@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FROST | Your Artisanal Shopping Bag. Review your selected handloom sarees, bespoke tailoring, and luxury home linens." />
+  <title>Your Shopping Bag | FROST Luxury Atelier</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-bar" id="top-bar" aria-label="Announcement">
+    <div class="container">
+      <div class="top-bar-ticker">
+        <span class="badge-pulse"></span>
+        <span>Complimentary Pan-India White-Glove Delivery On Orders Above ₹20,000</span>
+      </div>
+      <div class="top-bar-actions">
+        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
+        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
+        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
+          <span>🇮🇳 India · INR (₹)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="header-nav" id="header-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
+          <span class="logo-monogram">FROST</span>
+          <span class="logo-tagline">Couture &amp; Living</span>
+        </a>
+
+        <nav aria-label="Primary Navigation">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="sarees.html" class="nav-link">Couture Sarees</a>
+              <ul class="nav-dropdown">
+                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
+              <ul class="nav-dropdown">
+                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a href="lookbook.html" class="nav-link">Lookbook</a></li>
+            <li class="nav-item"><a href="heritage.html" class="nav-link">Heritage &amp; Craft</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="badge-count" id="wishlist-badge">0</span>
+          </button>
+          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="badge-count" id="cart-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container cart-page-wrap">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav">
+      <a href="index.html">Home</a>
+      <span class="separator">/</span>
+      <span class="current">Shopping Bag</span>
+    </nav>
+
+    <!-- Empty State (Hidden when items present) -->
+    <div id="cart-empty-view" style="display: none; text-align: center; padding: 5rem 1rem;">
+      <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; color: var(--gold-dark);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--frost-dark);">Your Shopping Bag is Empty</h2>
+      <p style="color: var(--text-muted); max-width: 440px; margin: 0 auto 2rem; line-height: 1.7;">
+        Immerse yourself in our curated handcrafted Banarasi and Kanjivaram silks, or explore artisanal Egyptian cotton bedding.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="sarees.html" class="btn-luxury btn-gold">Explore Couture Sarees</a>
+        <a href="home-living.html" class="btn-luxury btn-outline-white" style="border-color: var(--frost-dark); color: var(--frost-dark);">Explore Home Living</a>
+      </div>
+    </div>
+
+    <!-- Active Cart Layout -->
+    <div id="cart-active-view">
+      <!-- Free Shipping Banner -->
+      <div class="cart-free-ship-banner">
+        <div class="cart-free-ship-text" id="cart-page-ship-text">
+          Add <strong>₹20,000</strong> more for Complimentary Pan-India White-Glove Shipping
+        </div>
+        <div class="cart-free-ship-bar-outer">
+          <div class="cart-free-ship-bar-fill" id="cart-page-ship-bar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="cart-page-grid">
+        <!-- Items Column -->
+        <div class="cart-left-col">
+          <div class="cart-items-card">
+            <div class="cart-items-card-header">
+              <span>Selected Heirlooms (<span id="cart-items-count-label">0</span>)</span>
+              <a href="sarees.html" style="font-size: 0.78rem; color: var(--deep-wine); text-decoration: underline;">+ Add More Creations</a>
+            </div>
+            <div id="cart-page-items-list">
+              <!-- Item rows injected via JS -->
+            </div>
+          </div>
+
+          <!-- Gift Wrapping Option Card -->
+          <div class="cart-items-card" style="padding: 1.5rem 1.8rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer;">
+              <input type="checkbox" id="cart-page-gift-toggle" style="margin-top: 0.25rem; accent-color: var(--deep-wine);" />
+              <div>
+                <strong style="display: block; font-size: 0.92rem; color: var(--frost-dark);">Bespoke Gold-Foil Gift Packaging &amp; Personalized Calligraphy Card (+₹450)</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 0.2rem;">
+                  Presented in our signature burgundy velvet-finish keepsake box tied with gold zari ribbon, accompanied by a handwritten wax-sealed greeting.
+                </span>
+              </div>
+            </label>
+            <div id="gift-message-box" style="display: none; margin-top: 1rem;">
+              <label class="form-label" for="gift-note-text">Personalized Gift Message to Recipient:</label>
+              <textarea class="form-input" id="gift-note-text" rows="2" placeholder="Write your heartfelt greeting here (e.g. Wishing you timeless elegance on your special day)..."></textarea>
+            </div>
+          </div>
+
+          <!-- Reassurance Strip -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem; background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              <strong style="display: block; color: var(--frost-dark);">100% Pure Handloom</strong>
+              Silk Mark Certified
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              <strong style="display: block; color: var(--frost-dark);">Secure Payments</strong>
+              128-Bit SSL Encryption
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              <strong style="display: block; color: var(--frost-dark);">14-Day Guarantee</strong>
+              Hassle-free exchange
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Column -->
+        <div class="cart-summary-col">
+          <div class="cart-summary-card">
+            <h3 class="cart-summary-title">Order Summary</h3>
+
+            <!-- Promo Code Box -->
+            <div class="cart-promo-section">
+              <input type="text" class="cart-promo-input" id="cart-page-promo-input" placeholder="Privilege Code (FABINDIA15)" />
+              <button class="cart-promo-btn" onclick="applyCartPagePromo()">Apply</button>
+            </div>
+            <div id="promo-status-msg" style="font-size: 0.78rem; margin-top: -0.8rem; margin-bottom: 1.2rem;"></div>
+
+            <!-- Totals Breakdown -->
+            <div class="cart-summary-line">
+              <span>Bag Subtotal</span>
+              <span id="cp-subtotal">₹0</span>
+            </div>
+            <div class="cart-summary-line highlight" id="cp-discount-row" style="display: none;">
+              <span>Privilege Discount</span>
+              <span id="cp-discount">-₹0</span>
+            </div>
+            <div class="cart-summary-line" id="cp-gift-row" style="display: none;">
+              <span>Bespoke Gift Packaging</span>
+              <span>+₹450</span>
+            </div>
+            <div class="cart-summary-line">
+              <span>Pan-India Delivery</span>
+              <span id="cp-shipping">Complimentary</span>
+            </div>
+            <div class="cart-summary-line total">
+              <span>Total Payable</span>
+              <span id="cp-total">₹0</span>
+            </div>
+
+            <a href="checkout.html" class="btn-proceed-checkout">
+              Proceed to Checkout →
+            </a>
+
+            <div style="text-align: center; margin-top: 1.2rem; font-size: 0.75rem; color: var(--text-muted);">
+              🔒 Safe &amp; Secure Checkout • Verified by Visa, Mastercard, RuPay &amp; UPI
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shared Footer Area (Injected via shared.js) -->
+  <div id="frost-footer-area"></div>
+
+  <!-- Supabase Cloud Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+
+  <!-- Analytics & Logic -->
+  <script src="admin-data.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    function renderCartPage() {
+      const emptyView = document.getElementById('cart-empty-view');
+      const activeView = document.getElementById('cart-active-view');
+      const itemsList = document.getElementById('cart-page-items-list');
+      const countLabel = document.getElementById('cart-items-count-label');
+
+      if (!cart || cart.length === 0) {
+        if (emptyView) emptyView.style.display = 'block';
+        if (activeView) activeView.style.display = 'none';
+        return;
+      }
+
+      if (emptyView) emptyView.style.display = 'none';
+      if (activeView) activeView.style.display = 'block';
+
+      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+      if (countLabel) countLabel.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+
+      // Render Item Rows
+      itemsList.innerHTML = cart.map((item, idx) => `
+        <div class="cart-table-item">
+          <img src="${item.image}" alt="${item.title}" class="cart-table-thumb" onclick="window.location.href='product.html?id=${item.id}'" style="cursor:pointer;" />
+          <div class="cart-table-info">
+            <h4 onclick="window.location.href='product.html?id=${item.id}'" style="cursor:pointer;">${item.title}</h4>
+            <div class="cart-table-meta">${item.categoryName} • ${item.option}</div>
+            <button class="cart-table-remove-btn" onclick="removeFromCart(${idx}); renderCartPage();">
+              ✕ Remove from Bag
+            </button>
+          </div>
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="updateCartQty(${idx}, -1); renderCartPage();">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="updateCartQty(${idx}, 1); renderCartPage();">+</button>
+          </div>
+          <div style="font-weight: 700; color: var(--frost-dark); font-size: 1.05rem; text-align: right;">
+            ${formatCurrency(item.priceINR * item.qty)}
+          </div>
+        </div>
+      `).join('');
+
+      // Update Summary Totals
+      const t = getCartTotals();
+      document.getElementById('cp-subtotal').textContent = formatCurrency(t.subtotal);
+      document.getElementById('cp-shipping').textContent = t.freeShip ? 'Complimentary' : formatCurrency(t.ship);
+      document.getElementById('cp-total').textContent = formatCurrency(t.total);
+
+      const discRow = document.getElementById('cp-discount-row');
+      if (t.disc > 0) {
+        discRow.style.display = 'flex';
+        document.getElementById('cp-discount').textContent = `-${formatCurrency(t.disc)}`;
+      } else {
+        discRow.style.display = 'none';
+      }
+
+      const giftRow = document.getElementById('cp-gift-row');
+      if (isGiftWrapped) {
+        giftRow.style.display = 'flex';
+      } else {
+        giftRow.style.display = 'none';
+      }
+
+      // Shipping progress bar
+      const shipBar = document.getElementById('cart-page-ship-bar');
+      const shipText = document.getElementById('cart-page-ship-text');
+      const pct = Math.min(100, Math.round((t.subtotal / 20000) * 100));
+      if (shipBar) shipBar.style.width = `${pct}%`;
+      if (shipText) {
+        shipText.innerHTML = t.freeShip
+          ? '✨ <strong>Complimentary Pan-India White-Glove Delivery Unlocked!</strong>'
+          : `Add <strong>${formatCurrency(20000 - t.subtotal)}</strong> more for Complimentary Delivery Across India`;
+      }
+    }
+
+    function applyCartPagePromo() {
+      const res = handleApplyPromo();
+      const status = document.getElementById('promo-status-msg');
+      if (res && res.success) {
+        status.innerHTML = `<span style="color: #27ae60; font-weight:600;">✓ ${res.discount}% discount applied to your order!</span>`;
+      } else {
+        status.innerHTML = `<span style="color: #e74c3c;">✕ Invalid code. Try FABINDIA15 or FROST10.</span>`;
+      }
+      renderCartPage();
+    }
+
+    function initCartPage() {
+      initFrostPage('cart');
+      
+      const giftToggle = document.getElementById('cart-page-gift-toggle');
+      const giftMsgBox = document.getElementById('gift-message-box');
+      if (giftToggle) {
+        giftToggle.checked = isGiftWrapped;
+        giftToggle.addEventListener('change', (e) => {
+          isGiftWrapped = e.target.checked;
+          if (giftMsgBox) giftMsgBox.style.display = isGiftWrapped ? 'block' : 'none';
+          renderCartPage();
+        });
+      }
+
+      renderCartPage();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCartPage);
+    } else {
+      initCartPage();
+    }
+  </script>
+</body>
+</html>

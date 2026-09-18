@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FROST | Handcrafted Luxury Heirloom Product Details. Explore pure silk handloom drapes, authentic artisan provenance, and bespoke customization." />
+  <title>Heirloom Detail | FROST Luxury Atelier</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-bar" id="top-bar" aria-label="Announcement">
+    <div class="container">
+      <div class="top-bar-ticker">
+        <span class="badge-pulse"></span>
+        <span>Complimentary Pan-India White-Glove Delivery On Orders Above ₹20,000</span>
+      </div>
+      <div class="top-bar-actions">
+        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
+        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
+        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
+          <span>🇮🇳 India · INR (₹)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="header-nav" id="header-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
+          <span class="logo-monogram">FROST</span>
+          <span class="logo-tagline">Couture &amp; Living</span>
+        </a>
+
+        <nav aria-label="Primary Navigation">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="sarees.html" class="nav-link">Couture Sarees</a>
+              <ul class="nav-dropdown">
+                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
+              <ul class="nav-dropdown">
+                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a href="lookbook.html" class="nav-link">Lookbook</a></li>
+            <li class="nav-item"><a href="heritage.html" class="nav-link">Heritage &amp; Craft</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="badge-count" id="wishlist-badge">0</span>
+          </button>
+          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="badge-count" id="cart-badge">0</span>
+          </button>
+          <button class="icon-btn mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" id="pdp-breadcrumbs">
+      <a href="index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="sarees.html" id="bc-category-link">Collections</a>
+      <span class="separator">/</span>
+      <span class="current" id="bc-product-title">Artisanal Heirloom</span>
+    </nav>
+
+    <!-- Main PDP Grid -->
+    <div class="pdp-grid" id="pdp-main-content">
+      <!-- Gallery Column -->
+      <div class="pdp-gallery-wrap">
+        <div class="pdp-thumbs-col" id="pdp-thumbs">
+          <!-- Thumbnails injected via JS -->
+        </div>
+        <div class="pdp-main-image-wrap">
+          <span class="pdp-badge-pill" id="pdp-badge">Handloom Heirloom</span>
+          <img src="images/saree_banarasi.jpg" alt="Creation" id="pdp-hero-image" />
+        </div>
+      </div>
+
+      <!-- Details Column -->
+      <div class="pdp-details-col">
+        <span class="pdp-origin-tag" id="pdp-origin">Varanasi Atelier • Handcrafted</span>
+        <h1 class="pdp-title" id="pdp-title">The Empress Banarasi Katan Silk Saree</h1>
+        
+        <div class="pdp-rating-row">
+          <div class="pdp-stars">★★★★★</div>
+          <span style="font-weight: 600;" id="pdp-rating-score">4.9</span>
+          <span class="pdp-review-count" id="pdp-reviews-count">(38 Verified Reviews)</span>
+        </div>
+
+        <div class="pdp-craft-highlight" id="pdp-craft">
+          <span>❖</span>
+          <span id="pdp-craft-text">Handloom Kadwa Weave — 45 Days to Craft</span>
+        </div>
+
+        <!-- Price -->
+        <div class="pdp-price-wrap">
+          <span class="pdp-price-current" id="pdp-price">₹48,500</span>
+          <span class="pdp-price-original" id="pdp-original-price">₹58,000</span>
+          <span class="pdp-price-discount" id="pdp-discount-tag">Save ₹9,500</span>
+        </div>
+        <span class="pdp-tax-note">Price inclusive of all statutory GST taxes &amp; silk hallmarking fees</span>
+
+        <!-- Options / Customization -->
+        <div class="pdp-options-block">
+          <div class="pdp-options-label">
+            <span id="pdp-options-title">Bespoke Tailoring &amp; Finishing:</span>
+            <a href="contact.html" style="font-size:0.78rem; color:var(--deep-wine); text-decoration:underline;">Custom Fit Concierge</a>
+          </div>
+          <div class="pdp-options-grid" id="pdp-options-list">
+            <!-- Option buttons injected via JS -->
+          </div>
+        </div>
+
+        <!-- Pincode Delivery Availability Checker -->
+        <div class="pdp-pincode-box">
+          <div class="pdp-pincode-header">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span>Delivery Availability &amp; White-Glove Dispatch</span>
+          </div>
+          <div class="pdp-pincode-input-group">
+            <input type="text" class="pdp-pincode-input" id="pincode-input" placeholder="Enter 6-digit PIN code (e.g. 110001, 400001)" maxlength="6" />
+            <button class="pdp-pincode-btn" id="pincode-check-btn" onclick="handlePincodeCheck()">Check PIN</button>
+          </div>
+          <div class="pdp-pincode-result" id="pincode-result-msg"></div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="pdp-cta-row">
+          <button class="btn-pdp-add" id="pdp-btn-add" onclick="handlePdpAddToCart()">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            Add to Bag
+          </button>
+          <button class="btn-pdp-buy" id="pdp-btn-buy" onclick="handlePdpBuyNow()">
+            Buy Now
+          </button>
+        </div>
+
+        <!-- Trust Pillars Strip -->
+        <div class="pdp-trust-strip">
+          <div class="pdp-trust-item">
+            <strong>Certified Silk Mark</strong>
+            100% pure authentic handloom
+          </div>
+          <div class="pdp-trust-item">
+            <strong>Complimentary Shipping</strong>
+            Insured white-glove delivery
+          </div>
+          <div class="pdp-trust-item">
+            <strong>Hassle-Free Exchange</strong>
+            14-day return authentication
+          </div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="accordion-container" style="margin-top: 1rem;">
+          <div class="accordion-item active">
+            <div class="accordion-header" onclick="togglePdpAccordion(this)">
+              <span class="accordion-title">Artisanal Provenance &amp; Handcraft</span>
+              <span class="accordion-icon">−</span>
+            </div>
+            <div class="accordion-body" id="pdp-desc-text">
+              Handwoven with master precision in our heritage looms. Each thread is twisted and intertwined to ensure heirloom longevity and unmatched drape fluidity.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="togglePdpAccordion(this)">
+              <span class="accordion-title">Fabric &amp; Zari Specifications</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <div class="quickview-specs">
+                <div class="spec-line"><span>Primary Material:</span><span id="pdp-spec-fabric">Pure Katan Silk</span></div>
+                <div class="spec-line"><span>Zari Composition:</span><span id="pdp-spec-zari">Antique Silver &amp; Champagne Gold</span></div>
+                <div class="spec-line"><span>Origin Guild:</span><span id="pdp-spec-origin">Varanasi Atelier</span></div>
+                <div class="spec-line"><span>Length / Fit:</span><span>6.5 Meters (Includes 0.8m Blouse Piece)</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="togglePdpAccordion(this)">
+              <span class="accordion-title">Silk Mark Certification &amp; Authentication</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              Every creation is officially stamped with a scannable Silk Mark QR hologram from the Central Silk Board of India, guaranteeing pure mulberry/katan silk with no synthetic adulteration.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="togglePdpAccordion(this)">
+              <span class="accordion-title">Care &amp; Heirloom Preservation Guide</span>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              Dry clean only at specialized luxury textile cleaners. Store wrapped in unbleached pure cotton muslin cloths. Refold every six months along alternative folds to preserve zari longevity.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Artisanal Creations -->
+    <section class="section-padding" style="padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, 0.08);">
+      <div class="section-header text-center">
+        <span class="section-eyebrow">Curated Pairings</span>
+        <h2 class="section-title">You May Also Cherish</h2>
+        <p class="section-subtitle">Complementary handlooms and sanctuary accents curated for a cohesive luxury ensemble.</p>
+      </div>
+      <div class="products-grid" id="related-products-grid">
+        <!-- Rendered via shared.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Drawers, Modals & Footer (Injected via shared.js) -->
+  <div id="frost-footer-area"></div>
+
+  <!-- Supabase Cloud Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+
+  <!-- Analytics & Logic -->
+  <script src="admin-data.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    let currentPdpProduct = null;
+    let currentSelectedOption = null;
+
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    async function initProductPage() {
+      const productId = getParam('id') || 'saree-01';
+      let p = getProductById(productId);
+
+      // If not in local array, check Supabase Cloud database directly
+      if (!p && typeof apiGetProducts === 'function') {
+        try {
+          const dbProducts = await apiGetProducts();
+          p = dbProducts.find(pr => pr.id === productId);
+          if (p && typeof FROST_PRODUCTS !== 'undefined') {
+            FROST_PRODUCTS.unshift(p);
+          }
+        } catch(e) {}
+      }
+
+      if (!p) p = FROST_PRODUCTS[0];
+      currentPdpProduct = p;
+      currentSelectedOption = (p.options && p.options.length > 0) ? p.options[0] : 'Standard Luxury Edition';
+
+      // Update Page Meta
+      document.title = `${p.title} | FROST Haute Couture`;
+
+      // Update Breadcrumbs
+      const bcCat = document.getElementById('bc-category-link');
+      if (bcCat) {
+        bcCat.textContent = p.categoryName;
+        bcCat.href = p.category === 'sarees' ? 'sarees.html' : 'home-living.html';
+      }
+      const bcTitle = document.getElementById('bc-product-title');
+      if (bcTitle) bcTitle.textContent = p.title;
+
+      // Update Details
+      document.getElementById('pdp-title').textContent = p.title;
+      document.getElementById('pdp-origin').textContent = `${p.origin} • ${p.categoryName}`;
+      document.getElementById('pdp-badge').textContent = p.badge;
+      document.getElementById('pdp-craft-text').textContent = p.craft;
+      document.getElementById('pdp-price').textContent = formatCurrency(p.priceINR);
+      
+      if (p.originalPriceINR) {
+        document.getElementById('pdp-original-price').textContent = formatCurrency(p.originalPriceINR);
+        const saved = p.originalPriceINR - p.priceINR;
+        document.getElementById('pdp-discount-tag').textContent = `Save ${formatCurrency(saved)}`;
+      } else {
+        document.getElementById('pdp-original-price').style.display = 'none';
+        document.getElementById('pdp-discount-tag').style.display = 'none';
+      }
+
+      if (p.reviewsCount) {
+        document.getElementById('pdp-reviews-count').textContent = `(${p.reviewsCount} Verified Reviews)`;
+      }
+
+      // Main image & thumbs
+      const heroImg = document.getElementById('pdp-hero-image');
+      heroImg.src = p.image;
+      heroImg.alt = p.title;
+
+      // Render Thumbnails (using main image and alternate catalog images to create high-end gallery)
+      const thumbsContainer = document.getElementById('pdp-thumbs');
+      const galleryImages = [
+        p.image,
+        p.category === 'sarees' ? 'images/hero_saree.jpg' : 'images/cushions_luxury.jpg',
+        p.category === 'sarees' ? 'images/saree_organza.jpg' : 'images/tablecloth_luxury.jpg'
+      ];
+
+      thumbsContainer.innerHTML = galleryImages.map((imgSrc, idx) => `
+        <div class="pdp-thumb-item ${idx === 0 ? 'active' : ''}" onclick="selectPdpImage('${imgSrc}', this)">
+          <img src="${imgSrc}" alt="${p.title} view ${idx + 1}" />
+        </div>
+      `).join('');
+
+      // Options
+      document.getElementById('pdp-options-title').textContent = `${p.optionsLabel}:`;
+      const optionsContainer = document.getElementById('pdp-options-list');
+      optionsContainer.innerHTML = p.options.map((opt, idx) => `
+        <button type="button" class="pdp-option-btn ${idx === 0 ? 'active' : ''}" onclick="selectPdpOption('${opt}', this)">
+          ${opt}
+        </button>
+      `).join('');
+
+      // Specs
+      document.getElementById('pdp-desc-text').textContent = p.description;
+      document.getElementById('pdp-spec-fabric').textContent = p.fabric;
+      document.getElementById('pdp-spec-zari').textContent = p.zari;
+      document.getElementById('pdp-spec-origin').textContent = p.origin;
+
+      // Render Related Products
+      renderCatalog({
+        containerId: 'related-products-grid',
+        filter: p.category === 'sarees' ? 'sarees' : 'home',
+        maxItems: 4
+      });
+    }
+
+    function selectPdpImage(src, el) {
+      document.getElementById('pdp-hero-image').src = src;
+      document.querySelectorAll('.pdp-thumb-item').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function selectPdpOption(opt, el) {
+      currentSelectedOption = opt;
+      document.querySelectorAll('.pdp-option-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function handlePdpAddToCart() {
+      if (!currentPdpProduct) return;
+      addToCart(currentPdpProduct.id, currentSelectedOption);
+    }
+
+    function handlePdpBuyNow() {
+      if (!currentPdpProduct) return;
+      buyNow(currentPdpProduct.id, currentSelectedOption);
+    }
+
+    function handlePincodeCheck() {
+      const input = document.getElementById('pincode-input');
+      const res = checkPincodeDelivery(input.value);
+      const msgEl = document.getElementById('pincode-result-msg');
+      msgEl.innerHTML = res.message;
+      msgEl.style.color = res.valid ? '#27ae60' : '#e74c3c';
+    }
+
+    function togglePdpAccordion(header) {
+      const item = header.closest('.accordion-item');
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('active');
+        const icon = i.querySelector('.accordion-icon');
+        if (icon) icon.textContent = '+';
+      });
+      if (!wasActive) {
+        item.classList.add('active');
+        const icon = item.querySelector('.accordion-icon');
+        if (icon) icon.textContent = '−';
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initFrostPage('product');
+        initProductPage();
+      });
+    } else {
+      initFrostPage('product');
+      initProductPage();
+    }
+  </script>
+</body>
+</html>

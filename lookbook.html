@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FROST Lookbook & Interactive Room Visualizer — Explore Fall/Winter Haute Couture drapes and styled luxury sanctuary spaces with shoppable hotspots." />
+  <meta name="keywords" content="luxury lookbook, room visualizer, haute couture saree lookbook, interior styling luxury, Frost lookbook" />
+  <title>The Lookbook | FROST Couture & Living</title>
+
+  <!-- Google Fonts: Cormorant Garamond, Cinzel, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ==========================================
+       ANNOUNCEMENT TOP BAR
+       ========================================== -->
+  <aside class="top-bar" id="top-bar" aria-label="Announcement">
+    <div class="container">
+      <div class="top-bar-ticker">
+        <span class="badge-pulse"></span>
+        <span>Complimentary Pan-India White-Glove Shipping On Orders Above ₹20,000</span>
+      </div>
+      <div class="top-bar-actions">
+        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
+        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
+        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
+          <span>🇮🇳 India · INR (₹)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       STICKY LUXURY NAVIGATION HEADER
+       ========================================== -->
+  <header class="header-nav" id="header-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
+          <span class="logo-monogram">FROST</span>
+          <span class="logo-tagline">Couture &amp; Living</span>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <nav aria-label="Primary Navigation">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="sarees.html" class="nav-link">Couture Sarees</a>
+              <ul class="nav-dropdown">
+                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
+              <ul class="nav-dropdown">
+                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a href="lookbook.html" class="nav-link active">Lookbook</a></li>
+            <li class="nav-item"><a href="heritage.html" class="nav-link">Heritage &amp; Craft</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
+          </ul>
+        </nav>
+
+        <!-- Right Header Actions -->
+        <div class="nav-actions">
+          <!-- Search Button -->
+          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- Wishlist Button -->
+          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge-count" id="wishlist-badge">0</span>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count" id="cart-badge">0</span>
+          </button>
+
+          <!-- Mobile Toggle -->
+          <button class="icon-btn mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero Banner -->
+    <section class="page-hero-banner hero-lookbook">
+      <div class="container">
+        <div class="page-hero-content">
+          <div class="page-breadcrumb">
+            <a href="index.html">Maison</a>
+            <span>/</span>
+            <span>Editorial Lookbook</span>
+          </div>
+          <h1 class="page-title">Editorial Lookbook &amp; Interactive Spaces</h1>
+          <p class="page-subtitle">
+            Autumn / Winter Haute Couture Edition. Wander through styled rooms and touch the glowing golden pins to inspect, customize, and acquire each piece.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Interactive Room Visualizer -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="text-center" style="max-width: 720px; margin: 0 auto 3rem;">
+          <span class="section-eyebrow">Interactive Space Styling</span>
+          <h2 style="font-size: 2.5rem; margin-bottom: 0.8rem;">The Master Sanctuary Suite</h2>
+          <p style="color: var(--text-muted);">Hover or tap any gold pulsing marker to inspect fabric composition, sizing, and seamlessly add to your bag.</p>
+        </div>
+
+        <!-- Hotspot Stage 1: Bedroom -->
+        <div class="lookbook-stage">
+          <img src="images/home_sanctuary.jpg" alt="The Master Sanctuary Suite" />
+
+          <!-- Hotspot 1: Bedsheet -->
+          <div class="hotspot-marker" style="top: 60%; left: 38%;" tabindex="0">
+            <div class="hotspot-pulse"></div>
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-card">
+              <img src="images/home_sanctuary.jpg" alt="Egyptian Cotton Bedsheet" class="hotspot-card-img" />
+              <div class="hotspot-card-title">Imperial 800TC Egyptian Cotton Bedsheet Set</div>
+              <div class="hotspot-card-price">₹14,500</div>
+              <button class="hotspot-card-btn" onclick="openQuickView('home-01')">Quick View &amp; Sizing</button>
+            </div>
+          </div>
+
+          <!-- Hotspot 2: Silk Pillows -->
+          <div class="hotspot-marker" style="top: 38%; left: 24%;" tabindex="0">
+            <div class="hotspot-pulse"></div>
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-card">
+              <img src="images/home_sanctuary.jpg" alt="Mulberry Silk Pillow Covers" class="hotspot-card-img" />
+              <div class="hotspot-card-title">Mulberry Silk Oxford Pillow Covers (Pair)</div>
+              <div class="hotspot-card-price">₹7,500</div>
+              <button class="hotspot-card-btn" onclick="openQuickView('home-04')">Quick View &amp; Sizing</button>
+            </div>
+          </div>
+
+          <!-- Hotspot 3: Velvet Cushions -->
+          <div class="hotspot-marker" style="top: 48%; left: 54%;" tabindex="0">
+            <div class="hotspot-pulse"></div>
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-card">
+              <img src="images/cushions_luxury.jpg" alt="Botanical Velvet Cushions" class="hotspot-card-img" />
+              <div class="hotspot-card-title">Botanical Mirage Velvet Cushion Covers</div>
+              <div class="hotspot-card-price">₹8,900</div>
+              <button class="hotspot-card-btn" onclick="openQuickView('home-02')">Quick View &amp; Sizing</button>
+            </div>
+          </div>
+
+          <!-- Hotspot 4: Bed Runner -->
+          <div class="hotspot-marker" style="top: 76%; left: 62%;" tabindex="0">
+            <div class="hotspot-pulse"></div>
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-card">
+              <img src="images/cushions_luxury.jpg" alt="Velvet Bed Runner Duo" class="hotspot-card-img" />
+              <div class="hotspot-card-title">Celestial Frost Bed Runner &amp; Cushion Duo</div>
+              <div class="hotspot-card-price">₹11,200</div>
+              <button class="hotspot-card-btn" onclick="openQuickView('home-05')">Quick View &amp; Sizing</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotspot Stage 2: Banquet Dining Room -->
+        <div class="text-center" style="max-width: 720px; margin: 5rem auto 3rem;">
+          <span class="section-eyebrow">The Palace Dining Edit</span>
+          <h2 style="font-size: 2.5rem; margin-bottom: 0.8rem;">The Versailles Banquet Hall</h2>
+          <p style="color: var(--text-muted);">Crafted for candlelight dinners and high-society gatherings.</p>
+        </div>
+
+        <div class="lookbook-stage">
+          <img src="images/tablecloth_luxury.jpg" alt="Versailles Banquet Hall" />
+
+          <!-- Hotspot on Tablecloth -->
+          <div class="hotspot-marker" style="top: 55%; left: 48%;" tabindex="0">
+            <div class="hotspot-pulse"></div>
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-card">
+              <img src="images/tablecloth_luxury.jpg" alt="Grand Versailles Banquet Tablecloth" class="hotspot-card-img" />
+              <div class="hotspot-card-title">Grand Versailles Banquet Jacquard Tablecloth</div>
+              <div class="hotspot-card-price">₹12,500</div>
+              <button class="hotspot-card-btn" onclick="openQuickView('home-03')">Quick View &amp; Sizing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Editorial Magazine Spreads -->
+    <section class="section-padding" style="background: var(--frost-platinum);">
+      <div class="container">
+        <div class="text-center" style="max-width: 640px; margin: 0 auto 4.5rem;">
+          <span class="section-eyebrow">Haute Couture Spreads</span>
+          <h2 style="font-size: 2.6rem;">The Autumn / Winter Anthology</h2>
+        </div>
+
+        <!-- Spread 1 -->
+        <article class="lookbook-spread">
+          <div class="spread-media">
+            <img src="images/hero_saree.jpg" alt="Frost Celestial Tissue Saree" />
+          </div>
+          <div class="spread-info">
+            <span class="spread-meta-tag">Look 01 · Celestial Silver</span>
+            <h3 class="spread-heading">Ethereal Frost Upon Pure Tissue Silk</h3>
+            <p class="spread-desc">
+              Captured in the winter light of Udaipur, the Celestial Moonlit Tissue drape glimmers with icy platinum radiance. Each motif is outlined in micro cutdana and antique silver zardozi threadwork.
+            </p>
+            <div class="spread-products-strip">
+              <div class="spread-item-chip" onclick="openQuickView('saree-02')">
+                <img src="images/hero_saree.jpg" alt="Celestial Saree" />
+                <div>
+                  <div style="font-size: 0.78rem; font-weight: 600;">Celestial Moonlit Saree</div>
+                  <div style="font-size: 0.72rem; color: var(--gold-dark);">₹36,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Spread 2 -->
+        <article class="lookbook-spread reverse">
+          <div class="spread-media">
+            <img src="images/saree_banarasi.jpg" alt="Empress Banarasi Saree" />
+          </div>
+          <div class="spread-info">
+            <span class="spread-meta-tag">Look 02 · Royal Trousseau</span>
+            <h3 class="spread-heading">Forty-Five Days of Imperial Weaving</h3>
+            <p class="spread-desc">
+              Deep royal plum katan silk hand-loomed in the ancient alleys of Varanasi. Showered with champagne gold kadwa motifs and framed by an ornate palatial pallu designed to be cherished for generations.
+            </p>
+            <div class="spread-products-strip">
+              <div class="spread-item-chip" onclick="openQuickView('saree-01')">
+                <img src="images/saree_banarasi.jpg" alt="Empress Banarasi Saree" />
+                <div>
+                  <div style="font-size: 0.78rem; font-weight: 600;">The Empress Banarasi Saree</div>
+                  <div style="font-size: 0.72rem; color: var(--gold-dark);">₹48,500</div>
+                </div>
+              </div>
+              <div class="spread-item-chip" onclick="openQuickView('saree-04')">
+                <img src="images/saree_banarasi.jpg" alt="Royal Kanjivaram" />
+                <div>
+                  <div style="font-size: 0.78rem; font-weight: 600;">Royal Kanjivaram Drape</div>
+                  <div style="font-size: 0.72rem; color: var(--gold-dark);">₹52,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Spread 3 -->
+        <article class="lookbook-spread">
+          <div class="spread-media">
+            <img src="images/saree_organza.jpg" alt="Whispering Willow Organza" />
+          </div>
+          <div class="spread-info">
+            <span class="spread-meta-tag">Look 03 · Morning Mist</span>
+            <h3 class="spread-heading">Whispering Willow Tissue Organza</h3>
+            <p class="spread-desc">
+              Gossamer-light organza in pearl frost and misty sage hues. Delicate hand-cut scalloped borders embroidered with gota patti and Swarovski crystal accents.
+            </p>
+            <div class="spread-products-strip">
+              <div class="spread-item-chip" onclick="openQuickView('saree-03')">
+                <img src="images/saree_organza.jpg" alt="Whispering Willow Organza" />
+                <div>
+                  <div style="font-size: 0.78rem; font-weight: 600;">Whispering Willow Saree</div>
+                  <div style="font-size: 0.72rem; color: var(--gold-dark);">₹28,500</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Concierge Banner -->
+    <section class="section-padding" style="background: var(--frost-dark); color: var(--frost-white);">
+      <div class="container text-center" style="max-width: 680px;">
+        <span class="section-eyebrow" style="color: var(--gold-light);">Bespoke Styling Service</span>
+        <h2 style="font-size: 2.4rem; color: var(--frost-white); margin: 0.5rem 0 1rem;">Complete Residence Styling</h2>
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.98rem; line-height: 1.8; margin-bottom: 2rem;">
+          Our senior interior curators collaborate directly with homeowners, architects, and luxury estates worldwide to custom-tailor bedding, linens, and heirloom textiles.
+        </p>
+        <a href="contact.html" class="btn-luxury btn-gold">Inquire With Private Concierge</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer & Modals Area (Injected) -->
+  <div id="frost-footer-area"></div>
+
+  <!-- Supabase Cloud Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+
+  <!-- Analytics & Logic -->
+  <script src="admin-data.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initFrostPage('lookbook');
+
+      // Click support for mobile touch on hotspots
+      document.querySelectorAll('.hotspot-marker').forEach(marker => {
+        marker.addEventListener('click', (e) => {
+          if (e.target.closest('.hotspot-card-btn')) return;
+          const wasActive = marker.classList.contains('active');
+          document.querySelectorAll('.hotspot-marker').forEach(m => m.classList.remove('active'));
+          if (!wasActive) marker.classList.add('active');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.hotspot-marker')) {
+          document.querySelectorAll('.hotspot-marker').forEach(m => m.classList.remove('active'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>

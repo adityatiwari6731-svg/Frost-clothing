@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FROST Heritage & Craftsmanship — Discover our master weavers in Varanasi and Kanchipuram, pure silver zari twisting, and our 45-day heirloom handloom journey." />
+  <meta name="keywords" content="Frost heritage, handloom Varanasi weavers, Kanchipuram korvai weave, pure zari saree, artisan silk brand, luxury heritage" />
+  <title>Heritage &amp; Savoir-Faire | FROST Luxury Atelier</title>
+
+  <!-- Google Fonts: Cormorant Garamond, Cinzel, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ==========================================
+       ANNOUNCEMENT TOP BAR
+       ========================================== -->
+  <aside class="top-bar" id="top-bar" aria-label="Announcement">
+    <div class="container">
+      <div class="top-bar-ticker">
+        <span class="badge-pulse"></span>
+        <span>Complimentary Pan-India White-Glove Shipping On Orders Above ₹20,000</span>
+      </div>
+      <div class="top-bar-actions">
+        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
+        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
+        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
+          <span>🇮🇳 India · INR (₹)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       STICKY LUXURY NAVIGATION HEADER
+       ========================================== -->
+  <header class="header-nav" id="header-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
+          <span class="logo-monogram">FROST</span>
+          <span class="logo-tagline">Couture &amp; Living</span>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <nav aria-label="Primary Navigation">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="sarees.html" class="nav-link">Couture Sarees</a>
+              <ul class="nav-dropdown">
+                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
+                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
+              <ul class="nav-dropdown">
+                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
+                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a href="lookbook.html" class="nav-link">Lookbook</a></li>
+            <li class="nav-item"><a href="heritage.html" class="nav-link active">Heritage &amp; Craft</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
+          </ul>
+        </nav>
+
+        <!-- Right Header Actions -->
+        <div class="nav-actions">
+          <!-- Search Button -->
+          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- Wishlist Button -->
+          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge-count" id="wishlist-badge">0</span>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count" id="cart-badge">0</span>
+          </button>
+
+          <!-- Mobile Toggle -->
+          <button class="icon-btn mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero Banner -->
+    <section class="page-hero-banner hero-heritage">
+      <div class="container">
+        <div class="page-hero-content">
+          <div class="page-breadcrumb">
+            <a href="index.html">Maison</a>
+            <span>/</span>
+            <span>Heritage &amp; Craft</span>
+          </div>
+          <h1 class="page-title">The Hands &amp; Savoir-Faire Behind Frost</h1>
+          <p class="page-subtitle">
+            Preserving centuries of Indian handloom nobility. Where antique silver threads and natural silks intertwine in the sacred ateliers of Varanasi, Kanchipuram, and Kashmir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Story Chapters -->
+    <section class="section-padding heritage-story-block">
+      <div class="container">
+        
+        <!-- Chapter I -->
+        <div class="story-chapter">
+          <div class="story-img-frame">
+            <img src="images/saree_banarasi.jpg" alt="Varanasi Pit Loom Weaving" />
+          </div>
+          <div class="story-text">
+            <span class="story-chapter-num">Chapter I · The Sacred Looms of Kashi</span>
+            <h2 class="story-title">Where Silver Weaves With Silence</h2>
+            <p class="story-paragraph">
+              In the narrow stone lanes flanking the Ganges, generations of master weavers wake before dawn. The rhythmic clack of the wooden pit loom has echoed here for six hundred years. 
+            </p>
+            <p class="story-paragraph">
+              At Frost, we refuse industrial high-speed jacquards. Every single saree is woven using the laborious Kadwa technique — where each botanical leaf and royal peacock motif is individually hand-interlocked with silver and gold zari without a single floating thread left on the reverse.
+            </p>
+          </div>
+        </div>
+
+        <!-- Chapter II -->
+        <div class="story-chapter alternate">
+          <div class="story-img-frame">
+            <img src="images/hero_saree.jpg" alt="Moonlit Tissue Saree Craft" />
+          </div>
+          <div class="story-text">
+            <span class="story-chapter-num">Chapter II · The Alchemical Frost Luster</span>
+            <h2 class="story-title">Crafting the Celestial Sheen</h2>
+            <p class="story-paragraph">
+              Our signature icy-platinum tissue silk requires an extraordinarily rare yarn twisting process. Ultra-fine mulberry silk filaments are enveloped in microscopic electroplated silver ribbons before being introduced to the warp.
+            </p>
+            <p class="story-paragraph">
+              The result is a fabric that does not merely reflect light — it radiates an ethereal moonlit frost that moves like liquid mercury across the silhouette.
+            </p>
+          </div>
+        </div>
+
+        <!-- Chapter III -->
+        <div class="story-chapter">
+          <div class="story-img-frame">
+            <img src="images/home_sanctuary.jpg" alt="Sanctuary Home Craftsmanship" />
+          </div>
+          <div class="story-text">
+            <span class="story-chapter-num">Chapter III · The Living Sanctuary</span>
+            <h2 class="story-title">Elevating Daily Life to an Art Form</h2>
+            <p class="story-paragraph">
+              We believe the fabrics closest to your skin should possess the same aristocratic pedigree as royal court couture. Our bedsheets use solely Giza long-staple Egyptian cotton harvested by hand along the Nile Delta.
+            </p>
+            <p class="story-paragraph">
+              Spun into 800-thread-count single-ply sateen, every sheet undergoes double silver satin stitching by our master tailors to guarantee five-star boutique sanctuary sleep for decades.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Craft Timeline -->
+    <section class="section-padding" style="background: var(--frost-platinum);">
+      <div class="container">
+        <div class="text-center" style="max-width: 680px; margin: 0 auto 3rem;">
+          <span class="section-eyebrow">The 45-Day Metamorphosis</span>
+          <h2 style="font-size: 2.6rem; margin-bottom: 0.8rem;">From Cocoon to Finished Drape</h2>
+          <p style="color: var(--text-muted);">True luxury cannot be rushed. Explore the meticulous steps behind every Frost creation.</p>
+        </div>
+
+        <div class="craft-timeline">
+          <!-- Step 1 -->
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-day">Day 01 – Day 07</div>
+              <h4 class="timeline-title">Ethical Sericulture &amp; Silk Reeling</h4>
+              <p class="timeline-desc">Natural mulberry cocoons are carefully sorted for long continuous filaments, then spun into Grade 6A pure katan silk yarn.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-day">Day 08 – Day 16</div>
+              <h4 class="timeline-title">Pure Silver Zari Wire Flattening</h4>
+              <p class="timeline-desc">Fine silver ingots are drawn through diamond dies into micro-threads, flattened, and gilded with 24-karat gold for tested zari authenticity.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-day">Day 17 – Day 25</div>
+              <h4 class="timeline-title">Naqsha Master Graph &amp; Loom Warping</h4>
+              <p class="timeline-desc">The master naqshaband translates poetic heritage patterns onto graph paper and hand-threads thousands of warp cords into the pit loom.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-day">Day 26 – Day 42</div>
+              <h4 class="timeline-title">The Kadwa Weaving Devotion</h4>
+              <p class="timeline-desc">Two master weavers sit side by side, advancing just 2 to 3 inches per day, individually locking each silver motif by hand.</p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="timeline-step">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-day">Day 43 – Day 45</div>
+              <h4 class="timeline-title">Silk Mark Inspection &amp; Presentation</h4>
+              <p class="timeline-desc">Tested by the Central Silk Board of India, issued with a unique serial hologram, hand-ironed, and encased in an embossed gold-foil trunk.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Master Artisans Profile Grid -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="text-center" style="max-width: 650px; margin: 0 auto 3rem;">
+          <span class="section-eyebrow">Guild Guardians</span>
+          <h2 style="font-size: 2.5rem; margin-bottom: 0.6rem;">Meet the Master Weavers</h2>
+          <p style="color: var(--text-muted);">The revered craftsmen and women whose hands breathe life into every Frost thread.</p>
+        </div>
+
+        <div class="artisans-grid">
+          <div class="artisan-card">
+            <img src="images/saree_banarasi.jpg" alt="Master Kabir Ansari" class="artisan-photo" />
+            <div class="artisan-body">
+              <div class="artisan-guild">Varanasi Brocade Guild</div>
+              <h4 class="artisan-name">Ustad Kabir Ansari</h4>
+              <div class="artisan-tenure">38 Years of Master Devotion</div>
+              <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6;">Fourth-generation master weaver specializing in ancient Mughal jaal patterns and Kadwa gold zari interlocking.</p>
+            </div>
+          </div>
+
+          <div class="artisan-card">
+            <img src="images/hero_saree.jpg" alt="Master S. Devarajan" class="artisan-photo" />
+            <div class="artisan-body">
+              <div class="artisan-guild">Kanchipuram Silk District</div>
+              <h4 class="artisan-name">S. Devarajan</h4>
+              <div class="artisan-tenure">42 Years of Temple Weaving</div>
+              <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6;">Custodian of the ancient Temple Korvai split-warp technique, joining pure mulberry bodies with heavy 24k gold zari borders.</p>
+            </div>
+          </div>
+
+          <div class="artisan-card">
+            <img src="images/cushions_luxury.jpg" alt="Master Fatima Mir" class="artisan-photo" />
+            <div class="artisan-body">
+              <div class="artisan-guild">Kashmir &amp; Delhi Ari Guild</div>
+              <h4 class="artisan-name">Fatima Mir</h4>
+              <div class="artisan-tenure">29 Years of Needlecraft</div>
+              <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6;">Lead artisan behind our metallic botanical cushion covers, utilizing antique Ari hooks and hand-cut sequins.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 4 Pillars of Integrity -->
+    <section class="atelier-info-strip" style="margin: 0; background: var(--frost-dark); color: var(--frost-white); border-color: rgba(197, 168, 128, 0.2);">
+      <div class="container">
+        <div class="text-center" style="max-width: 600px; margin: 0 auto 3rem;">
+          <span class="section-eyebrow" style="color: var(--gold-light);">Our Sacred Promise</span>
+          <h2 style="font-size: 2.3rem; color: var(--frost-white);">The Four Pillars of Frost Integrity</h2>
+        </div>
+        <div class="atelier-info-grid">
+          <div class="atelier-info-item">
+            <div class="atelier-info-icon" style="background: rgba(197, 168, 128, 0.2); border-color: var(--gold-light); color: var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div>
+              <h4 class="atelier-info-title" style="color: var(--frost-white);">100% Tested Real Zari</h4>
+              <p class="atelier-info-desc" style="color: rgba(255, 255, 255, 0.7);">We never use plastic Lurex or imitation metallic threads. Our zari is laboratory-tested electroplated pure silver with gold guild verification.</p>
+            </div>
+          </div>
+          <div class="atelier-info-item">
+            <div class="atelier-info-icon" style="background: rgba(197, 168, 128, 0.2); border-color: var(--gold-light); color: var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4 class="atelier-info-title" style="color: var(--frost-white);">Ethical Living Wages</h4>
+              <p class="atelier-info-desc" style="color: rgba(255, 255, 255, 0.7);">Our weavers receive 300% above standard cooperative wages, full health coverage for their households, and guild pension security.</p>
+            </div>
+          </div>
+          <div class="atelier-info-item">
+            <div class="atelier-info-icon" style="background: rgba(197, 168, 128, 0.2); border-color: var(--gold-light); color: var(--gold-light);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div>
+              <h4 class="atelier-info-title" style="color: var(--frost-white);">Pure Silk Mark Hallmarking</h4>
+              <p class="atelier-info-desc" style="color: rgba(255, 255, 255, 0.7);">Every creation carries a QR-coded Silk Mark authentication certificate registered under the Ministry of Textiles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visit Atelier CTA -->
+    <section class="section-padding" style="background: var(--frost-cream);">
+      <div class="container text-center" style="max-width: 640px;">
+        <span class="section-eyebrow">Private Invitation</span>
+        <h2 style="font-size: 2.4rem; margin-bottom: 1rem;">Experience the Weaving Firsthand</h2>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.8; margin-bottom: 2rem;">
+          We welcome clients, bridal parties, and textile connoisseurs to our private salon chambers in Mumbai, New Delhi, and Bengaluru.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="contact.html" class="btn-luxury btn-gold">Book Private Salon Visit</a>
+          <a href="sarees.html" class="btn-luxury btn-outline-white" style="border-color: var(--frost-dark); color: var(--frost-dark);">Browse The Collections</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer & Modals Area (Injected) -->
+  <div id="frost-footer-area"></div>
+
+  <!-- Supabase Cloud Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+
+  <!-- Analytics & Logic -->
+  <script src="admin-data.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initFrostPage('heritage');
+    });
+  </script>
+</body>
+</html>
