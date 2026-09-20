@@ -360,19 +360,18 @@ async function syncSupabaseProducts() {
   if (typeof apiGetProducts === 'function') {
     try {
       const dbProds = await apiGetProducts();
-      if (dbProds && dbProds.length > 0) {
+      if (Array.isArray(dbProds)) {
         const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
-        dbProds.forEach(dp => {
-          if (deletedIds.includes(dp.id)) return;
-          const idx = FROST_PRODUCTS.findIndex(p => p.id === dp.id);
-          if (idx > -1) {
-            FROST_PRODUCTS[idx] = { ...FROST_PRODUCTS[idx], ...dp };
-          } else {
-            FROST_PRODUCTS.unshift(dp);
-          }
-        });
+        const validProds = dbProds.filter(dp => !deletedIds.includes(dp.id) && dp.active !== false);
+
+        // Supabase Cloud is the single source of truth across all devices
+        // Clear old memory state and populate with live Supabase products
+        FROST_PRODUCTS.length = 0;
+        validProds.forEach(p => FROST_PRODUCTS.push(p));
+
         filterOutDeletedProducts();
         window.dispatchEvent(new CustomEvent('frost:products-updated'));
+        if (typeof renderHomeCatalog === 'function') renderHomeCatalog();
         if (typeof renderCurrentPageCatalog === 'function') renderCurrentPageCatalog();
         if (typeof renderCuratedProducts === 'function') renderCuratedProducts();
         if (typeof renderShopCatalog === 'function') renderShopCatalog();
@@ -625,7 +624,10 @@ function closeCheckout(){ document.getElementById('checkout-modal')?.classList.r
 // ==========================================
 function openQuickView(productId) {
   const p = FROST_PRODUCTS.find(x => x.id === productId);
-  if (!p) return;
+  if (!p) {
+    window.location.href = 'shop.html';
+    return;
+  }
   activeQuickViewProduct = p;
   selectedModalOption = p.options[0];
   const body = document.getElementById('quickview-modal-body');

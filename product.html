@@ -646,10 +646,25 @@
 
     function initPdpPage() {
       const params = new URLSearchParams(window.location.search);
-      const pid = params.get('id') || 'sage-linen-dress';
+      const pid = params.get('id');
       
-      let p = FROST_PRODUCTS.find(item => item.id === pid);
-      if (!p) p = FROST_PRODUCTS[0];
+      let p = pid ? FROST_PRODUCTS.find(item => item.id === pid) : (FROST_PRODUCTS.length > 0 ? FROST_PRODUCTS[0] : null);
+      if (!p && FROST_PRODUCTS.length > 0) p = FROST_PRODUCTS[0];
+      
+      if (!p) {
+        document.title = 'Product Not Found | FROST';
+        const main = document.querySelector('.pdp-main-section');
+        if (main) {
+          main.innerHTML = `
+            <div style="text-align:center; padding:5rem 1rem; width:100%;">
+              <h2 style="font-family:var(--font-serif); font-size:2rem; margin-bottom:1rem;">Product Not Found</h2>
+              <p style="color:var(--text-muted); margin-bottom:2rem;">This handcrafted piece may have been updated or moved to our archives.</p>
+              <a href="shop.html" class="btn-burgundy" style="display:inline-block; padding:0.9rem 2rem; text-decoration:none; border-radius:4px; color:#fff; background:var(--burgundy-primary);">Explore Collection</a>
+            </div>
+          `;
+        }
+        return;
+      }
       activeProduct = p;
 
       // Meta & breadcrumbs

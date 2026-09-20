@@ -115,31 +115,41 @@ async function apiGetProducts() {
     const data = await supabaseRest('products?select=*&is_active=eq.true&order=created_at.desc');
     if (!Array.isArray(data)) return [];
 
-    return data.map(p => ({
-      id: p.id,
-      title: p.title,
-      category: p.category,
-      categoryName: p.category_name || (p.category === 'sarees' ? 'Couture Saree' : 'Home Sanctuary'),
-      priceINR: Number(p.price_inr),
-      originalPriceINR: p.original_price_inr ? Number(p.original_price_inr) : null,
-      stock: p.stock ?? 10,
-      rating: Number(p.rating || 4.9),
-      reviewsCount: p.reviews_count ?? 18,
-      badge: p.badge || 'Handcrafted',
-      badgeType: p.badge_type || 'gold',
-      image: p.image_url,
-      fabric: p.fabric || 'Pure Silk Mark',
-      zari: p.zari || 'Antique Silver & Champagne Gold Zari',
-      craft: p.craft || 'Handloom Master Weave',
-      origin: p.origin || 'Varanasi Atelier',
-      description: p.description || p.title,
-      optionsLabel: p.options_label || 'Bespoke Tailoring',
-      options: Array.isArray(p.options) ? p.options : ['Standard Edition'],
-      active: p.is_active !== false,
-      fromSupabase: true
-    }));
+    return data.map(p => {
+      let gallery = [p.image_url || 'images/hero_editorial.jpg'];
+      if (p.zari && p.zari.startsWith('[')) {
+        try {
+          const parsed = JSON.parse(p.zari);
+          if (Array.isArray(parsed) && parsed.length > 0) gallery = parsed;
+        } catch(e) {}
+      }
+      return {
+        id: p.id,
+        title: p.title,
+        category: p.category,
+        categoryName: p.category_name || (p.category === 'home' ? 'Home & Living' : "Women's Collection"),
+        priceINR: Number(p.price_inr),
+        originalPriceINR: p.original_price_inr ? Number(p.original_price_inr) : null,
+        stock: p.stock ?? 10,
+        rating: Number(p.rating || 4.9),
+        reviewsCount: p.reviews_count ?? 18,
+        badge: p.badge || 'Handcrafted',
+        badgeType: p.badge_type || 'gold',
+        image: p.image_url || 'images/hero_editorial.jpg',
+        gallery: gallery,
+        fabric: p.fabric || 'Pure Artisan Linen',
+        zari: (p.zari && !p.zari.startsWith('[')) ? p.zari : 'Fine Hand Finish',
+        craft: p.craft || 'Handloom Master Weave',
+        origin: p.origin || 'Frost Atelier',
+        description: p.description || p.title,
+        optionsLabel: p.options_label || (p.category === 'home' ? 'Select Dimensions' : 'Select Size'),
+        options: Array.isArray(p.options) ? p.options : ['Standard Edition'],
+        active: p.is_active !== false,
+        fromSupabase: true
+      };
+    });
   } catch (err) {
-    console.warn('apiGetProducts REST fallback error:', err.message);
+    console.warn('apiGetProducts REST error:', err.message);
     return typeof FROST_PRODUCTS !== 'undefined' ? FROST_PRODUCTS : [];
   }
 }
@@ -152,24 +162,34 @@ async function apiGetAdminProducts() {
     const data = await supabaseRest('products?select=*&order=created_at.desc');
     if (!Array.isArray(data)) return [];
 
-    return data.map(p => ({
-      id: p.id,
-      title: p.title,
-      category: p.category,
-      categoryName: p.category_name,
-      priceINR: Number(p.price_inr),
-      originalPriceINR: p.original_price_inr ? Number(p.original_price_inr) : null,
-      stock: p.stock ?? 10,
-      rating: Number(p.rating || 4.9),
-      reviewsCount: p.reviews_count ?? 18,
-      badge: p.badge || 'Handcrafted',
-      badgeType: p.badge_type || 'gold',
-      image: p.image_url,
-      fabric: p.fabric || 'Pure Silk Mark',
-      description: p.description || p.title,
-      active: p.is_active !== false,
-      fromSupabase: true
-    }));
+    return data.map(p => {
+      let gallery = [p.image_url || 'images/hero_editorial.jpg'];
+      if (p.zari && p.zari.startsWith('[')) {
+        try {
+          const parsed = JSON.parse(p.zari);
+          if (Array.isArray(parsed) && parsed.length > 0) gallery = parsed;
+        } catch(e) {}
+      }
+      return {
+        id: p.id,
+        title: p.title,
+        category: p.category,
+        categoryName: p.category_name || (p.category === 'home' ? 'Home & Living' : "Women's Collection"),
+        priceINR: Number(p.price_inr),
+        originalPriceINR: p.original_price_inr ? Number(p.original_price_inr) : null,
+        stock: p.stock ?? 10,
+        rating: Number(p.rating || 4.9),
+        reviewsCount: p.reviews_count ?? 18,
+        badge: p.badge || 'Handcrafted',
+        badgeType: p.badge_type || 'gold',
+        image: p.image_url || 'images/hero_editorial.jpg',
+        gallery: gallery,
+        fabric: p.fabric || 'Pure Artisan Linen',
+        description: p.description || p.title,
+        active: p.is_active !== false,
+        fromSupabase: true
+      };
+    });
   } catch (err) {
     console.warn('apiGetAdminProducts fallback error:', err.message);
     return [];
@@ -214,19 +234,31 @@ async function apiUploadProductImage(file) {
  * Insert or Update Product in Supabase
  */
 async function apiSaveProduct(productData) {
+  const galleryList = Array.isArray(productData.gallery) && productData.gallery.length > 0
+    ? productData.gallery.filter(Boolean)
+    : [productData.image || 'images/hero_editorial.jpg'];
+
+  const primaryImage = galleryList[0] || productData.image || 'images/hero_editorial.jpg';
+  const rawCat = productData.category || 'women';
+  const isHome = rawCat === 'home' || rawCat === 'bedsheets' || rawCat === 'cushions' || rawCat === 'tablecloths';
+  const normalizedCat = isHome ? 'home' : (rawCat === 'sarees' ? 'sarees' : 'women');
+
   const row = {
     id: productData.id || `custom-${Date.now()}`,
-    title: productData.title,
-    category: productData.category || 'sarees',
-    category_name: productData.category === 'sarees' ? 'Couture Saree' : 'Home Sanctuary',
-    price_inr: Number(productData.priceINR),
+    title: productData.title || 'Handcrafted Luxury Creation',
+    category: normalizedCat,
+    category_name: productData.categoryName || (isHome ? 'Home & Living' : "Women's Collection"),
+    price_inr: Number(productData.priceINR || productData.price_inr || 0),
     original_price_inr: productData.originalPriceINR ? Number(productData.originalPriceINR) : null,
     stock: parseInt(productData.stock) || 10,
-    badge: productData.badge || 'New Creation',
-    badge_type: 'gold',
-    image_url: productData.image,
-    fabric: productData.fabric || 'Pure Handcrafted Weave',
+    badge: productData.badge || 'Handcrafted',
+    badge_type: productData.badgeType || (isHome ? 'green' : 'burgundy'),
+    image_url: primaryImage,
+    fabric: productData.fabric || (isHome ? 'Pure French Slub Linen' : '100% Breathable Midweight Linen'),
+    zari: JSON.stringify(galleryList),
     description: productData.description || productData.title,
+    options_label: productData.optionsLabel || (isHome ? 'Select Dimensions' : 'Select Size'),
+    options: Array.isArray(productData.options) ? productData.options : (isHome ? ['Standard Edition', 'Luxury Set'] : ['XS', 'S', 'M', 'L', 'XL']),
     is_active: productData.active !== false
   };
 

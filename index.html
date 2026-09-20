@@ -123,81 +123,7 @@
         <h2>BESTSELLERS</h2>
       </div>
       <div class="product-grid-4col" id="home-bestsellers-grid">
-        <!-- Product 1 -->
-        <div class="product-card-frost" data-id="sage-linen-dress">
-          <div class="card-media-wrap">
-            <a href="product.html?id=sage-linen-dress">
-              <img src="images/sage_linen_dress.jpg" alt="Textured Linen Midi Dress" loading="lazy" />
-            </a>
-            <button class="card-wishlist-toggle" onclick="toggleWishlist('sage-linen-dress')" aria-label="Save to Wishlist">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <button class="card-quick-add-bar" onclick="addToCart('sage-linen-dress')">QUICK ADD</button>
-          </div>
-          <div class="card-info-wrap">
-            <span class="card-category-tag">Dresses</span>
-            <a href="product.html?id=sage-linen-dress" class="card-product-title">Textured Linen Midi Dress</a>
-            <span class="card-product-price">₹1,899</span>
-            <button class="card-btn-add" onclick="addToCart('sage-linen-dress')">ADD TO CART</button>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card-frost" data-id="rose-kurti">
-          <div class="card-media-wrap">
-            <a href="product.html?id=rose-kurti">
-              <img src="images/rose_kurti.jpg" alt="Rose Handloom Cotton Kurti" loading="lazy" />
-            </a>
-            <button class="card-wishlist-toggle" onclick="toggleWishlist('rose-kurti')" aria-label="Save to Wishlist">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <button class="card-quick-add-bar" onclick="addToCart('rose-kurti')">QUICK ADD</button>
-          </div>
-          <div class="card-info-wrap">
-            <span class="card-category-tag">Kurtis</span>
-            <a href="product.html?id=rose-kurti" class="card-product-title">Rose Handloom Cotton Kurti</a>
-            <span class="card-product-price">₹1,299</span>
-            <button class="card-btn-add" onclick="addToCart('rose-kurti')">ADD TO CART</button>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card-frost" data-id="curtains-green">
-          <div class="card-media-wrap">
-            <a href="product.html?id=curtains-green">
-              <img src="images/curtains_green.jpg" alt="Deep Green Bagh Print Curtains" loading="lazy" />
-            </a>
-            <button class="card-wishlist-toggle" onclick="toggleWishlist('curtains-green')" aria-label="Save to Wishlist">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <button class="card-quick-add-bar" onclick="addToCart('curtains-green')">QUICK ADD</button>
-          </div>
-          <div class="card-info-wrap">
-            <span class="card-category-tag">Curtains</span>
-            <a href="product.html?id=curtains-green" class="card-product-title">Deep Green Bagh Print Curtains</a>
-            <span class="card-product-price">₹1,899</span>
-            <button class="card-btn-add" onclick="addToCart('curtains-green')">ADD TO CART</button>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="product-card-frost" data-id="table-runner">
-          <div class="card-media-wrap">
-            <a href="product.html?id=table-runner">
-              <img src="images/table_runner.jpg" alt="Textured Linen Table Runner" loading="lazy" />
-            </a>
-            <button class="card-wishlist-toggle" onclick="toggleWishlist('table-runner')" aria-label="Save to Wishlist">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <button class="card-quick-add-bar" onclick="addToCart('table-runner')">QUICK ADD</button>
-          </div>
-          <div class="card-info-wrap">
-            <span class="card-category-tag">Table Linens</span>
-            <a href="product.html?id=table-runner" class="card-product-title">Textured Linen Table Runner</a>
-            <span class="card-product-price">₹699</span>
-            <button class="card-btn-add" onclick="addToCart('table-runner')">ADD TO CART</button>
-          </div>
-        </div>
+        <!-- Rendered dynamically from live product catalog -->
       </div>
     </section>
 
@@ -402,7 +328,15 @@
       }
 
       const bestContainer = document.getElementById('home-bestsellers-grid');
-      if (bestContainer && activeProducts.length > 0) {
+      if (!bestContainer) return;
+      if (activeProducts.length === 0) {
+        bestContainer.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
+            <p style="font-family:var(--font-serif); font-size:1.25rem; color:var(--frost-dark); margin-bottom:0.5rem; letter-spacing:0.05em;">New Collection Arriving Soon</p>
+            <p style="font-size:0.88rem; max-width:420px; margin:0 auto; line-height:1.6;">Our artisans are curating our newest handcrafted edit. Check back shortly or explore our bespoke creations in the store.</p>
+          </div>
+        `;
+      } else {
         bestContainer.innerHTML = activeProducts.slice(0, 4).map(createProductCardHtml).join('');
       }
     }

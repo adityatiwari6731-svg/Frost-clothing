@@ -276,14 +276,34 @@ const DEFAULT_PRODUCTS = [
   }
 ];
 
+const ALL_SEED_PRODUCT_IDS = [
+  'sage-linen-dress',
+  'bordeaux-coord',
+  'rose-kurti',
+  'blockprint-bedsheet',
+  'curtains-green',
+  'table-runner',
+  'cushion-cream',
+  'charcoal-bottoms',
+  'saree-01',
+  'saree-02',
+  'saree-03',
+  'saree-04',
+  'home-01',
+  'home-02',
+  'home-03',
+  'home-04',
+  'home-05'
+];
+
 function getAdminProducts() {
   const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
   const saved = localStorage.getItem('frost_admin_products');
   let prods = DEFAULT_PRODUCTS;
-  if (saved) {
+  if (saved !== null) {
     try {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) prods = parsed;
+      if (Array.isArray(parsed)) prods = parsed;
     } catch(e) {}
   }
   return prods.filter(p => !deletedIds.includes(p.id));
@@ -323,6 +343,42 @@ function deleteAdminProduct(productId) {
   }
 
   return products;
+}
+
+function purgeAllDemoProducts() {
+  try {
+    const deleted = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
+    ALL_SEED_PRODUCT_IDS.forEach(id => {
+      if (!deleted.includes(id)) deleted.push(id);
+    });
+    localStorage.setItem('frost_deleted_products', JSON.stringify(deleted));
+
+    const current = getAdminProducts();
+    const cleaned = current.filter(p => !ALL_SEED_PRODUCT_IDS.includes(p.id));
+    localStorage.setItem('frost_admin_products', JSON.stringify(cleaned));
+
+    if (typeof FROST_PRODUCTS !== 'undefined' && Array.isArray(FROST_PRODUCTS)) {
+      for (let i = FROST_PRODUCTS.length - 1; i >= 0; i--) {
+        if (ALL_SEED_PRODUCT_IDS.includes(FROST_PRODUCTS[i].id)) {
+          FROST_PRODUCTS.splice(i, 1);
+        }
+      }
+    }
+
+    if (typeof apiDeleteProduct === 'function') {
+      ALL_SEED_PRODUCT_IDS.forEach(id => {
+        apiDeleteProduct(id).catch(() => {});
+      });
+    }
+
+    localStorage.setItem('frost_last_product_update', String(Date.now()));
+    window.dispatchEvent(new CustomEvent('frost:products-updated'));
+    if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+    return true;
+  } catch(e) {
+    console.warn('purgeAllDemoProducts error:', e);
+    return false;
+  }
 }
 
 // ====================================================

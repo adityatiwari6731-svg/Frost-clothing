@@ -1535,7 +1535,7 @@
               <div style="display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap;">
                 <input type="text" class="table-search" id="product-search" placeholder="Search products..." onkeyup="renderProductsGrid()" />
                 <button class="btn-secondary" onclick="renderProductsGrid()" title="Reload from Supabase Cloud">🔄 Refresh Cloud</button>
-                <button class="btn-secondary" onclick="syncDefaultCatalogToSupabase()" title="Upload genuine catalog to Supabase">☁️ Sync Catalog to Supabase</button>
+                <button class="btn-secondary" style="color:var(--accent-red); border-color:rgba(255,71,87,0.35);" onclick="purgeAllDemoProductsAction()" title="Completely purge all demo products from database & local store">🗑️ Purge All Demo Products</button>
                 <button class="btn-primary" onclick="openAddProductModal()">+ Add New Product</button>
               </div>
             </div>
@@ -2273,17 +2273,26 @@
 
       grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-dim);">Loading products from Supabase Cloud... ⏳</div>`;
 
+      let supabaseConnected = false;
       let products = [];
       if (typeof apiGetAdminProducts === 'function') {
         try {
-          products = await apiGetAdminProducts();
+          const res = await apiGetAdminProducts();
+          if (Array.isArray(res)) {
+            products = res;
+            supabaseConnected = true;
+          }
         } catch(e) {
           console.warn('Could not load products from Supabase:', e);
         }
       }
 
-      if (!products || products.length === 0) {
+      // Only fall back to local storage if Supabase was completely offline/unreachable
+      if (!supabaseConnected) {
         products = getAdminProducts();
+      } else {
+        const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
+        products = products.filter(p => !deletedIds.includes(p.id));
       }
 
       const counter = document.getElementById('products-cloud-counter');
@@ -2298,6 +2307,18 @@
           p.category.toLowerCase().includes(searchQ) ||
           (p.fabric && p.fabric.toLowerCase().includes(searchQ))
         );
+      }
+
+      if (products.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:4rem 1rem; color:var(--text-dim); background:rgba(255,255,255,0.02); border-radius:8px; border:1px dashed var(--border-dark);">
+            <div style="font-size:2rem; margin-bottom:0.6rem;">📦</div>
+            <h4 style="color:var(--text-primary); margin-bottom:0.4rem;">Catalog is Empty</h4>
+            <p style="font-size:0.84rem; max-width:400px; margin:0 auto 1.2rem;">All fake demo products have been cleared. Click below to add your genuine handcrafted product.</p>
+            <button class="btn-primary" onclick="openAddProductModal()">+ Add New Product</button>
+          </div>
+        `;
+        return;
       }
 
       grid.innerHTML = products.map(p => `
@@ -2404,6 +2425,16 @@
       }
       showAdminToast(`✓ ${count} products synchronized with Supabase!`);
       await renderProductsGrid();
+    }
+
+    async function purgeAllDemoProductsAction() {
+      if (!confirm('This will permanently wipe all demo/fake products from both your store and Supabase Cloud across all devices. Real products you added will remain untouched. Continue?')) return;
+      showAdminToast('Purging all demo products from cloud & store... ⏳');
+      if (typeof purgeAllDemoProducts === 'function') {
+        purgeAllDemoProducts();
+      }
+      await renderProductsGrid();
+      showAdminToast('✓ All demo/fake products have been permanently purged!');
     }
 
     let productGallery = [];
@@ -2666,11 +2697,14 @@
       saveAdminProducts(products);
 
       // 2. Persist directly to Supabase PostgreSQL
+      let cloudSynced = false;
       if (typeof apiSaveProduct === 'function') {
         try {
           await apiSaveProduct(productData);
+          cloudSynced = true;
         } catch (dbErr) {
           console.warn('Supabase product save warning:', dbErr.message);
+          showAdminToast('Saved locally, but cloud sync warning: ' + dbErr.message, 'error');
         }
       }
 
@@ -2682,8 +2716,10 @@
       } catch(e) {}
 
       closeProductModal();
-      renderProductsGrid();
-      showAdminToast(editingProductId ? 'Product updated in Supabase & Local!' : 'New product created in Supabase & Local!');
+      await renderProductsGrid();
+      if (cloudSynced) {
+        showAdminToast(editingProductId ? '✓ Product updated in Cloud & live across all devices!' : '✓ New product created in Cloud & live across all devices!');
+      }
     }
 
     async function toggleProductStatus(productId) {
