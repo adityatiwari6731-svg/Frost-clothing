@@ -3,418 +3,801 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FROST | Handcrafted Luxury Heirloom Product Details. Explore pure silk handloom drapes, authentic artisan provenance, and bespoke customization." />
-  <title>Heirloom Detail | FROST Luxury Atelier</title>
+  <meta name="description" content="FROST — Textured Linen Midi Dress. Made from 100% pure European flax linen. Contemporary silhouette for effortless everyday elegance." />
+  <title>Textured Linen Midi Dress | FROST</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Playfair Display, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* PDP Redesign Specific Styles */
+    .pdp-page-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 5rem;
+    }
+    .pdp-editorial-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .pdp-gallery-container {
+      display: flex;
+      gap: 1.2rem;
+      position: sticky;
+      top: 90px;
+    }
+    .pdp-thumbnails-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 82px;
+      flex-shrink: 0;
+    }
+    .pdp-thumb-slot {
+      width: 82px;
+      height: 104px;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.2s ease;
+      background: var(--frost-cream);
+    }
+    .pdp-thumb-slot:hover,
+    .pdp-thumb-slot.active {
+      opacity: 1;
+      border-color: var(--frost-burgundy);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .pdp-thumb-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .pdp-main-viewport {
+      flex: 1;
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--frost-cream);
+      box-shadow: var(--shadow-sm);
+    }
+    .pdp-main-viewport img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .pdp-badge-floating {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #ffffff;
+      color: var(--text-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      z-index: 2;
+    }
+
+    /* PDP Info Panel */
+    .pdp-info-panel {
+      padding-top: 0.5rem;
+    }
+    .pdp-badge-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--frost-burgundy);
+      margin-bottom: 0.5rem;
+    }
+    .pdp-main-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .pdp-rating-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+    .pdp-stars {
+      color: #D4AF37;
+      letter-spacing: 2px;
+      font-size: 0.95rem;
+    }
+    .pdp-pricing-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .pdp-current-price {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .pdp-original-price {
+      font-size: 1.15rem;
+      color: #9CA3AF;
+      text-decoration: line-through;
+    }
+    .pdp-discount-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #15803d;
+      background: #f0fdf4;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .pdp-tax-caption {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+      display: block;
+    }
+
+    /* Color Selection */
+    .pdp-option-section {
+      margin-bottom: 1.8rem;
+    }
+    .pdp-option-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+    .pdp-color-swatches-grid {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .pdp-swatch-ring {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      padding: 2px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pdp-swatch-ring.active,
+    .pdp-swatch-ring:hover {
+      border-color: var(--text-dark);
+    }
+    .pdp-swatch-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Size Selector */
+    .pdp-size-btn-group {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .pdp-size-pill {
+      min-width: 48px;
+      height: 42px;
+      padding: 0 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--frost-border);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pdp-size-pill:hover,
+    .pdp-size-pill.active {
+      border-color: var(--frost-burgundy);
+      background: var(--frost-burgundy);
+      color: #ffffff;
+    }
+
+    /* Quantity & CTAs */
+    .pdp-actions-block {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .pdp-stepper-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      width: 110px;
+      height: 50px;
+      justify-content: space-between;
+      padding: 0 0.5rem;
+    }
+    .pdp-step-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      width: 30px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pdp-step-val {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .btn-add-to-bag-green {
+      flex: 1.3;
+      height: 50px;
+      background: var(--frost-green);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.15s ease;
+    }
+    .btn-add-to-bag-green:hover {
+      background: #09261e;
+      transform: translateY(-1px);
+    }
+    .btn-buy-now-burgundy {
+      flex: 1;
+      height: 50px;
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.15s ease;
+    }
+    .btn-buy-now-burgundy:hover {
+      background: #4a0e14;
+      transform: translateY(-1px);
+    }
+
+    /* Guest Checkout Trust Banner */
+    .pdp-guest-badge {
+      background: #FAF7F2;
+      border: 1px dashed var(--frost-border);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+    }
+    .pdp-guest-badge svg {
+      color: var(--frost-burgundy);
+      flex-shrink: 0;
+    }
+    .pdp-guest-badge-text {
+      font-size: 0.82rem;
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+    .pdp-guest-badge-text strong {
+      display: block;
+      font-size: 0.84rem;
+    }
+
+    /* Pincode checker */
+    .pdp-delivery-box {
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      background: #ffffff;
+    }
+    .pdp-deliv-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pdp-deliv-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .pdp-deliv-input {
+      flex: 1;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      outline: none;
+    }
+    .pdp-deliv-btn {
+      padding: 0 1.2rem;
+      background: var(--text-dark);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Editorial Accordions */
+    .pdp-accordion-stack {
+      border-top: 1px solid var(--frost-border);
+    }
+    .pdp-acc-item {
+      border-bottom: 1px solid var(--frost-border);
+    }
+    .pdp-acc-trigger {
+      width: 100%;
+      padding: 1.1rem 0;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .pdp-acc-body {
+      display: none;
+      padding-bottom: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: #4B5563;
+    }
+    .pdp-acc-item.active .pdp-acc-body {
+      display: block;
+    }
+
+    @media (max-width: 992px) {
+      .pdp-editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .pdp-gallery-container {
+        flex-direction: column-reverse;
+        position: static;
+      }
+      .pdp-thumbnails-stack {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+      }
+      .pdp-thumb-slot {
+        width: 70px;
+        height: 90px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
-  <aside class="top-bar" id="top-bar" aria-label="Announcement">
-    <div class="container">
-      <div class="top-bar-ticker">
-        <span class="badge-pulse"></span>
-        <span>Complimentary Pan-India White-Glove Delivery On Orders Above ₹20,000</span>
-      </div>
-      <div class="top-bar-actions">
-        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
-        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
-        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
-          <span>🇮🇳 India · INR (₹)</span>
-        </div>
-      </div>
-    </div>
-  </aside>
+  <!-- Injected Announcement Top Bar -->
+  <div id="frost-topbar"></div>
 
-  <!-- Navigation Header -->
-  <header class="header-nav" id="header-nav">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
-          <span class="logo-monogram">FROST</span>
-          <span class="logo-tagline">Couture &amp; Living</span>
-        </a>
+  <!-- Injected Luxury Header -->
+  <div id="frost-header"></div>
 
-        <nav aria-label="Primary Navigation">
-          <ul class="nav-menu">
-            <li class="nav-item">
-              <a href="sarees.html" class="nav-link">Couture Sarees</a>
-              <ul class="nav-dropdown">
-                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
-              <ul class="nav-dropdown">
-                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a href="lookbook.html" class="nav-link">Lookbook</a></li>
-            <li class="nav-item"><a href="heritage.html" class="nav-link">Heritage &amp; Craft</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-actions">
-          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </button>
-          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <span class="badge-count" id="wishlist-badge">0</span>
-          </button>
-          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span class="badge-count" id="cart-badge">0</span>
-          </button>
-          <button class="icon-btn mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumb-nav" id="pdp-breadcrumbs">
+  <main class="pdp-page-container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" id="pdp-breadcrumbs" style="margin-bottom: 1.8rem;">
       <a href="index.html">Home</a>
       <span class="separator">/</span>
-      <a href="sarees.html" id="bc-category-link">Collections</a>
+      <a href="shop.html" id="bc-main-category">Shop</a>
       <span class="separator">/</span>
-      <span class="current" id="bc-product-title">Artisanal Heirloom</span>
+      <span class="current" id="bc-product-title">Textured Linen Midi Dress</span>
     </nav>
 
-    <!-- Main PDP Grid -->
-    <div class="pdp-grid" id="pdp-main-content">
+    <!-- Main Editorial Layout -->
+    <div class="pdp-editorial-grid">
       <!-- Gallery Column -->
-      <div class="pdp-gallery-wrap">
-        <div class="pdp-thumbs-col" id="pdp-thumbs">
-          <!-- Thumbnails injected via JS -->
+      <div class="pdp-gallery-container">
+        <!-- Vertical Thumbnails -->
+        <div class="pdp-thumbnails-stack" id="pdp-gallery-thumbs">
+          <!-- Injected via JS -->
         </div>
-        <div class="pdp-main-image-wrap">
-          <span class="pdp-badge-pill" id="pdp-badge">Handloom Heirloom</span>
-          <img src="images/saree_banarasi.jpg" alt="Creation" id="pdp-hero-image" />
+
+        <!-- Main Viewport -->
+        <div class="pdp-main-viewport">
+          <span class="pdp-badge-floating" id="pdp-hero-badge">NEW ARRIVAL</span>
+          <img src="images/sage_linen_dress.jpg" alt="Textured Linen Midi Dress" id="pdp-main-display-img" />
         </div>
       </div>
 
-      <!-- Details Column -->
-      <div class="pdp-details-col">
-        <span class="pdp-origin-tag" id="pdp-origin">Varanasi Atelier • Handcrafted</span>
-        <h1 class="pdp-title" id="pdp-title">The Empress Banarasi Katan Silk Saree</h1>
-        
-        <div class="pdp-rating-row">
-          <div class="pdp-stars">★★★★★</div>
-          <span style="font-weight: 600;" id="pdp-rating-score">4.9</span>
-          <span class="pdp-review-count" id="pdp-reviews-count">(38 Verified Reviews)</span>
+      <!-- Information & Purchase Column -->
+      <div class="pdp-info-panel">
+        <span class="pdp-badge-eyebrow" id="pdp-eyebrow-cat">WOMEN · DRESSES</span>
+        <h1 class="pdp-main-heading" id="pdp-product-title">Textured Linen Midi Dress</h1>
+
+        <div class="pdp-rating-strip">
+          <span class="pdp-stars">★★★★★</span>
+          <span style="font-weight:600; color:var(--text-dark);" id="pdp-rating-num">4.8</span>
+          <span>|</span>
+          <span id="pdp-reviews-num">126 verified reviews</span>
         </div>
 
-        <div class="pdp-craft-highlight" id="pdp-craft">
-          <span>❖</span>
-          <span id="pdp-craft-text">Handloom Kadwa Weave — 45 Days to Craft</span>
+        <div class="pdp-pricing-row">
+          <span class="pdp-current-price" id="pdp-price-tag">₹1,899</span>
+          <span class="pdp-original-price" id="pdp-mrp-tag">₹2,499</span>
+          <span class="pdp-discount-pill" id="pdp-save-tag">SAVE 24%</span>
         </div>
+        <span class="pdp-tax-caption">Inclusive of all taxes. Free shipping on orders over ₹1,499.</span>
 
-        <!-- Price -->
-        <div class="pdp-price-wrap">
-          <span class="pdp-price-current" id="pdp-price">₹48,500</span>
-          <span class="pdp-price-original" id="pdp-original-price">₹58,000</span>
-          <span class="pdp-price-discount" id="pdp-discount-tag">Save ₹9,500</span>
-        </div>
-        <span class="pdp-tax-note">Price inclusive of all statutory GST taxes &amp; silk hallmarking fees</span>
-
-        <!-- Options / Customization -->
-        <div class="pdp-options-block">
-          <div class="pdp-options-label">
-            <span id="pdp-options-title">Bespoke Tailoring &amp; Finishing:</span>
-            <a href="contact.html" style="font-size:0.78rem; color:var(--deep-wine); text-decoration:underline;">Custom Fit Concierge</a>
+        <!-- Color Selector -->
+        <div class="pdp-option-section">
+          <div class="pdp-option-title-row">
+            <span>Color: <strong id="pdp-color-name">Sage Green</strong></span>
           </div>
-          <div class="pdp-options-grid" id="pdp-options-list">
-            <!-- Option buttons injected via JS -->
+          <div class="pdp-color-swatches-grid">
+            <div class="pdp-swatch-ring active" data-color="Sage Green" onclick="selectPdpColor('Sage Green', '#889F8D', this)">
+              <span class="pdp-swatch-fill" style="background:#889F8D;"></span>
+            </div>
+            <div class="pdp-swatch-ring" data-color="Ivory Cream" onclick="selectPdpColor('Ivory Cream', '#ECE6DA', this)">
+              <span class="pdp-swatch-fill" style="background:#ECE6DA;"></span>
+            </div>
+            <div class="pdp-swatch-ring" data-color="Bordeaux Plum" onclick="selectPdpColor('Bordeaux Plum', '#6C151E', this)">
+              <span class="pdp-swatch-fill" style="background:#6C151E;"></span>
+            </div>
           </div>
         </div>
 
-        <!-- Pincode Delivery Availability Checker -->
-        <div class="pdp-pincode-box">
-          <div class="pdp-pincode-header">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-            <span>Delivery Availability &amp; White-Glove Dispatch</span>
+        <!-- Size Selector -->
+        <div class="pdp-option-section">
+          <div class="pdp-option-title-row">
+            <span>Size: <strong id="pdp-size-name">S</strong></span>
+            <button type="button" onclick="openSizeGuide()" style="background:none; border:none; color:var(--frost-burgundy); font-weight:600; font-size:0.8rem; cursor:pointer; text-decoration:underline;">
+              Size Guide 📏
+            </button>
           </div>
-          <div class="pdp-pincode-input-group">
-            <input type="text" class="pdp-pincode-input" id="pincode-input" placeholder="Enter 6-digit PIN code (e.g. 110001, 400001)" maxlength="6" />
-            <button class="pdp-pincode-btn" id="pincode-check-btn" onclick="handlePincodeCheck()">Check PIN</button>
+          <div class="pdp-size-btn-group" id="pdp-sizes-container">
+            <button type="button" class="pdp-size-pill" onclick="selectPdpSize('XS', this)">XS</button>
+            <button type="button" class="pdp-size-pill active" onclick="selectPdpSize('S', this)">S</button>
+            <button type="button" class="pdp-size-pill" onclick="selectPdpSize('M', this)">M</button>
+            <button type="button" class="pdp-size-pill" onclick="selectPdpSize('L', this)">L</button>
+            <button type="button" class="pdp-size-pill" onclick="selectPdpSize('XL', this)">XL</button>
+            <button type="button" class="pdp-size-pill" onclick="selectPdpSize('XXL', this)">XXL</button>
           </div>
-          <div class="pdp-pincode-result" id="pincode-result-msg"></div>
         </div>
 
-        <!-- Action CTAs -->
-        <div class="pdp-cta-row">
-          <button class="btn-pdp-add" id="pdp-btn-add" onclick="handlePdpAddToCart()">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            Add to Bag
+        <!-- Quantity and Action Buttons -->
+        <div class="pdp-actions-block">
+          <div class="pdp-stepper-wrap">
+            <button type="button" class="pdp-step-btn" onclick="stepPdpQty(-1)">−</button>
+            <span class="pdp-step-val" id="pdp-qty-display">1</span>
+            <button type="button" class="pdp-step-btn" onclick="stepPdpQty(1)">+</button>
+          </div>
+          <button type="button" class="btn-add-to-bag-green" onclick="handlePdpAdd()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            ADD TO BAG
           </button>
-          <button class="btn-pdp-buy" id="pdp-btn-buy" onclick="handlePdpBuyNow()">
-            Buy Now
+          <button type="button" class="btn-buy-now-burgundy" onclick="handlePdpBuy()">
+            BUY NOW
           </button>
         </div>
 
-        <!-- Trust Pillars Strip -->
-        <div class="pdp-trust-strip">
-          <div class="pdp-trust-item">
-            <strong>Certified Silk Mark</strong>
-            100% pure authentic handloom
-          </div>
-          <div class="pdp-trust-item">
-            <strong>Complimentary Shipping</strong>
-            Insured white-glove delivery
-          </div>
-          <div class="pdp-trust-item">
-            <strong>Hassle-Free Exchange</strong>
-            14-day return authentication
+        <!-- Guest Checkout Feature Badge -->
+        <div class="pdp-guest-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div class="pdp-guest-badge-text">
+            <strong>GUEST CHECKOUT · NO ACCOUNT REQUIRED</strong>
+            Fast, frictionless online checkout. We accept UPI, RuPay, Visa, Mastercard &amp; Net Banking.
           </div>
         </div>
 
-        <!-- Accordions -->
-        <div class="accordion-container" style="margin-top: 1rem;">
-          <div class="accordion-item active">
-            <div class="accordion-header" onclick="togglePdpAccordion(this)">
-              <span class="accordion-title">Artisanal Provenance &amp; Handcraft</span>
-              <span class="accordion-icon">−</span>
-            </div>
-            <div class="accordion-body" id="pdp-desc-text">
-              Handwoven with master precision in our heritage looms. Each thread is twisted and intertwined to ensure heirloom longevity and unmatched drape fluidity.
+        <!-- Pincode Delivery Availability -->
+        <div class="pdp-delivery-box">
+          <div class="pdp-deliv-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span>Delivery Availability</span>
+          </div>
+          <div class="pdp-deliv-input-group">
+            <input type="text" id="pdp-pincode-input" class="pdp-deliv-input" placeholder="Enter 6-digit Pincode" maxlength="6" />
+            <button type="button" class="pdp-deliv-btn" onclick="checkPdpPin()">Check</button>
+          </div>
+          <div id="pdp-pin-msg" style="font-size:0.82rem; margin-top:0.6rem; color:var(--text-muted);"></div>
+        </div>
+
+        <!-- Editorial Accordions -->
+        <div class="pdp-accordion-stack">
+          <!-- Accordion 1 -->
+          <div class="pdp-acc-item active">
+            <button type="button" class="pdp-acc-trigger" onclick="toggleAccordion(this)">
+              <span>Description</span>
+              <span class="pdp-acc-symbol">−</span>
+            </button>
+            <div class="pdp-acc-body" id="pdp-desc-content">
+              Crafted from premium 100% European flax linen, this midi dress features a relaxed silhouette with subtle waist shaping, breathable texture, and functional side pockets. Perfect for sunlit afternoons or elevated evening wear.
             </div>
           </div>
 
-          <div class="accordion-item">
-            <div class="accordion-header" onclick="togglePdpAccordion(this)">
-              <span class="accordion-title">Fabric &amp; Zari Specifications</span>
-              <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-body">
-              <div class="quickview-specs">
-                <div class="spec-line"><span>Primary Material:</span><span id="pdp-spec-fabric">Pure Katan Silk</span></div>
-                <div class="spec-line"><span>Zari Composition:</span><span id="pdp-spec-zari">Antique Silver &amp; Champagne Gold</span></div>
-                <div class="spec-line"><span>Origin Guild:</span><span id="pdp-spec-origin">Varanasi Atelier</span></div>
-                <div class="spec-line"><span>Length / Fit:</span><span>6.5 Meters (Includes 0.8m Blouse Piece)</span></div>
-              </div>
+          <!-- Accordion 2 -->
+          <div class="pdp-acc-item">
+            <button type="button" class="pdp-acc-trigger" onclick="toggleAccordion(this)">
+              <span>Fabric &amp; Material</span>
+              <span class="pdp-acc-symbol">+</span>
+            </button>
+            <div class="pdp-acc-body" id="pdp-fabric-content">
+              <strong>Material:</strong> 100% Pure European Flax Linen.<br/>
+              <strong>Weave:</strong> Breathable, medium weight (180 GSM), pre-softened with artisanal bio-wash for unmatched handfeel.<br/>
+              <strong>Transparency:</strong> Opaque, non-sheer.
             </div>
           </div>
 
-          <div class="accordion-item">
-            <div class="accordion-header" onclick="togglePdpAccordion(this)">
-              <span class="accordion-title">Silk Mark Certification &amp; Authentication</span>
-              <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-body">
-              Every creation is officially stamped with a scannable Silk Mark QR hologram from the Central Silk Board of India, guaranteeing pure mulberry/katan silk with no synthetic adulteration.
+          <!-- Accordion 3 -->
+          <div class="pdp-acc-item">
+            <button type="button" class="pdp-acc-trigger" onclick="toggleAccordion(this)">
+              <span>Size &amp; Fit</span>
+              <span class="pdp-acc-symbol">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <strong>Fit:</strong> True to size, relaxed comfort fit.<br/>
+              <strong>Model Reference:</strong> Model is 5'8" (173cm), Bust 34", Waist 26" and wears size S.<br/>
+              <strong>Length:</strong> Midi length, approx 47 inches.
             </div>
           </div>
 
-          <div class="accordion-item">
-            <div class="accordion-header" onclick="togglePdpAccordion(this)">
-              <span class="accordion-title">Care &amp; Heirloom Preservation Guide</span>
-              <span class="accordion-icon">+</span>
+          <!-- Accordion 4 -->
+          <div class="pdp-acc-item">
+            <button type="button" class="pdp-acc-trigger" onclick="toggleAccordion(this)">
+              <span>Care Instructions</span>
+              <span class="pdp-acc-symbol">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              Machine wash on gentle cycle in cold water with mild liquid detergent. Line dry in shade to preserve natural fiber luster. Warm iron while slightly damp if a pressed finish is desired.
             </div>
-            <div class="accordion-body">
-              Dry clean only at specialized luxury textile cleaners. Store wrapped in unbleached pure cotton muslin cloths. Refold every six months along alternative folds to preserve zari longevity.
+          </div>
+
+          <!-- Accordion 5 -->
+          <div class="pdp-acc-item">
+            <button type="button" class="pdp-acc-trigger" onclick="toggleAccordion(this)">
+              <span>Shipping &amp; 7-Day Returns</span>
+              <span class="pdp-acc-symbol">+</span>
+            </button>
+            <div class="pdp-acc-body">
+              <strong>Dispatched within 24 hours.</strong> Standard delivery takes 3–5 business days across India. Complimentary shipping on orders above ₹1,499.<br/>
+              Hassle-free 7-day exchanges and returns for unworn items with tags intact.
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Related Artisanal Creations -->
-    <section class="section-padding" style="padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, 0.08);">
-      <div class="section-header text-center">
-        <span class="section-eyebrow">Curated Pairings</span>
-        <h2 class="section-title">You May Also Cherish</h2>
-        <p class="section-subtitle">Complementary handlooms and sanctuary accents curated for a cohesive luxury ensemble.</p>
+    <!-- Complete the Look / You May Also Like -->
+    <section style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--frost-border);">
+      <div class="section-headline-center" style="margin-bottom: 2.5rem;">
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; font-weight:500; letter-spacing:0.06em;">COMPLETE THE LOOK</h2>
+        <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.4rem;">Thoughtfully coordinated accents and companion pieces.</p>
       </div>
-      <div class="products-grid" id="related-products-grid">
-        <!-- Rendered via shared.js -->
+      <div class="product-grid-4col" id="pdp-related-grid">
+        <!-- Rendered via JS -->
       </div>
     </section>
   </main>
 
-  <!-- Shared Drawers, Modals & Footer (Injected via shared.js) -->
+  <!-- Injected Footer + Drawers + Modals + Mobile Bottom Navigation -->
   <div id="frost-footer-area"></div>
 
-  <!-- Supabase Cloud Engine -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Scripts -->
   <script src="supabase-client.js"></script>
-
-  <!-- Analytics & Logic -->
-  <script src="admin-data.js"></script>
   <script src="shared.js"></script>
   <script>
-    let currentPdpProduct = null;
-    let currentSelectedOption = null;
+    let activeProduct = null;
+    let activeSelectedSize = 'S';
+    let activeSelectedColor = 'Sage Green';
+    let activeSelectedQty = 1;
 
-    function getParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    async function initProductPage() {
-      const productId = getParam('id') || 'saree-01';
-      let p = getProductById(productId);
-
-      // If not in local array, check Supabase Cloud database directly
-      if (!p && typeof apiGetProducts === 'function') {
-        try {
-          const dbProducts = await apiGetProducts();
-          p = dbProducts.find(pr => pr.id === productId);
-          if (p && typeof FROST_PRODUCTS !== 'undefined') {
-            FROST_PRODUCTS.unshift(p);
-          }
-        } catch(e) {}
-      }
-
+    function initPdpPage() {
+      const params = new URLSearchParams(window.location.search);
+      const pid = params.get('id') || 'sage-linen-dress';
+      
+      let p = FROST_PRODUCTS.find(item => item.id === pid);
       if (!p) p = FROST_PRODUCTS[0];
-      currentPdpProduct = p;
-      currentSelectedOption = (p.options && p.options.length > 0) ? p.options[0] : 'Standard Luxury Edition';
+      activeProduct = p;
 
-      // Update Page Meta
-      document.title = `${p.title} | FROST Haute Couture`;
-
-      // Update Breadcrumbs
-      const bcCat = document.getElementById('bc-category-link');
+      // Meta & breadcrumbs
+      document.title = `${p.title} | FROST`;
+      const bcCat = document.getElementById('bc-main-category');
       if (bcCat) {
-        bcCat.textContent = p.categoryName;
-        bcCat.href = p.category === 'sarees' ? 'sarees.html' : 'home-living.html';
+        bcCat.textContent = p.category === 'home' ? 'Home & Living' : 'Women';
+        bcCat.href = p.category === 'home' ? 'shop.html?cat=home' : 'shop.html?cat=women';
       }
-      const bcTitle = document.getElementById('bc-product-title');
-      if (bcTitle) bcTitle.textContent = p.title;
+      document.getElementById('bc-product-title').textContent = p.title;
 
-      // Update Details
-      document.getElementById('pdp-title').textContent = p.title;
-      document.getElementById('pdp-origin').textContent = `${p.origin} • ${p.categoryName}`;
-      document.getElementById('pdp-badge').textContent = p.badge;
-      document.getElementById('pdp-craft-text').textContent = p.craft;
-      document.getElementById('pdp-price').textContent = formatCurrency(p.priceINR);
+      // Hero info
+      document.getElementById('pdp-eyebrow-cat').textContent = `${(p.category === 'home' ? 'HOME & LIVING' : 'WOMEN')} · ${p.categoryName.toUpperCase()}`;
+      document.getElementById('pdp-product-title').textContent = p.title;
+      document.getElementById('pdp-price-tag').textContent = formatCurrency(p.priceINR);
       
       if (p.originalPriceINR) {
-        document.getElementById('pdp-original-price').textContent = formatCurrency(p.originalPriceINR);
-        const saved = p.originalPriceINR - p.priceINR;
-        document.getElementById('pdp-discount-tag').textContent = `Save ${formatCurrency(saved)}`;
+        document.getElementById('pdp-mrp-tag').textContent = formatCurrency(p.originalPriceINR);
+        const pct = Math.round(((p.originalPriceINR - p.priceINR) / p.originalPriceINR) * 100);
+        document.getElementById('pdp-save-tag').textContent = `SAVE ${pct}%`;
       } else {
-        document.getElementById('pdp-original-price').style.display = 'none';
-        document.getElementById('pdp-discount-tag').style.display = 'none';
+        document.getElementById('pdp-mrp-tag').style.display = 'none';
+        document.getElementById('pdp-save-tag').style.display = 'none';
       }
 
-      if (p.reviewsCount) {
-        document.getElementById('pdp-reviews-count').textContent = `(${p.reviewsCount} Verified Reviews)`;
+      if (p.badge) {
+        document.getElementById('pdp-hero-badge').textContent = p.badge;
       }
 
-      // Main image & thumbs
-      const heroImg = document.getElementById('pdp-hero-image');
-      heroImg.src = p.image;
-      heroImg.alt = p.title;
+      // Main image & gallery
+      const mainImg = document.getElementById('pdp-main-display-img');
+      mainImg.src = p.image;
+      mainImg.alt = p.title;
 
-      // Render Thumbnails (using main image and alternate catalog images to create high-end gallery)
-      const thumbsContainer = document.getElementById('pdp-thumbs');
-      const galleryImages = [
+      // Build 5-image gallery using related assets
+      const galleryList = [
         p.image,
-        p.category === 'sarees' ? 'images/hero_saree.jpg' : 'images/cushions_luxury.jpg',
-        p.category === 'sarees' ? 'images/saree_organza.jpg' : 'images/tablecloth_luxury.jpg'
+        'images/sage_fabric.jpg',
+        'images/women_banner.jpg',
+        'images/hero_editorial.jpg',
+        'images/bordeaux_coord.jpg'
       ];
 
-      thumbsContainer.innerHTML = galleryImages.map((imgSrc, idx) => `
-        <div class="pdp-thumb-item ${idx === 0 ? 'active' : ''}" onclick="selectPdpImage('${imgSrc}', this)">
-          <img src="${imgSrc}" alt="${p.title} view ${idx + 1}" />
+      const thumbsCol = document.getElementById('pdp-gallery-thumbs');
+      thumbsCol.innerHTML = galleryList.map((src, i) => `
+        <div class="pdp-thumb-slot ${i === 0 ? 'active' : ''}" onclick="switchPdpThumb('${src}', this)">
+          <img src="${src}" alt="${p.title} view ${i+1}" loading="lazy" />
         </div>
       `).join('');
 
-      // Options
-      document.getElementById('pdp-options-title').textContent = `${p.optionsLabel}:`;
-      const optionsContainer = document.getElementById('pdp-options-list');
-      optionsContainer.innerHTML = p.options.map((opt, idx) => `
-        <button type="button" class="pdp-option-btn ${idx === 0 ? 'active' : ''}" onclick="selectPdpOption('${opt}', this)">
-          ${opt}
-        </button>
+      // Description & fabric details
+      document.getElementById('pdp-desc-content').textContent = p.description;
+      if (p.fabric) {
+        document.getElementById('pdp-fabric-content').innerHTML = `
+          <strong>Fabric:</strong> ${p.fabric}.<br/>
+          <strong>Artisanal Origin:</strong> ${p.origin}.<br/>
+          <strong>Technique:</strong> ${p.craft}.
+        `;
+      }
+
+      // Related products
+      const relatedGrid = document.getElementById('pdp-related-grid');
+      const others = FROST_PRODUCTS.filter(item => item.id !== p.id).slice(0, 4);
+      relatedGrid.innerHTML = others.map(item => `
+        <div class="product-card-frost" data-id="${item.id}">
+          <div class="card-media-wrap">
+            <a href="product.html?id=${item.id}">
+              <img src="${item.image}" alt="${item.title}" loading="lazy" />
+            </a>
+            <button class="card-wishlist-toggle" onclick="toggleWishlist('${item.id}')" aria-label="Save to Wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+            <button class="card-quick-add-bar" onclick="addToCart('${item.id}')">QUICK ADD</button>
+          </div>
+          <div class="card-info-wrap">
+            <span class="card-category-tag">${item.categoryName}</span>
+            <a href="product.html?id=${item.id}" class="card-product-title">${item.title}</a>
+            <span class="card-product-price">${formatCurrency(item.priceINR)}</span>
+          </div>
+        </div>
       `).join('');
-
-      // Specs
-      document.getElementById('pdp-desc-text').textContent = p.description;
-      document.getElementById('pdp-spec-fabric').textContent = p.fabric;
-      document.getElementById('pdp-spec-zari').textContent = p.zari;
-      document.getElementById('pdp-spec-origin').textContent = p.origin;
-
-      // Render Related Products
-      renderCatalog({
-        containerId: 'related-products-grid',
-        filter: p.category === 'sarees' ? 'sarees' : 'home',
-        maxItems: 4
-      });
     }
 
-    function selectPdpImage(src, el) {
-      document.getElementById('pdp-hero-image').src = src;
-      document.querySelectorAll('.pdp-thumb-item').forEach(t => t.classList.remove('active'));
+    function switchPdpThumb(src, el) {
+      document.getElementById('pdp-main-display-img').src = src;
+      document.querySelectorAll('.pdp-thumb-slot').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
     }
 
-    function selectPdpOption(opt, el) {
-      currentSelectedOption = opt;
-      document.querySelectorAll('.pdp-option-btn').forEach(b => b.classList.remove('active'));
+    function selectPdpColor(name, hex, el) {
+      activeSelectedColor = name;
+      document.getElementById('pdp-color-name').textContent = name;
+      document.querySelectorAll('.pdp-swatch-ring').forEach(r => r.classList.remove('active'));
       el.classList.add('active');
     }
 
-    function handlePdpAddToCart() {
-      if (!currentPdpProduct) return;
-      addToCart(currentPdpProduct.id, currentSelectedOption);
+    function selectPdpSize(size, el) {
+      activeSelectedSize = size;
+      document.getElementById('pdp-size-name').textContent = size;
+      document.querySelectorAll('.pdp-size-pill').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
     }
 
-    function handlePdpBuyNow() {
-      if (!currentPdpProduct) return;
-      buyNow(currentPdpProduct.id, currentSelectedOption);
+    function stepPdpQty(delta) {
+      activeSelectedQty = Math.max(1, activeSelectedQty + delta);
+      document.getElementById('pdp-qty-display').textContent = activeSelectedQty;
     }
 
-    function handlePincodeCheck() {
-      const input = document.getElementById('pincode-input');
-      const res = checkPincodeDelivery(input.value);
-      const msgEl = document.getElementById('pincode-result-msg');
-      msgEl.innerHTML = res.message;
-      msgEl.style.color = res.valid ? '#27ae60' : '#e74c3c';
-    }
-
-    function togglePdpAccordion(header) {
-      const item = header.closest('.accordion-item');
-      const wasActive = item.classList.contains('active');
-      document.querySelectorAll('.accordion-item').forEach(i => {
-        i.classList.remove('active');
-        const icon = i.querySelector('.accordion-icon');
-        if (icon) icon.textContent = '+';
-      });
-      if (!wasActive) {
-        item.classList.add('active');
-        const icon = item.querySelector('.accordion-icon');
-        if (icon) icon.textContent = '−';
+    function handlePdpAdd() {
+      if (!activeProduct) return;
+      const opt = `${activeSelectedSize} / ${activeSelectedColor}`;
+      for (let i = 0; i < activeSelectedQty; i++) {
+        addToCart(activeProduct.id, opt);
       }
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        initFrostPage('product');
-        initProductPage();
-      });
-    } else {
-      initFrostPage('product');
-      initProductPage();
+    function handlePdpBuy() {
+      if (!activeProduct) return;
+      handlePdpAdd();
+      window.location.href = 'checkout.html';
     }
+
+    function checkPdpPin() {
+      const pin = document.getElementById('pdp-pincode-input').value.trim();
+      const msg = document.getElementById('pdp-pin-msg');
+      if (pin.length === 6 && /^\d+$/.test(pin)) {
+        msg.innerHTML = `<span style="color:#15803d; font-weight:600;">✓ Delivery available to ${pin} within 3-4 business days. Free shipping included!</span>`;
+      } else {
+        msg.innerHTML = `<span style="color:#b91c1c;">Please enter a valid 6-digit Indian PIN code.</span>`;
+      }
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.closest('.pdp-acc-item');
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.pdp-acc-item').forEach(i => {
+        i.classList.remove('active');
+        const s = i.querySelector('.pdp-acc-symbol');
+        if (s) s.textContent = '+';
+      });
+      if (!wasActive) {
+        item.classList.add('active');
+        const s = item.querySelector('.pdp-acc-symbol');
+        if (s) s.textContent = '−';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initPdpPage);
   </script>
 </body>
 </html>

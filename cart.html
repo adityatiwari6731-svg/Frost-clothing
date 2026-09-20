@@ -3,210 +3,344 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FROST | Your Artisanal Shopping Bag. Review your selected handloom sarees, bespoke tailoring, and luxury home linens." />
-  <title>Your Shopping Bag | FROST Luxury Atelier</title>
+  <meta name="description" content="Your Shopping Bag | FROST — Review your selected pieces and proceed to seamless guest checkout." />
+  <title>Your Bag | FROST</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Playfair Display, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cart-page-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    .cart-title-heading {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+    .cart-free-shipping-card {
+      background: var(--frost-cream);
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .cart-ship-label {
+      font-size: 0.86rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .cart-ship-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .cart-ship-progress {
+      height: 100%;
+      background: var(--frost-burgundy);
+      transition: width 0.3s ease;
+    }
+
+    .cart-split-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* Cart Items Table/List */
+    .cart-item-card {
+      display: grid;
+      grid-template-columns: 90px 1fr auto auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--frost-border);
+    }
+    .cart-item-thumb {
+      width: 90px;
+      height: 110px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: var(--frost-cream);
+      cursor: pointer;
+    }
+    .cart-item-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+      text-decoration: none;
+      display: block;
+    }
+    .cart-item-variant {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+    .cart-remove-link {
+      background: none;
+      border: none;
+      font-size: 0.76rem;
+      color: var(--frost-burgundy);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* Stepper */
+    .cart-qty-ctrl {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      height: 38px;
+    }
+    .cart-qty-ctrl button {
+      background: none;
+      border: none;
+      width: 30px;
+      height: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+    .cart-qty-ctrl span {
+      padding: 0 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .cart-item-total-price {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      text-align: right;
+      min-width: 90px;
+    }
+
+    /* Summary Card */
+    .cart-summary-box {
+      background: #ffffff;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 100px;
+    }
+    .cart-summary-heading {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--frost-border);
+    }
+    .cart-coupon-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .cart-coupon-box input {
+      flex: 1;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      outline: none;
+      text-transform: uppercase;
+    }
+    .cart-coupon-box button {
+      padding: 0 1.2rem;
+      background: var(--text-dark);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .summary-calc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+    .summary-calc-row.total-row {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      padding-top: 1rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--frost-border);
+    }
+    .btn-checkout-burgundy-full {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      margin-top: 1.5rem;
+      transition: background 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-checkout-burgundy-full:hover {
+      background: #4a0e14;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 850px) {
+      .cart-split-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .cart-item-card {
+        grid-template-columns: 75px 1fr auto;
+        gap: 1rem;
+      }
+      .cart-item-total-price {
+        grid-column: 2 / -1;
+        text-align: left;
+        margin-top: 0.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
-  <aside class="top-bar" id="top-bar" aria-label="Announcement">
-    <div class="container">
-      <div class="top-bar-ticker">
-        <span class="badge-pulse"></span>
-        <span>Complimentary Pan-India White-Glove Delivery On Orders Above ₹20,000</span>
-      </div>
-      <div class="top-bar-actions">
-        <a href="heritage.html" class="top-bar-link">The Atelier Story</a>
-        <a href="contact.html" class="top-bar-link">Private Styling Concierge</a>
-        <div class="currency-selector" style="color:var(--gold-light); font-size:0.75rem; font-weight:600; letter-spacing:0.04em;">
-          <span>🇮🇳 India · INR (₹)</span>
-        </div>
-      </div>
-    </div>
-  </aside>
+  <!-- Injected Announcement Top Bar -->
+  <div id="frost-topbar"></div>
 
-  <!-- Navigation Header -->
-  <header class="header-nav" id="header-nav">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
-          <span class="logo-monogram">FROST</span>
-          <span class="logo-tagline">Couture &amp; Living</span>
-        </a>
+  <!-- Injected Luxury Header -->
+  <div id="frost-header"></div>
 
-        <nav aria-label="Primary Navigation">
-          <ul class="nav-menu">
-            <li class="nav-item">
-              <a href="sarees.html" class="nav-link">Couture Sarees</a>
-              <ul class="nav-dropdown">
-                <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Tissue Organza Drapes</a></li>
-                <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau Edits</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="home-living.html" class="nav-link">Home Sanctuary</a>
-              <ul class="nav-dropdown">
-                <li><a href="home-living.html" class="dropdown-link">800TC Egyptian Cotton Bedsheets</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Embroidered Velvet Cushion Covers</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillow Covers</a></li>
-                <li><a href="home-living.html" class="dropdown-link">Banquet Tablecloths &amp; Runners</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a href="lookbook.html" class="nav-link">Lookbook</a></li>
-            <li class="nav-item"><a href="heritage.html" class="nav-link">Heritage &amp; Craft</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact &amp; Concierge</a></li>
-          </ul>
-        </nav>
+  <main class="cart-page-main">
+    <h1 class="cart-title-heading">YOUR BAG</h1>
 
-        <div class="nav-actions">
-          <button class="icon-btn" id="search-trigger" aria-label="Search Catalog" title="Search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </button>
-          <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist" title="Saved Heirlooms">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <span class="badge-count" id="wishlist-badge">0</span>
-          </button>
-          <button class="icon-btn" id="cart-trigger" aria-label="Shopping Bag" title="Shopping Bag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span class="badge-count" id="cart-badge">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container cart-page-wrap">
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumb-nav">
-      <a href="index.html">Home</a>
-      <span class="separator">/</span>
-      <span class="current">Shopping Bag</span>
-    </nav>
-
-    <!-- Empty State (Hidden when items present) -->
-    <div id="cart-empty-view" style="display: none; text-align: center; padding: 5rem 1rem;">
-      <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; color: var(--gold-dark);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      </div>
-      <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--frost-dark);">Your Shopping Bag is Empty</h2>
-      <p style="color: var(--text-muted); max-width: 440px; margin: 0 auto 2rem; line-height: 1.7;">
-        Immerse yourself in our curated handcrafted Banarasi and Kanjivaram silks, or explore artisanal Egyptian cotton bedding.
+    <!-- Empty Bag State -->
+    <div id="empty-cart-state" style="display:none; text-align:center; padding: 4rem 1rem;">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--text-muted); margin-bottom:1.2rem;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <h2 style="font-family:var(--font-serif); font-size:1.8rem; margin-bottom:0.6rem;">Your Bag is Currently Empty</h2>
+      <p style="color:var(--text-muted); margin-bottom:2rem; max-width:440px; margin-left:auto; margin-right:auto;">
+        Discover contemporary linen silhouettes and serene home sanctuary textiles.
       </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="sarees.html" class="btn-luxury btn-gold">Explore Couture Sarees</a>
-        <a href="home-living.html" class="btn-luxury btn-outline-white" style="border-color: var(--frost-dark); color: var(--frost-dark);">Explore Home Living</a>
-      </div>
+      <a href="shop.html" class="btn-burgundy" style="display:inline-block;">START SHOPPING</a>
     </div>
 
-    <!-- Active Cart Layout -->
-    <div id="cart-active-view">
-      <!-- Free Shipping Banner -->
-      <div class="cart-free-ship-banner">
-        <div class="cart-free-ship-text" id="cart-page-ship-text">
-          Add <strong>₹20,000</strong> more for Complimentary Pan-India White-Glove Shipping
+    <!-- Active Cart View -->
+    <div id="active-cart-view">
+      <!-- Free Shipping Tracker -->
+      <div class="cart-free-shipping-card">
+        <div class="cart-ship-label" id="cart-page-ship-label">
+          Add ₹1,499 more for FREE SHIPPING
         </div>
-        <div class="cart-free-ship-bar-outer">
-          <div class="cart-free-ship-bar-fill" id="cart-page-ship-bar" style="width: 0%;"></div>
+        <div class="cart-ship-track">
+          <div class="cart-ship-progress" id="cart-page-ship-progress" style="width: 0%;"></div>
         </div>
       </div>
 
-      <div class="cart-page-grid">
-        <!-- Items Column -->
-        <div class="cart-left-col">
-          <div class="cart-items-card">
-            <div class="cart-items-card-header">
-              <span>Selected Heirlooms (<span id="cart-items-count-label">0</span>)</span>
-              <a href="sarees.html" style="font-size: 0.78rem; color: var(--deep-wine); text-decoration: underline;">+ Add More Creations</a>
-            </div>
-            <div id="cart-page-items-list">
-              <!-- Item rows injected via JS -->
+      <div class="cart-split-grid">
+        <!-- Cart Items List Column -->
+        <div class="cart-items-column">
+          <div id="cart-page-items-list">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Gift wrap option -->
+          <div style="margin-top: 2rem; padding: 1.2rem; background:#ffffff; border:1px solid var(--frost-border); border-radius:var(--radius-sm); display:flex; gap:0.8rem; align-items:flex-start;">
+            <input type="checkbox" id="gift-pack-toggle" style="accent-color:var(--frost-burgundy); width:18px; height:18px; margin-top:2px;" onchange="toggleGiftWrap(this)" />
+            <div>
+              <label for="gift-pack-toggle" style="font-weight:600; font-size:0.88rem; color:var(--text-dark); cursor:pointer;">
+                Bespoke Keepsake Packaging &amp; Handwritten Card (+₹450)
+              </label>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem; line-height:1.4;">
+                Presented in our signature bordeaux gift box tied with handwoven zari ribbon.
+              </p>
             </div>
           </div>
 
-          <!-- Gift Wrapping Option Card -->
-          <div class="cart-items-card" style="padding: 1.5rem 1.8rem;">
-            <label style="display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer;">
-              <input type="checkbox" id="cart-page-gift-toggle" style="margin-top: 0.25rem; accent-color: var(--deep-wine);" />
-              <div>
-                <strong style="display: block; font-size: 0.92rem; color: var(--frost-dark);">Bespoke Gold-Foil Gift Packaging &amp; Personalized Calligraphy Card (+₹450)</strong>
-                <span style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 0.2rem;">
-                  Presented in our signature burgundy velvet-finish keepsake box tied with gold zari ribbon, accompanied by a handwritten wax-sealed greeting.
-                </span>
-              </div>
-            </label>
-            <div id="gift-message-box" style="display: none; margin-top: 1rem;">
-              <label class="form-label" for="gift-note-text">Personalized Gift Message to Recipient:</label>
-              <textarea class="form-input" id="gift-note-text" rows="2" placeholder="Write your heartfelt greeting here (e.g. Wishing you timeless elegance on your special day)..."></textarea>
+          <!-- Trust Strip -->
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-top:1.5rem; text-align:center; padding:1.2rem; background:var(--frost-cream); border-radius:var(--radius-sm);">
+            <div>
+              <strong style="display:block; font-size:0.82rem; color:var(--text-dark);">100% Pure Linen</strong>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Artisanal quality</span>
             </div>
-          </div>
-
-          <!-- Reassurance Strip -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem; background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius-sm); text-align: center;">
-            <div style="font-size: 0.78rem; color: var(--text-muted);">
-              <strong style="display: block; color: var(--frost-dark);">100% Pure Handloom</strong>
-              Silk Mark Certified
+            <div>
+              <strong style="display:block; font-size:0.82rem; color:var(--text-dark);">Prepaid Security</strong>
+              <span style="font-size:0.75rem; color:var(--text-muted);">100% SSL encryption</span>
             </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">
-              <strong style="display: block; color: var(--frost-dark);">Secure Payments</strong>
-              128-Bit SSL Encryption
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">
-              <strong style="display: block; color: var(--frost-dark);">14-Day Guarantee</strong>
-              Hassle-free exchange
+            <div>
+              <strong style="display:block; font-size:0.82rem; color:var(--text-dark);">7-Day Easy Return</strong>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Doorstep pickup</span>
             </div>
           </div>
         </div>
 
         <!-- Summary Column -->
-        <div class="cart-summary-col">
-          <div class="cart-summary-card">
-            <h3 class="cart-summary-title">Order Summary</h3>
+        <div class="cart-summary-column">
+          <div class="cart-summary-box">
+            <h3 class="cart-summary-heading">Order Summary</h3>
 
-            <!-- Promo Code Box -->
-            <div class="cart-promo-section">
-              <input type="text" class="cart-promo-input" id="cart-page-promo-input" placeholder="Privilege Code (FABINDIA15)" />
-              <button class="cart-promo-btn" onclick="applyCartPagePromo()">Apply</button>
+            <!-- Coupon Group -->
+            <div class="cart-coupon-box">
+              <input type="text" id="cart-coupon-input" placeholder="Coupon (e.g. FROST10)" />
+              <button type="button" onclick="applyCouponCode()">Apply</button>
             </div>
-            <div id="promo-status-msg" style="font-size: 0.78rem; margin-top: -0.8rem; margin-bottom: 1.2rem;"></div>
+            <div id="coupon-feedback" style="font-size:0.78rem; margin-top:-0.6rem; margin-bottom:1rem;"></div>
 
-            <!-- Totals Breakdown -->
-            <div class="cart-summary-line">
-              <span>Bag Subtotal</span>
-              <span id="cp-subtotal">₹0</span>
+            <!-- Breakdown -->
+            <div class="summary-calc-row">
+              <span>Subtotal</span>
+              <span id="sum-subtotal">₹0</span>
             </div>
-            <div class="cart-summary-line highlight" id="cp-discount-row" style="display: none;">
+            <div class="summary-calc-row" id="sum-disc-row" style="display:none; color:#15803d; font-weight:600;">
               <span>Privilege Discount</span>
-              <span id="cp-discount">-₹0</span>
+              <span id="sum-discount">-₹0</span>
             </div>
-            <div class="cart-summary-line" id="cp-gift-row" style="display: none;">
-              <span>Bespoke Gift Packaging</span>
+            <div class="summary-calc-row" id="sum-gift-row" style="display:none;">
+              <span>Keepsake Packaging</span>
               <span>+₹450</span>
             </div>
-            <div class="cart-summary-line">
-              <span>Pan-India Delivery</span>
-              <span id="cp-shipping">Complimentary</span>
+            <div class="summary-calc-row">
+              <span>Delivery</span>
+              <span id="sum-shipping">FREE</span>
             </div>
-            <div class="cart-summary-line total">
+            <div class="summary-calc-row total-row">
               <span>Total Payable</span>
-              <span id="cp-total">₹0</span>
+              <span id="sum-total">₹0</span>
             </div>
 
-            <a href="checkout.html" class="btn-proceed-checkout">
-              Proceed to Checkout →
-            </a>
+            <button type="button" class="btn-checkout-burgundy-full" onclick="window.location.href='checkout.html'">
+              PROCEED TO CHECKOUT &rarr;
+            </button>
 
-            <div style="text-align: center; margin-top: 1.2rem; font-size: 0.75rem; color: var(--text-muted);">
-              🔒 Safe &amp; Secure Checkout • Verified by Visa, Mastercard, RuPay &amp; UPI
+            <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:1.2rem; line-height:1.5;">
+              🔒 Instant Guest Checkout · No Account Required.<br/>UPI · RuPay · Visa · Mastercard · Net Banking
             </div>
           </div>
         </div>
@@ -214,22 +348,17 @@
     </div>
   </main>
 
-  <!-- Shared Footer Area (Injected via shared.js) -->
+  <!-- Injected Footer + Drawers + Modals + Mobile Bottom Navigation -->
   <div id="frost-footer-area"></div>
 
-  <!-- Supabase Cloud Engine -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Scripts -->
   <script src="supabase-client.js"></script>
-
-  <!-- Analytics & Logic -->
-  <script src="admin-data.js"></script>
   <script src="shared.js"></script>
   <script>
-    function renderCartPage() {
-      const emptyView = document.getElementById('cart-empty-view');
-      const activeView = document.getElementById('cart-active-view');
-      const itemsList = document.getElementById('cart-page-items-list');
-      const countLabel = document.getElementById('cart-items-count-label');
+    function renderBagPage() {
+      const emptyView = document.getElementById('empty-cart-state');
+      const activeView = document.getElementById('active-cart-view');
+      const listEl = document.getElementById('cart-page-items-list');
 
       if (!cart || cart.length === 0) {
         if (emptyView) emptyView.style.display = 'block';
@@ -240,97 +369,104 @@
       if (emptyView) emptyView.style.display = 'none';
       if (activeView) activeView.style.display = 'block';
 
-      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-      if (countLabel) countLabel.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
-
-      // Render Item Rows
-      itemsList.innerHTML = cart.map((item, idx) => `
-        <div class="cart-table-item">
-          <img src="${item.image}" alt="${item.title}" class="cart-table-thumb" onclick="window.location.href='product.html?id=${item.id}'" style="cursor:pointer;" />
-          <div class="cart-table-info">
-            <h4 onclick="window.location.href='product.html?id=${item.id}'" style="cursor:pointer;">${item.title}</h4>
-            <div class="cart-table-meta">${item.categoryName} • ${item.option}</div>
-            <button class="cart-table-remove-btn" onclick="removeFromCart(${idx}); renderCartPage();">
-              ✕ Remove from Bag
-            </button>
+      // Render items
+      listEl.innerHTML = cart.map((item, idx) => `
+        <div class="cart-item-card">
+          <img src="${item.image}" alt="${item.title}" class="cart-item-thumb" onclick="window.location.href='product.html?id=${item.id}'" />
+          <div>
+            <a href="product.html?id=${item.id}" class="cart-item-title">${item.title}</a>
+            <div class="cart-item-variant">${item.option || 'Standard Edition'}</div>
+            <button class="cart-remove-link" onclick="removeFromCart(${idx}); renderBagPage();">✕ Remove</button>
           </div>
-          <div class="qty-stepper">
-            <button class="qty-btn" onclick="updateCartQty(${idx}, -1); renderCartPage();">−</button>
-            <span class="qty-val">${item.qty}</span>
-            <button class="qty-btn" onclick="updateCartQty(${idx}, 1); renderCartPage();">+</button>
+          <div class="cart-qty-ctrl">
+            <button onclick="updateCartQty(${idx}, -1); renderBagPage();">−</button>
+            <span>${item.qty}</span>
+            <button onclick="updateCartQty(${idx}, 1); renderBagPage();">+</button>
           </div>
-          <div style="font-weight: 700; color: var(--frost-dark); font-size: 1.05rem; text-align: right;">
+          <div class="cart-item-total-price">
             ${formatCurrency(item.priceINR * item.qty)}
           </div>
         </div>
       `).join('');
 
-      // Update Summary Totals
+      // Summary
       const t = getCartTotals();
-      document.getElementById('cp-subtotal').textContent = formatCurrency(t.subtotal);
-      document.getElementById('cp-shipping').textContent = t.freeShip ? 'Complimentary' : formatCurrency(t.ship);
-      document.getElementById('cp-total').textContent = formatCurrency(t.total);
+      document.getElementById('sum-subtotal').textContent = formatCurrency(t.subtotal);
+      document.getElementById('sum-shipping').textContent = t.freeShip ? 'FREE' : formatCurrency(t.ship);
+      document.getElementById('sum-total').textContent = formatCurrency(t.total);
 
-      const discRow = document.getElementById('cp-discount-row');
+      const discRow = document.getElementById('sum-disc-row');
       if (t.disc > 0) {
         discRow.style.display = 'flex';
-        document.getElementById('cp-discount').textContent = `-${formatCurrency(t.disc)}`;
+        document.getElementById('sum-discount').textContent = `-${formatCurrency(t.disc)}`;
       } else {
         discRow.style.display = 'none';
       }
 
-      const giftRow = document.getElementById('cp-gift-row');
+      const giftRow = document.getElementById('sum-gift-row');
       if (isGiftWrapped) {
         giftRow.style.display = 'flex';
       } else {
         giftRow.style.display = 'none';
       }
 
-      // Shipping progress bar
-      const shipBar = document.getElementById('cart-page-ship-bar');
-      const shipText = document.getElementById('cart-page-ship-text');
-      const pct = Math.min(100, Math.round((t.subtotal / 20000) * 100));
-      if (shipBar) shipBar.style.width = `${pct}%`;
-      if (shipText) {
-        shipText.innerHTML = t.freeShip
-          ? '✨ <strong>Complimentary Pan-India White-Glove Delivery Unlocked!</strong>'
-          : `Add <strong>${formatCurrency(20000 - t.subtotal)}</strong> more for Complimentary Delivery Across India`;
+      // Free shipping bar
+      const threshold = (typeof FROST_CONFIG !== 'undefined' && FROST_CONFIG.freeShipThreshold) || 1499;
+      const progressEl = document.getElementById('cart-page-ship-progress');
+      const labelEl = document.getElementById('cart-page-ship-label');
+      const pct = Math.min(100, Math.round((t.subtotal / threshold) * 100));
+      if (progressEl) progressEl.style.width = `${pct}%`;
+      if (labelEl) {
+        labelEl.innerHTML = t.subtotal >= threshold
+          ? '✨ <strong>Complimentary Free Shipping Unlocked!</strong>'
+          : `Add <strong>${formatCurrency(threshold - t.subtotal)}</strong> more for <strong>FREE SHIPPING</strong>`;
       }
     }
 
-    function applyCartPagePromo() {
-      const res = handleApplyPromo();
-      const status = document.getElementById('promo-status-msg');
-      if (res && res.success) {
-        status.innerHTML = `<span style="color: #27ae60; font-weight:600;">✓ ${res.discount}% discount applied to your order!</span>`;
+    function toggleGiftWrap(checkbox) {
+      isGiftWrapped = checkbox.checked;
+      updateCartUI();
+      renderBagPage();
+    }
+
+    function applyCouponCode() {
+      const input = document.getElementById('cart-coupon-input');
+      const code = input.value.trim().toUpperCase();
+      const feedback = document.getElementById('coupon-feedback');
+
+      if (code === 'FROST10' || code === 'FROST15' || code === 'FABINDIA15') {
+        const discountPct = (code === 'FROST15' || code === 'FABINDIA15') ? 15 : 10;
+        appliedDiscount = discountPct;
+        localStorage.setItem('frost_promo', JSON.stringify({ code, discount: discountPct }));
+        feedback.innerHTML = `<span style="color:#15803d; font-weight:600;">✓ Code ${code} applied! ${discountPct}% off.</span>`;
+        updateCartUI();
       } else {
-        status.innerHTML = `<span style="color: #e74c3c;">✕ Invalid code. Try FABINDIA15 or FROST10.</span>`;
+        feedback.innerHTML = `<span style="color:#b91c1c;">Invalid code. Try FROST10 or FROST15.</span>`;
       }
-      renderCartPage();
+      renderBagPage();
     }
 
-    function initCartPage() {
-      initFrostPage('cart');
-      
-      const giftToggle = document.getElementById('cart-page-gift-toggle');
-      const giftMsgBox = document.getElementById('gift-message-box');
-      if (giftToggle) {
-        giftToggle.checked = isGiftWrapped;
-        giftToggle.addEventListener('change', (e) => {
-          isGiftWrapped = e.target.checked;
-          if (giftMsgBox) giftMsgBox.style.display = isGiftWrapped ? 'block' : 'none';
-          renderCartPage();
-        });
+    window.addEventListener('frost:products-updated', renderBagPage);
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'frost_cart') {
+        cart = JSON.parse(localStorage.getItem('frost_cart') || '[]');
+        renderBagPage();
       }
+    });
 
-      renderCartPage();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCartPage);
-    } else {
-      initCartPage();
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const savedPromo = JSON.parse(localStorage.getItem('frost_promo') || 'null');
+        if (savedPromo && savedPromo.discount) {
+          appliedDiscount = Number(savedPromo.discount);
+          const feedback = document.getElementById('coupon-feedback');
+          if (feedback) feedback.innerHTML = `<span style="color:#15803d; font-weight:600;">✓ Code ${savedPromo.code} applied! ${savedPromo.discount}% off.</span>`;
+          const input = document.getElementById('cart-coupon-input');
+          if (input) input.value = savedPromo.code;
+        }
+      } catch(e) {}
+      renderBagPage();
+    });
   </script>
 </body>
 </html>

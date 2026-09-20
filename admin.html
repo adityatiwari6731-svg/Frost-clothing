@@ -434,7 +434,7 @@
     ========================================= */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.4rem;
       margin-bottom: 2rem;
     }
@@ -1601,11 +1601,8 @@
         <div>
           <label class="modal-label">Category *</label>
           <select class="modal-input" id="prod-category">
-            <option value="sarees">Couture Sarees</option>
-            <option value="bedsheets">Luxury Bedsheets</option>
-            <option value="cushions">Cushion Covers</option>
-            <option value="pillows">Pillow Covers</option>
-            <option value="tablecloths">Table Linens</option>
+            <option value="women">Women's Apparel (Dresses, Co-ords, Kurtis, Bottoms)</option>
+            <option value="home">Home &amp; Living (Bedsheets, Curtains, Cushions, Linens)</option>
           </select>
         </div>
         <div>
@@ -1680,7 +1677,18 @@
     let editingProductId = null;
 
     document.addEventListener('DOMContentLoaded', () => {
-      seedDemoData();
+      // Purge any fake/demo orders and seeded test patrons so orders & analytics are 100% genuine
+      clearFakeData();
+      try {
+        const raw = JSON.parse(localStorage.getItem('frost_orders') || '[]');
+        const cleaned = raw.filter(o => 
+          o.id !== 'FAB-TEST-9010' && 
+          o.customer !== 'Simulated Patron' && 
+          !String(o.id || '').startsWith('FR-10020') &&
+          !String(o.customer || '').toLowerCase().includes('simulated')
+        );
+        localStorage.setItem('frost_orders', JSON.stringify(cleaned));
+      } catch(e) {}
       updateClock();
       setInterval(updateClock, 1000);
       setupDragAndDrop();
@@ -1747,6 +1755,14 @@
     async function showAdminApp() {
       document.getElementById('admin-app').style.display = 'block';
       document.getElementById('login-screen').style.display = 'none';
+
+      // Sync genuine Supabase cloud orders into local storage before rendering
+      if (typeof syncAdminOrdersFromSupabase === 'function') {
+        try {
+          await syncAdminOrdersFromSupabase();
+        } catch(e) {}
+      }
+
       renderDashboard();
       if (typeof testSupabaseAdminConnection === 'function') {
         testSupabaseAdminConnection();
@@ -1806,6 +1822,7 @@
       const cards = [
         { label: 'Total Visitors', value: analytics.totalVisits.toLocaleString(), meta: `${analytics.todayVisits} today`, color: 'blue', icon: '👥' },
         { label: 'Total Orders', value: analytics.totalOrders, meta: `${analytics.pendingOrders} pending`, color: 'amber', icon: '🛍️' },
+        { label: 'Total Customers', value: (analytics.totalCustomers !== undefined ? analytics.totalCustomers : analytics.totalOrders), meta: 'Active patrons', color: 'green', icon: '👑' },
         { label: 'Total Revenue', value: `₹${analytics.totalRevenue.toLocaleString()}`, meta: `₹${analytics.thisMonthRevenue.toLocaleString()} this month`, color: 'gold', icon: '💰' },
         { label: 'Avg. Order Value', value: `₹${analytics.avgOrderValue.toLocaleString()}`, meta: 'All-time average', color: 'purple', icon: '📊' }
       ];
@@ -2145,6 +2162,7 @@
       }
       showAdminToast(`Order ${orderId} status saved in Supabase.`);
       renderOrdersTable();
+      renderDashboard();
     }
 
     // ============================================
@@ -2212,23 +2230,40 @@
     }
 
     async function deleteProduct(productId) {
-      if (!confirm('Are you sure you want to permanently delete this product from Supabase?')) return;
-      showAdminToast('Deleting from Supabase Cloud... ⏳');
+      if (!confirm('Are you sure you want to permanently delete this product?')) return;
+      showAdminToast('Deleting product... ⏳');
+
+      if (typeof deleteAdminProduct === 'function') {
+        deleteAdminProduct(productId);
+      } else {
+        try {
+          const deleted = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
+          if (!deleted.includes(productId)) {
+            deleted.push(productId);
+            localStorage.setItem('frost_deleted_products', JSON.stringify(deleted));
+          }
+        } catch(e) {}
+        let products = getAdminProducts().filter(p => p.id !== productId);
+        saveAdminProducts(products);
+      }
 
       if (typeof apiDeleteProduct === 'function') {
         try {
           await apiDeleteProduct(productId);
         } catch(err) {
-          console.warn('Supabase delete error:', err.message);
+          console.warn('Supabase delete notice:', err.message);
         }
       }
 
-      let products = getAdminProducts();
-      products = products.filter(p => p.id !== productId);
-      saveAdminProducts(products);
+      // Broadcast update across windows & tabs
+      window.dispatchEvent(new CustomEvent('frost:products-updated'));
+      try {
+        localStorage.setItem('frost_last_product_update', String(Date.now()));
+        if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+      } catch(e) {}
 
       await renderProductsGrid();
-      showAdminToast('Product permanently deleted from Supabase.');
+      showAdminToast('Product permanently deleted from catalog & database.');
     }
 
     async function testSupabaseAdminConnection() {
@@ -2438,18 +2473,27 @@
 
       const imgVal = document.getElementById('prod-image').value || 'images/hero_saree.jpg';
 
+      const rawCat = document.getElementById('prod-category').value;
+      const isWomen = (rawCat === 'women' || rawCat === 'sarees' || rawCat === 'dresses');
+      const normalizedCat = isWomen ? 'women' : 'home';
+      const catName = isWomen ? "Women's Collection" : 'Home & Living';
+
       const products = getAdminProducts();
       const productData = {
         id: editingProductId || `custom-${Date.now()}`,
         title,
-        category: document.getElementById('prod-category').value,
+        category: normalizedCat,
+        categoryName: catName,
         priceINR: price,
-        originalPriceINR: parseInt(document.getElementById('prod-original-price').value) || 0,
-        stock: parseInt(document.getElementById('prod-stock').value) || 0,
-        badge: document.getElementById('prod-badge').value,
-        fabric: document.getElementById('prod-fabric').value,
+        originalPriceINR: parseInt(document.getElementById('prod-original-price').value) || Math.round(price * 1.3),
+        stock: parseInt(document.getElementById('prod-stock').value) || 10,
+        badge: document.getElementById('prod-badge').value || 'New Creation',
+        badgeType: isWomen ? 'burgundy' : 'green',
+        fabric: document.getElementById('prod-fabric').value || (isWomen ? '100% Breathable Midweight Linen' : 'Pure French Slub Linen'),
         image: imgVal,
-        description: document.getElementById('prod-desc').value,
+        description: document.getElementById('prod-desc').value || title,
+        optionsLabel: isWomen ? 'Select Size' : 'Select Dimensions',
+        options: isWomen ? ['XS', 'S', 'M', 'L', 'XL'] : ['Standard Edition', 'Luxury Set'],
         active: document.getElementById('prod-active').value === 'true'
       };
 
@@ -2459,6 +2503,13 @@
       } else {
         products.push(productData);
       }
+
+      // Remove from deleted list if re-added
+      try {
+        const del = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
+        const filteredDel = del.filter(id => id !== productData.id);
+        localStorage.setItem('frost_deleted_products', JSON.stringify(filteredDel));
+      } catch(e) {}
 
       // 1. Save locally for instant reactivity
       saveAdminProducts(products);
@@ -2471,6 +2522,13 @@
           console.warn('Supabase product save warning:', dbErr.message);
         }
       }
+
+      // 3. Broadcast update to all pages/tabs
+      window.dispatchEvent(new CustomEvent('frost:products-updated'));
+      try {
+        localStorage.setItem('frost_last_product_update', String(Date.now()));
+        if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+      } catch(e) {}
 
       closeProductModal();
       renderProductsGrid();
@@ -2489,14 +2547,6 @@
         renderProductsGrid();
         showAdminToast(`Product ${products[idx].active ? 'activated' : 'deactivated'}.`);
       }
-    }
-
-    function deleteProduct(productId) {
-      if (!confirm('Are you sure you want to permanently delete this product?')) return;
-      const products = getAdminProducts().filter(p => p.id !== productId);
-      saveAdminProducts(products);
-      renderProductsGrid();
-      showAdminToast('Product deleted from catalog.');
     }
 
     function openProductModal() {
@@ -2533,16 +2583,16 @@
 
     function clearVisitorData() {
       if (!confirm('This will permanently delete all visitor analytics data. Continue?')) return;
-      localStorage.removeItem('frost_visits');
+      localStorage.setItem('frost_visits', JSON.stringify([]));
       showAdminToast('Visitor data cleared.');
+      renderDashboard();
     }
 
     function resetDemoData() {
-      localStorage.removeItem('frost_data_seeded');
-      localStorage.removeItem('frost_orders');
-      localStorage.removeItem('frost_visits');
-      seedDemoData();
-      showAdminToast('Demo data restored successfully.');
+      if (!confirm('This will purge all fake demo statistics and reset analytics to 100% genuine live store data. Continue?')) return;
+      clearFakeData();
+      showAdminToast('All fake statistics cleared. Dashboard is now 100% live with real store data.');
+      renderDashboard();
     }
 
     // ============================================

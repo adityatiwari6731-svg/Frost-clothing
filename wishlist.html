@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your Curated Wishlist | FROST — Review your saved contemporary silhouettes and home textiles." />
+  <title>Your Wishlist | FROST</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .wishlist-page-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .wishlist-header-area {
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--frost-border);
+      padding-bottom: 2rem;
+    }
+    .wishlist-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 0.6rem;
+    }
+    .wishlist-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .wishlist-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+    }
+    .wishlist-count-text {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .btn-clear-wishlist {
+      background: none;
+      border: none;
+      color: var(--frost-burgundy);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+    .btn-clear-wishlist:hover {
+      background: rgba(108, 21, 30, 0.08);
+    }
+
+    /* Wishlist Grid */
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.2rem;
+    }
+    .wishlist-card {
+      background: #ffffff;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+    .wishlist-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    }
+    .wishlist-media {
+      position: relative;
+      height: 340px;
+      background: var(--frost-cream);
+      overflow: hidden;
+    }
+    .wishlist-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .wishlist-card:hover .wishlist-img {
+      transform: scale(1.03);
+    }
+    .wishlist-remove-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: #ffffff;
+      border: 1px solid var(--frost-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--frost-burgundy);
+      font-size: 14px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+    .wishlist-remove-btn:hover {
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      border-color: var(--frost-burgundy);
+    }
+    .wishlist-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .wishlist-info {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .wishlist-category {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .wishlist-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+      display: block;
+    }
+    .wishlist-card-title:hover {
+      color: var(--frost-burgundy);
+    }
+    .wishlist-fabric {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .wishlist-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-top: auto;
+      margin-bottom: 1.2rem;
+    }
+    .wishlist-price-current {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+    }
+    .wishlist-price-orig {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .wishlist-actions-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .btn-move-bag {
+      flex: 1;
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-align: center;
+    }
+    .btn-move-bag:hover {
+      background: #4a0e14;
+    }
+
+    /* Empty state */
+    .wishlist-empty-state {
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+    .empty-heart-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Injected Announcement Top Bar -->
+  <div id="frost-topbar"></div>
+
+  <!-- Injected Luxury Header -->
+  <div id="frost-header"></div>
+
+  <main class="wishlist-page-main">
+    <div class="wishlist-header-area">
+      <h1 class="wishlist-title">SAVED HEIRLOOMS &amp; CREATIONS</h1>
+      <p class="wishlist-sub">Your personal curation of contemporary silhouettes, pure linen tailoring, and serene home living textiles.</p>
+    </div>
+
+    <!-- Empty Wishlist State -->
+    <div id="wishlist-empty-view" class="wishlist-empty-state" style="display:none;">
+      <svg class="empty-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <h2 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--text-dark); margin-bottom:0.6rem;">Your Wishlist is Empty</h2>
+      <p style="color:var(--text-muted); margin-bottom:2rem; max-width:440px; margin-left:auto; margin-right:auto;">
+        Tap the heart icon (♡) on any creation in our catalog to preserve it in your personal atelier collection.
+      </p>
+      <a href="shop.html" class="btn-burgundy" style="display:inline-block; padding:0.85rem 2.2rem; text-decoration:none;">EXPLORE CATALOG</a>
+    </div>
+
+    <!-- Active Wishlist View -->
+    <div id="wishlist-active-view">
+      <div class="wishlist-toolbar">
+        <span class="wishlist-count-text" id="wishlist-page-counter">Showing 0 saved creations</span>
+        <button class="btn-clear-wishlist" onclick="clearFullWishlist()">Clear All</button>
+      </div>
+
+      <div class="wishlist-grid" id="wishlist-page-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Injected Footer + Drawers + Modals + Mobile Bottom Navigation -->
+  <div id="frost-footer-area"></div>
+
+  <!-- Scripts -->
+  <script src="supabase-client.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    function renderWishlistPage() {
+      const emptyView = document.getElementById('wishlist-empty-view');
+      const activeView = document.getElementById('wishlist-active-view');
+      const grid = document.getElementById('wishlist-page-grid');
+      const counter = document.getElementById('wishlist-page-counter');
+
+      if (!wishlist || wishlist.length === 0) {
+        if (emptyView) emptyView.style.display = 'block';
+        if (activeView) activeView.style.display = 'none';
+        return;
+      }
+
+      if (emptyView) emptyView.style.display = 'none';
+      if (activeView) activeView.style.display = 'block';
+
+      const items = FROST_PRODUCTS.filter(p => wishlist.includes(p.id));
+
+      if (counter) {
+        counter.textContent = `Showing ${items.length} saved creation${items.length !== 1 ? 's' : ''}`;
+      }
+
+      grid.innerHTML = items.map(p => `
+        <div class="wishlist-card" data-id="${p.id}">
+          <div class="wishlist-media" onclick="window.location.href='product.html?id=${p.id}'">
+            <img src="${p.image}" alt="${p.title}" class="wishlist-img" loading="lazy" />
+            ${p.badge ? `<span class="wishlist-badge">${p.badge}</span>` : ''}
+            <button class="wishlist-remove-btn" onclick="event.stopPropagation(); removeWishlistItem('${p.id}')" title="Remove from wishlist">✕</button>
+          </div>
+          <div class="wishlist-info">
+            <span class="wishlist-category">${p.categoryName || (p.category === 'home' ? 'Home & Living' : 'Women')}</span>
+            <a href="product.html?id=${p.id}" class="wishlist-card-title">${p.title}</a>
+            <div class="wishlist-fabric">${p.fabric || 'Pure Artisan Texture'}</div>
+            <div class="wishlist-price-row">
+              <span class="wishlist-price-current">${formatCurrency(p.priceINR)}</span>
+              ${p.originalPriceINR ? `<span class="wishlist-price-orig">${formatCurrency(p.originalPriceINR)}</span>` : ''}
+            </div>
+            <div class="wishlist-actions-row">
+              <button class="btn-move-bag" onclick="moveItemToBag('${p.id}')">MOVE TO BAG</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeWishlistItem(productId) {
+      toggleWishlist(productId);
+      renderWishlistPage();
+    }
+
+    function moveItemToBag(productId) {
+      addToCart(productId);
+      toggleWishlist(productId);
+      renderWishlistPage();
+    }
+
+    function clearFullWishlist() {
+      if (!confirm('Are you sure you want to remove all saved items from your wishlist?')) return;
+      wishlist = [];
+      localStorage.setItem('frost_wishlist', JSON.stringify(wishlist));
+      updateWishlistUI();
+      renderWishlistPage();
+      showToast('Wishlist cleared.');
+    }
+
+    window.addEventListener('frost:products-updated', () => {
+      if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+      renderWishlistPage();
+    });
+    window.addEventListener('storage', (e) => {
+      if (e.key && (e.key === 'frost_wishlist' || e.key.startsWith('frost_'))) {
+        wishlist = JSON.parse(localStorage.getItem('frost_wishlist') || '[]');
+        if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+        renderWishlistPage();
+      }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof refreshProductsFromStorage === 'function') refreshProductsFromStorage();
+      renderWishlistPage();
+    });
+  </script>
+</body>
+</html>

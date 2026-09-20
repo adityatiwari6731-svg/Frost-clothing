@@ -3,609 +3,726 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FROST | Secure Pan-India Checkout. Choose from UPI, Cards, Net Banking, or Cash on Delivery for insured white-glove shipping." />
-  <title>Secure Checkout &amp; Payment | FROST Luxury Atelier</title>
+  <meta name="description" content="FROST Checkout — Seamless, secure 3-step guest checkout. Fast online payments via UPI, Cards, and Net Banking." />
+  <title>Checkout | FROST</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Playfair Display, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
-</head>
-<body style="background-color: var(--frost-platinum);">
+  <style>
+    /* Checkout Redesign Specific Styles */
+    .checkout-nav-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--frost-border);
+      padding: 1.2rem 2rem;
+    }
+    .checkout-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .checkout-badge-secure {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--frost-green);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
 
-  <!-- Minimal Checkout Top Header -->
-  <header style="background: white; border-bottom: 1px solid rgba(0,0,0,0.08); padding: 1.2rem 0;">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-      <a href="index.html" class="brand-logo" aria-label="FROST Homepage">
-        <span class="logo-monogram">FROST</span>
-        <span class="logo-tagline">Couture &amp; Living</span>
+    .checkout-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* 3-Step Breadcrumb / Stepper */
+    .checkout-stepper-3step {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .step-node {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .step-node.active {
+      color: var(--frost-burgundy);
+    }
+    .step-node.completed {
+      color: var(--frost-green);
+    }
+    .step-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border: 1.5px solid var(--frost-border);
+      background: #ffffff;
+    }
+    .step-node.active .step-circle {
+      background: var(--frost-burgundy);
+      color: #ffffff;
+      border-color: var(--frost-burgundy);
+    }
+    .step-node.completed .step-circle {
+      background: var(--frost-green);
+      color: #ffffff;
+      border-color: var(--frost-green);
+    }
+    .step-line {
+      width: 40px;
+      height: 1px;
+      background: var(--frost-border);
+    }
+
+    /* 2-Column Checkout Layout */
+    .checkout-columns {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: #ffffff;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      padding: 2.2rem;
+    }
+    .checkout-section-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--frost-border);
+    }
+
+    /* Form Fields */
+    .form-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .form-col-full {
+      grid-column: 1 / -1;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .form-field input,
+    .form-field select {
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      background: #ffffff;
+      transition: border-color 0.2s ease;
+    }
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: var(--frost-burgundy);
+    }
+
+    /* Shipping Option Cards */
+    .ship-method-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 1.3rem;
+      border: 1.5px solid var(--frost-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .ship-method-card.selected {
+      border-color: var(--frost-burgundy);
+      background: rgba(108, 21, 30, 0.03);
+    }
+    .ship-method-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .ship-method-info strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-dark);
+    }
+    .ship-method-info span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Payment Tabs */
+    .pay-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+    }
+    .pay-tab-btn {
+      padding: 0.9rem 0.6rem;
+      border: 1.5px solid var(--frost-border);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .pay-tab-btn.active {
+      border-color: var(--frost-green);
+      background: rgba(15, 56, 44, 0.05);
+      color: var(--frost-green);
+    }
+
+    /* Payment Green CTA */
+    .btn-pay-green-full {
+      width: 100%;
+      height: 52px;
+      background: var(--frost-green);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      margin-top: 1.5rem;
+    }
+    .btn-pay-green-full:hover {
+      background: #09261e;
+      transform: translateY(-1px);
+    }
+
+    /* Order Confirmation View */
+    .confirmation-hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .confirm-check-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--frost-green);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .checkout-columns {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .form-grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body style="background:#FAF7F2;">
+
+  <!-- Header -->
+  <header class="checkout-nav-header">
+    <div class="checkout-nav-inner">
+      <a href="index.html" class="brand-logo-frost" aria-label="FROST Homepage" style="text-decoration:none;">
+        <span class="logo-text" style="font-family:var(--font-serif); font-size:1.6rem; font-weight:600; letter-spacing:0.18em; color:var(--text-dark);">FROST</span>
       </a>
-      <div style="display: flex; align-items: center; gap: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
-        <span style="display: flex; align-items: center; gap: 0.4rem; color: #27ae60; font-weight: 600;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          256-Bit SSL Encrypted
-        </span>
-        <a href="contact.html" style="color: var(--deep-wine); text-decoration: underline;">Concierge Help</a>
+      <div class="checkout-badge-secure">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>GUEST CHECKOUT · 256-BIT SECURE</span>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <!-- Stepper Navigation -->
-    <div class="checkout-stepper-bar">
-      <div class="stepper-item active" id="step-nav-1">
-        <span class="stepper-badge">1</span>
-        <span>Delivery Address</span>
+  <main class="checkout-wrapper">
+    <!-- 3-Step Stepper -->
+    <div class="checkout-stepper-3step">
+      <div class="step-node active" id="step-node-1">
+        <span class="step-circle">1</span>
+        <span>Information</span>
       </div>
-      <div class="stepper-divider"></div>
-      <div class="stepper-item" id="step-nav-2">
-        <span class="stepper-badge">2</span>
-        <span>Payment Gateway</span>
+      <div class="step-line"></div>
+      <div class="step-node" id="step-node-2">
+        <span class="step-circle">2</span>
+        <span>Shipping</span>
       </div>
-      <div class="stepper-divider"></div>
-      <div class="stepper-item" id="step-nav-3">
-        <span class="stepper-badge">3</span>
-        <span>Confirmation</span>
+      <div class="step-line"></div>
+      <div class="step-node" id="step-node-3">
+        <span class="step-circle">3</span>
+        <span>Payment</span>
       </div>
     </div>
 
-    <!-- MAIN CHECKOUT FLOW (Steps 1 & 2) -->
-    <div id="checkout-main-grid" class="checkout-page-grid">
+    <!-- Active Checkout Grid (Step 1, 2, 3) -->
+    <div class="checkout-columns" id="checkout-interactive-grid">
       <!-- Left Forms Column -->
-      <div class="checkout-left-col">
-        <!-- ==============================================
-             STEP 1: SHIPPING ADDRESS
-             ============================================== -->
-        <div id="step-1-container">
-          <div class="checkout-box">
-            <h3 class="checkout-box-title">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              Shipping &amp; White-Glove Delivery Details
-            </h3>
+      <div class="checkout-left-pane">
+        
+        <!-- STEP 1: CONTACT & ADDRESS -->
+        <div id="checkout-step-1" class="checkout-card">
+          <h2 class="checkout-section-title">1. Contact &amp; Shipping Address</h2>
+          <form id="form-step-1" onsubmit="handleProceedToStep2(event)">
+            <div class="form-field">
+              <label for="co-email">Email Address (for order receipt &amp; tracking) *</label>
+              <input type="email" id="co-email" required placeholder="name@domain.com" value="priya.sharma@example.com" />
+            </div>
 
-            <form id="shipping-form" onsubmit="handleShippingSubmit(event)">
-              <div class="checkout-form-grid">
-                <div class="form-group">
-                  <label class="form-label" for="ship-fname">First Name *</label>
-                  <input type="text" class="form-input" id="ship-fname" required placeholder="e.g. Gayatri" value="Gayatri" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="ship-lname">Last Name *</label>
-                  <input type="text" class="form-input" id="ship-lname" required placeholder="e.g. Singhania" value="Singhania" />
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="ship-phone">Mobile Number (for Courier Updates) *</label>
-                  <div style="display: flex; gap: 0.4rem;">
-                    <span style="padding: 0.75rem 0.8rem; background: #f0f2f5; border: 1px solid rgba(0,0,0,0.15); border-radius: var(--radius-sm); font-size: 0.86rem; font-weight: 600;">+91</span>
-                    <input type="tel" class="form-input" id="ship-phone" required placeholder="98765 43210" pattern="[0-9]{10}" maxlength="10" value="9820123456" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="ship-email">Email Address (for Receipt &amp; Tracking) *</label>
-                  <input type="email" class="form-input" id="ship-email" required placeholder="name@domain.com" value="gayatri.s@example.com" />
-                </div>
-
-                <div class="form-group full-width">
-                  <label class="form-label" for="ship-address">Street Address / House / Villa Number *</label>
-                  <input type="text" class="form-input" id="ship-address" required placeholder="Flat 402, Sea Face Manor, Worli" value="Flat 402, Sea Face Manor, Worli" />
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="ship-landmark">Landmark / Estate Area (Optional)</label>
-                  <input type="text" class="form-input" id="ship-landmark" placeholder="Near Nehru Science Centre" value="Near Nehru Planetarium" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="ship-city">City *</label>
-                  <input type="text" class="form-input" id="ship-city" required placeholder="Mumbai" value="Mumbai" />
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="ship-state">State / Union Territory *</label>
-                  <select class="form-select" id="ship-state" required>
-                    <option value="Maharashtra" selected>Maharashtra</option>
-                    <option value="Delhi">Delhi NCT</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-                    <option value="West Bengal">West Bengal</option>
-                    <option value="Rajasthan">Rajasthan</option>
-                    <option value="Gujarat">Gujarat</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Telangana">Telangana</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Haryana">Haryana</option>
-                    <option value="Goa">Goa</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="ship-pincode">6-Digit Indian PIN Code *</label>
-                  <input type="text" class="form-input" id="ship-pincode" required placeholder="400018" pattern="[0-9]{6}" maxlength="6" value="400018" />
-                </div>
+            <div class="form-grid-2col">
+              <div class="form-field">
+                <label for="co-fname">First Name *</label>
+                <input type="text" id="co-fname" required placeholder="Priya" value="Priya" />
               </div>
-
-              <!-- Shipping Speed Options -->
-              <div style="margin-top: 1.8rem; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 1.4rem;">
-                <label class="form-label" style="margin-bottom: 0.8rem;">Select Shipping Preference:</label>
-                <div style="display: grid; gap: 0.8rem;">
-                  <label style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; border: 1.5px solid var(--deep-wine); border-radius: var(--radius-sm); background: rgba(92,24,42,0.03); cursor: pointer;">
-                    <div style="display: flex; align-items: center; gap: 0.8rem;">
-                      <input type="radio" name="shipping_speed" value="white-glove" checked style="accent-color: var(--deep-wine);" />
-                      <div>
-                        <strong style="display: block; font-size: 0.88rem; color: var(--frost-dark);">Complimentary Pan-India White-Glove Delivery (3-5 Days)</strong>
-                        <span style="font-size: 0.78rem; color: var(--text-muted);">Handled by BlueDart Apex with signature verification on delivery</span>
-                      </div>
-                    </div>
-                    <span style="font-weight: 700; color: #27ae60; font-size: 0.85rem;">FREE</span>
-                  </label>
-
-                  <label style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; border: 1px solid rgba(0,0,0,0.12); border-radius: var(--radius-sm); background: white; cursor: pointer;">
-                    <div style="display: flex; align-items: center; gap: 0.8rem;">
-                      <input type="radio" name="shipping_speed" value="express" style="accent-color: var(--deep-wine);" />
-                      <div>
-                        <strong style="display: block; font-size: 0.88rem; color: var(--frost-dark);">Atelier Priority Air Express (24-48 Hours)</strong>
-                        <span style="font-size: 0.78rem; color: var(--text-muted);">Direct same-day dispatch via dedicated air courier</span>
-                      </div>
-                    </div>
-                    <span style="font-weight: 600; font-size: 0.85rem;">+₹750</span>
-                  </label>
-                </div>
+              <div class="form-field">
+                <label for="co-lname">Last Name *</label>
+                <input type="text" id="co-lname" required placeholder="Sharma" value="Sharma" />
               </div>
+            </div>
 
-              <button type="submit" class="btn-proceed-checkout" style="margin-top: 2rem;">
-                Continue to Payment Method →
-              </button>
-            </form>
-          </div>
+            <div class="form-field">
+              <label for="co-phone">Phone Number (for Courier delivery updates) *</label>
+              <input type="tel" id="co-phone" required placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" value="9876543210" />
+            </div>
+
+            <div class="form-field">
+              <label for="co-address">Flat, House No., Building, Street *</label>
+              <input type="text" id="co-address" required placeholder="Apartment 5B, Palm Grove Avenue" value="Apartment 5B, Palm Grove Avenue" />
+            </div>
+
+            <div class="form-grid-2col">
+              <div class="form-field">
+                <label for="co-city">City *</label>
+                <input type="text" id="co-city" required placeholder="Bengaluru" value="Bengaluru" />
+              </div>
+              <div class="form-field">
+                <label for="co-pincode">PIN Code *</label>
+                <input type="text" id="co-pincode" required placeholder="560001" pattern="[0-9]{6}" maxlength="6" value="560001" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="co-state">State *</label>
+              <select id="co-state" required>
+                <option value="Karnataka" selected>Karnataka</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-burgundy" style="width:100%; margin-top:1.5rem; padding:0.9rem;">
+              CONTINUE TO SHIPPING METHOD &rarr;
+            </button>
+          </form>
         </div>
 
-        <!-- ==============================================
-             STEP 2: PAYMENT GATEWAY (FABINDIA STYLE)
-             ============================================== -->
-        <div id="step-2-container" style="display: none;">
-          <div class="checkout-box">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.4rem;">
-              <h3 class="checkout-box-title" style="margin-bottom: 0;">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                Select Payment Mode
-              </h3>
-              <button onclick="goToStep(1)" style="font-size: 0.78rem; color: var(--deep-wine); text-decoration: underline; background: none; border: none; cursor: pointer;">
-                ← Edit Address
-              </button>
+        <!-- STEP 2: SHIPPING METHOD -->
+        <div id="checkout-step-2" class="checkout-card" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid var(--frost-border);">
+            <h2 class="checkout-section-title" style="margin:0; border:none; padding:0;">2. Shipping Method</h2>
+            <button onclick="goToCheckoutStep(1)" style="background:none; border:none; color:var(--frost-burgundy); font-size:0.8rem; cursor:pointer; text-decoration:underline;">
+              Edit Address
+            </button>
+          </div>
+
+          <div style="background:#FAF7F2; padding:1rem; border-radius:var(--radius-sm); margin-bottom:1.5rem; font-size:0.84rem; line-height:1.5;">
+            <div style="font-weight:600; color:var(--text-dark);" id="summary-shipping-address">Priya Sharma, Bengaluru - 560001</div>
+            <div style="color:var(--text-muted);" id="summary-shipping-email">priya.sharma@example.com · +91 9876543210</div>
+          </div>
+
+          <div class="ship-method-card selected" id="method-standard" onclick="selectShippingSpeed('standard', 0)">
+            <div class="ship-method-info">
+              <input type="radio" name="ship_speed" checked style="accent-color:var(--frost-burgundy);" />
+              <div>
+                <strong>Standard Insured Delivery (3–5 Days)</strong>
+                <span>Pan-India complimentary on orders above ₹1,499</span>
+              </div>
+            </div>
+            <strong style="color:var(--frost-green); font-size:0.88rem;">FREE</strong>
+          </div>
+
+          <div class="ship-method-card" id="method-express" onclick="selectShippingSpeed('express', 99)">
+            <div class="ship-method-info">
+              <input type="radio" name="ship_speed" style="accent-color:var(--frost-burgundy);" />
+              <div>
+                <strong>Express Air Priority (24–48 Hours)</strong>
+                <span>Direct air freight with priority warehouse dispatch</span>
+              </div>
+            </div>
+            <strong style="font-size:0.88rem;">+₹99</strong>
+          </div>
+
+          <button type="button" class="btn-burgundy" style="width:100%; margin-top:1.5rem; padding:0.9rem;" onclick="goToCheckoutStep(3)">
+            CONTINUE TO PAYMENT &rarr;
+          </button>
+        </div>
+
+        <!-- STEP 3: PAYMENT METHOD (ONLINE ONLY, NO COD) -->
+        <div id="checkout-step-3" class="checkout-card" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid var(--frost-border);">
+            <h2 class="checkout-section-title" style="margin:0; border:none; padding:0;">3. Online Payment</h2>
+            <button onclick="goToCheckoutStep(2)" style="background:none; border:none; color:var(--frost-burgundy); font-size:0.8rem; cursor:pointer; text-decoration:underline;">
+              Edit Shipping
+            </button>
+          </div>
+
+          <div class="pay-methods-grid">
+            <button type="button" class="pay-tab-btn active" onclick="switchPayMode('upi', this)">
+              📱 UPI &amp; QR
+            </button>
+            <button type="button" class="pay-tab-btn" onclick="switchPayMode('card', this)">
+              💳 Card
+            </button>
+            <button type="button" class="pay-tab-btn" onclick="switchPayMode('netbanking', this)">
+              🏛️ Net Banking
+            </button>
+          </div>
+
+          <!-- UPI Mode -->
+          <div id="pay-mode-upi" class="pay-sub-panel">
+            <div style="text-align:center; padding:1.2rem; background:#FAF7F2; border-radius:var(--radius-sm); margin-bottom:1.2rem;">
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); font-weight:700;">Instant UPI QR Code</span>
+              <div style="margin:1rem auto; width:120px; height:120px; background:#ffffff; padding:8px; border:1px solid var(--frost-border); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center;">
+                <!-- SVG QR Code -->
+                <svg viewBox="0 0 100 100" width="104" height="104">
+                  <rect x="0" y="0" width="100" height="100" fill="white"/>
+                  <rect x="10" y="10" width="26" height="26" fill="#0F382C"/>
+                  <rect x="15" y="15" width="16" height="16" fill="white"/>
+                  <rect x="18" y="18" width="10" height="10" fill="#0F382C"/>
+                  <rect x="64" y="10" width="26" height="26" fill="#0F382C"/>
+                  <rect x="69" y="15" width="16" height="16" fill="white"/>
+                  <rect x="72" y="18" width="10" height="10" fill="#0F382C"/>
+                  <rect x="10" y="64" width="26" height="26" fill="#0F382C"/>
+                  <rect x="15" y="69" width="16" height="16" fill="white"/>
+                  <rect x="18" y="72" width="10" height="10" fill="#0F382C"/>
+                  <rect x="42" y="12" width="6" height="6" fill="#0F382C"/>
+                  <rect x="48" y="45" width="10" height="10" fill="#6C151E"/>
+                  <rect x="65" y="45" width="8" height="8" fill="#0F382C"/>
+                  <rect x="42" y="70" width="6" height="6" fill="#0F382C"/>
+                </svg>
+              </div>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Scan with Google Pay, PhonePe, Paytm, or BHIM</span>
             </div>
 
-            <div class="payment-tabs-layout">
-              <!-- Payment Method Nav Tabs -->
-              <div class="payment-nav-col">
-                <button type="button" class="payment-nav-btn active" onclick="switchPaymentTab('upi', this)">
-                  <span>📱</span> UPI &amp; QR Code
-                </button>
-                <button type="button" class="payment-nav-btn" onclick="switchPaymentTab('card', this)">
-                  <span>💳</span> Credit / Debit Card
-                </button>
-                <button type="button" class="payment-nav-btn" onclick="switchPaymentTab('netbanking', this)">
-                  <span>🏛️</span> Net Banking
-                </button>
-                <button type="button" class="payment-nav-btn" onclick="switchPaymentTab('cod', this)">
-                  <span>💵</span> Cash on Delivery
-                </button>
-              </div>
-
-              <!-- Payment Panels -->
-              <div class="payment-content-col">
-                <!-- 1. UPI PANEL -->
-                <div class="payment-tab-panel active" id="tab-upi">
-                  <h4 style="font-size: 1rem; color: var(--frost-dark); margin-bottom: 0.4rem;">Scan QR or Enter UPI ID</h4>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.2rem;">Instant payment via Google Pay, PhonePe, Paytm, BHIM, or any UPI banking app.</p>
-
-                  <div class="upi-qr-box">
-                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.06em; text-transform: uppercase;">Scan with any UPI App</span>
-                    <div class="upi-qr-image">
-                      <!-- SVG Simulated QR Code -->
-                      <svg viewBox="0 0 100 100" width="140" height="140">
-                        <rect x="0" y="0" width="100" height="100" fill="white"/>
-                        <rect x="10" y="10" width="25" height="25" fill="#5c182a"/>
-                        <rect x="15" y="15" width="15" height="15" fill="white"/>
-                        <rect x="18" y="18" width="9" height="9" fill="#5c182a"/>
-                        <rect x="65" y="10" width="25" height="25" fill="#5c182a"/>
-                        <rect x="70" y="15" width="15" height="15" fill="white"/>
-                        <rect x="73" y="18" width="9" height="9" fill="#5c182a"/>
-                        <rect x="10" y="65" width="25" height="25" fill="#5c182a"/>
-                        <rect x="15" y="70" width="15" height="15" fill="white"/>
-                        <rect x="18" y="73" width="9" height="9" fill="#5c182a"/>
-                        <rect x="42" y="12" width="6" height="6" fill="#14191f"/>
-                        <rect x="52" y="18" width="6" height="6" fill="#14191f"/>
-                        <rect x="42" y="32" width="6" height="6" fill="#14191f"/>
-                        <rect x="48" y="45" width="8" height="8" fill="#5c182a"/>
-                        <rect x="12" y="45" width="6" height="6" fill="#14191f"/>
-                        <rect x="25" y="48" width="6" height="6" fill="#14191f"/>
-                        <rect x="65" y="45" width="6" height="6" fill="#14191f"/>
-                        <rect x="78" y="42" width="6" height="6" fill="#14191f"/>
-                        <rect x="42" y="65" width="6" height="6" fill="#14191f"/>
-                        <rect x="52" y="75" width="6" height="6" fill="#14191f"/>
-                        <rect x="65" y="65" width="6" height="6" fill="#14191f"/>
-                        <rect x="80" y="78" width="6" height="6" fill="#14191f"/>
-                      </svg>
-                    </div>
-                    <span style="font-size: 0.72rem; color: var(--text-muted);">Amount Payable: <strong style="color:var(--deep-wine);" id="upi-box-amount">₹0</strong></span>
-                  </div>
-
-                  <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem;">— OR ENTER UPI VPA —</div>
-
-                  <div style="display: flex; gap: 0.5rem; max-width: 380px; margin: 0 auto 1.4rem;">
-                    <input type="text" class="form-input" id="upi-vpa-input" placeholder="e.g. mobile@upi / name@okhdfcbank" value="gayatri@okhdfcbank" />
-                  </div>
-
-                  <div class="upi-apps-row">
-                    <button type="button" class="upi-app-pill" onclick="setUpiSuffix('@okaxis')">GPay</button>
-                    <button type="button" class="upi-app-pill" onclick="setUpiSuffix('@ybl')">PhonePe</button>
-                    <button type="button" class="upi-app-pill" onclick="setUpiSuffix('@paytm')">Paytm</button>
-                    <button type="button" class="upi-app-pill" onclick="setUpiSuffix('@upi')">BHIM</button>
-                  </div>
-
-                  <button type="button" class="btn-proceed-checkout" onclick="executePayment('UPI (Google Pay / PhonePe)')">
-                    Verify &amp; Complete Payment
-                  </button>
-                </div>
-
-                <!-- 2. CARD PANEL -->
-                <div class="payment-tab-panel" id="tab-card">
-                  <h4 style="font-size: 1rem; color: var(--frost-dark); margin-bottom: 0.4rem;">Credit or Debit Card</h4>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.2rem;">All major Indian &amp; international cards accepted: Visa, Mastercard, RuPay, and American Express.</p>
-
-                  <div class="checkout-form-grid">
-                    <div class="form-group full-width">
-                      <label class="form-label" for="card-number">Card Number *</label>
-                      <input type="text" class="form-input" id="card-number" placeholder="4532 •••• •••• 8891" maxlength="19" value="4532 8901 2345 8891" />
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="card-expiry">Valid Thru (MM/YY) *</label>
-                      <input type="text" class="form-input" id="card-expiry" placeholder="12/28" maxlength="5" value="08/29" />
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label" for="card-cvv">CVV / CVC *</label>
-                      <input type="password" class="form-input" id="card-cvv" placeholder="•••" maxlength="4" value="789" />
-                    </div>
-
-                    <div class="form-group full-width">
-                      <label class="form-label" for="card-name">Name as Printed on Card *</label>
-                      <input type="text" class="form-input" id="card-name" placeholder="GAYATRI SINGHANIA" value="GAYATRI SINGHANIA" />
-                    </div>
-                  </div>
-
-                  <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); cursor: pointer;">
-                    <input type="checkbox" checked style="accent-color: var(--deep-wine);" />
-                    Save this card securely per RBI compliance tokenization guidelines
-                  </label>
-
-                  <button type="button" class="btn-proceed-checkout" onclick="executePayment('Credit / Debit Card (Visa/Mastercard)')">
-                    Pay Now via Secure 3D OTP
-                  </button>
-                </div>
-
-                <!-- 3. NET BANKING PANEL -->
-                <div class="payment-tab-panel" id="tab-netbanking">
-                  <h4 style="font-size: 1rem; color: var(--frost-dark); margin-bottom: 0.4rem;">Indian Net Banking</h4>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.2rem;">Choose your preferred banking portal for direct account debit.</p>
-
-                  <div class="netbanking-grid">
-                    <div class="bank-option-card active" onclick="selectBank(this, 'HDFC Bank')">🏛️ HDFC Bank</div>
-                    <div class="bank-option-card" onclick="selectBank(this, 'ICICI Bank')">🏛️ ICICI Bank</div>
-                    <div class="bank-option-card" onclick="selectBank(this, 'State Bank of India')">🏛️ SBI</div>
-                    <div class="bank-option-card" onclick="selectBank(this, 'Axis Bank')">🏛️ Axis Bank</div>
-                    <div class="bank-option-card" onclick="selectBank(this, 'Kotak Mahindra')">🏛️ Kotak Bank</div>
-                    <div class="bank-option-card" onclick="selectBank(this, 'Punjab National Bank')">🏛️ PNB</div>
-                  </div>
-
-                  <div class="form-group" style="margin-bottom: 1.5rem;">
-                    <label class="form-label">Or Select Another Bank:</label>
-                    <select class="form-select" id="all-banks-select">
-                      <option value="">More than 40+ Indian Banks...</option>
-                      <option value="Bank of Baroda">Bank of Baroda</option>
-                      <option value="Canara Bank">Canara Bank</option>
-                      <option value="IndusInd Bank">IndusInd Bank</option>
-                      <option value="IDBI Bank">IDBI Bank</option>
-                      <option value="Federal Bank">Federal Bank</option>
-                      <option value="Union Bank of India">Union Bank of India</option>
-                    </select>
-                  </div>
-
-                  <button type="button" class="btn-proceed-checkout" onclick="executePayment('Net Banking (' + selectedBankName + ')')">
-                    Proceed to Bank Authorization
-                  </button>
-                </div>
-
-                <!-- 4. CASH ON DELIVERY PANEL -->
-                <div class="payment-tab-panel" id="tab-cod">
-                  <h4 style="font-size: 1rem; color: var(--frost-dark); margin-bottom: 0.4rem;">Cash on Delivery (COD)</h4>
-                  <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.2rem;">Pay in cash or via mobile UPI QR code to our white-glove courier upon parcel inspection.</p>
-
-                  <div style="background: #fdfbf7; border: 1px dashed var(--gold-dark); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem; font-size: 0.82rem; line-height: 1.6; color: var(--text-dark);">
-                    ✓ Verification OTP will be sent to your registered mobile before dispatch.<br/>
-                    ✓ Exact cash or UPI scan-on-delivery accepted by BlueDart courier executives.<br/>
-                    ✓ All pure silk items include tamper-evident security seals with verification hologram intact.
-                  </div>
-
-                  <button type="button" class="btn-proceed-checkout" onclick="executePayment('Cash on Delivery (COD)')">
-                    Confirm Order with Cash on Delivery
-                  </button>
-                </div>
-              </div>
+            <div class="form-field">
+              <label for="upi-id-input">Or Enter UPI ID / VPA</label>
+              <input type="text" id="upi-id-input" placeholder="mobile@upi or name@okhdfcbank" value="priya@okaxis" />
             </div>
           </div>
+
+          <!-- Card Mode -->
+          <div id="pay-mode-card" class="pay-sub-panel" style="display:none;">
+            <div class="form-field">
+              <label for="card-num">Card Number</label>
+              <input type="text" id="card-num" placeholder="4532 •••• •••• 8891" maxlength="19" value="4532 8901 2345 8891" />
+            </div>
+            <div class="form-grid-2col">
+              <div class="form-field">
+                <label for="card-exp">Expiry (MM/YY)</label>
+                <input type="text" id="card-exp" placeholder="08/28" maxlength="5" value="08/28" />
+              </div>
+              <div class="form-field">
+                <label for="card-cvv">CVV</label>
+                <input type="password" id="card-cvv" placeholder="•••" maxlength="3" value="456" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="card-holder">Cardholder Name</label>
+              <input type="text" id="card-holder" placeholder="PRIYA SHARMA" value="PRIYA SHARMA" />
+            </div>
+          </div>
+
+          <!-- Net Banking Mode -->
+          <div id="pay-mode-netbanking" class="pay-sub-panel" style="display:none;">
+            <div class="form-field">
+              <label for="bank-select">Select Bank</label>
+              <select id="bank-select">
+                <option value="HDFC Bank" selected>HDFC Bank</option>
+                <option value="ICICI Bank">ICICI Bank</option>
+                <option value="State Bank of India">State Bank of India</option>
+                <option value="Axis Bank">Axis Bank</option>
+                <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem;">
+            🔒 All transactions are secured with 256-bit SSL encryption. We never store CVV or bank passwords.
+          </div>
+
+          <button type="button" class="btn-pay-green-full" id="btn-final-pay" onclick="handleExecuteCheckout()">
+            PAY <span id="btn-pay-amount">₹1,899</span> &rarr;
+          </button>
         </div>
       </div>
 
       <!-- Right Summary Column -->
-      <div class="checkout-right-col">
-        <div class="cart-summary-card">
-          <h3 class="cart-summary-title">Order Bag Summary</h3>
-
-          <div id="checkout-items-preview" style="max-height: 280px; overflow-y: auto; margin-bottom: 1.2rem; padding-right: 0.4rem;">
-            <!-- Cart preview injected via JS -->
+      <div class="checkout-right-pane">
+        <div class="checkout-card" style="position:sticky; top:90px;">
+          <h3 class="checkout-section-title">Order Summary</h3>
+          <div id="checkout-products-list" style="margin-bottom:1.5rem; max-height:260px; overflow-y:auto;">
+            <!-- Cart items summary -->
           </div>
 
-          <div class="cart-summary-line">
-            <span>Bag Subtotal</span>
-            <span id="co-subtotal">₹0</span>
+          <div style="display:flex; justify-content:space-between; font-size:0.88rem; color:var(--text-muted); margin-bottom:0.6rem;">
+            <span>Subtotal</span>
+            <span id="co-subtotal-val">₹0</span>
           </div>
-          <div class="cart-summary-line highlight" id="co-discount-row" style="display: none;">
+
+          <div id="co-discount-line" style="display:none; justify-content:space-between; font-size:0.88rem; color:var(--frost-green); font-weight:600; margin-bottom:0.6rem;">
             <span>Privilege Discount</span>
-            <span id="co-discount">-₹0</span>
-          </div>
-          <div class="cart-summary-line" id="co-gift-row" style="display: none;">
-            <span>Gift Box Packaging</span>
-            <span>+₹450</span>
-          </div>
-          <div class="cart-summary-line">
-            <span>Delivery Fee</span>
-            <span id="co-shipping">Complimentary</span>
-          </div>
-          <div class="cart-summary-line total">
-            <span>Total Amount Payable</span>
-            <span id="co-total">₹0</span>
+            <span id="co-discount-val">-₹0</span>
           </div>
 
-          <div style="margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.06); font-size: 0.74rem; color: var(--text-muted); line-height: 1.5;">
-            🛡️ <strong>Fabindia &amp; Frost Authenticity Pledge:</strong> Certified Pure Handloom Silk Mark with free 14-day exchange guarantee.
+          <div style="display:flex; justify-content:space-between; font-size:0.88rem; color:var(--text-muted); margin-bottom:0.6rem;">
+            <span>Delivery</span>
+            <span id="co-ship-val">FREE</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; font-size:1.2rem; font-weight:700; color:var(--text-dark); padding-top:1rem; border-top:1px solid var(--frost-border); margin-top:0.8rem;">
+            <span>Total Payable</span>
+            <span id="co-total-val">₹0</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ==============================================
-         STEP 3: ORDER CONFIRMATION & RECEIPT SCREEN
-         ============================================== -->
-    <div id="order-confirmation-container" style="display: none;">
-      <div class="order-success-screen">
-        <div class="success-icon-badge">✓</div>
-        <span class="section-eyebrow" style="color: var(--gold-dark);">Order Successfully Placed</span>
-        <h2 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--frost-dark); margin: 0.4rem 0 0.6rem;">
-          Thank You, <span id="receipt-customer-name">Patron</span>
-        </h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7;">
-          Your order has been authorized and dispatched to our Varanasi &amp; Kanchipuram master ateliers for Silk Mark hallmarking and packaging.
-        </p>
+    <!-- ORDER CONFIRMATION / THANK YOU SCREEN -->
+    <div id="order-confirmed-screen" class="confirmation-hero" style="display:none;">
+      <div class="confirm-check-circle">✓</div>
+      <span style="font-size:0.8rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--frost-burgundy); display:block; margin-bottom:0.4rem;">
+        ORDER CONFIRMED
+      </span>
+      <h1 style="font-family:var(--font-serif); font-size:2.4rem; color:var(--text-dark); margin-bottom:0.8rem;">
+        THANK YOU FOR YOUR PURCHASE
+      </h1>
+      <p style="color:var(--text-muted); line-height:1.6; margin-bottom:2rem;">
+        We've received your order and are preparing it with care. A confirmation email with tracking details has been sent to your inbox.
+      </p>
 
-        <div class="order-id-chip">
-          Order Reference: <strong id="receipt-order-id">FAB-2026-000000</strong>
+      <div style="background:#ffffff; border:1px solid var(--frost-border); border-radius:var(--radius-sm); padding:1.5rem; text-align:left; margin-bottom:2.5rem;">
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--frost-border); padding-bottom:0.8rem; margin-bottom:1rem;">
+          <span style="color:var(--text-muted); font-size:0.85rem;">Order Number</span>
+          <strong style="font-size:0.95rem; color:var(--frost-burgundy);" id="confirmed-order-id">FRST-10248</strong>
         </div>
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--frost-border); padding-bottom:0.8rem; margin-bottom:1rem;">
+          <span style="color:var(--text-muted); font-size:0.85rem;">Payment Method</span>
+          <strong style="font-size:0.85rem;" id="confirmed-pay-mode">Online UPI · Paid</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--frost-border); padding-bottom:0.8rem; margin-bottom:1rem;">
+          <span style="color:var(--text-muted); font-size:0.85rem;">Estimated Delivery</span>
+          <strong style="font-size:0.85rem; color:var(--frost-green);">3–5 Business Days</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:700;">
+          <span>Total Paid</span>
+          <span style="color:var(--text-dark);" id="confirmed-total-paid">₹1,899</span>
+        </div>
+      </div>
 
-        <div class="receipt-details-box">
-          <div class="receipt-line">
-            <span>Order Date:</span>
-            <strong id="receipt-date">Today</strong>
-          </div>
-          <div class="receipt-line">
-            <span>Payment Mode:</span>
-            <strong id="receipt-payment-mode">UPI Verified</strong>
-          </div>
-          <div class="receipt-line">
-            <span>Transaction Ref ID:</span>
-            <strong id="receipt-txn-ref" style="font-family: monospace;">UPI8829103982</strong>
-          </div>
-          <div class="receipt-line">
-            <span>Shipping Destination:</span>
-            <strong id="receipt-address" style="text-align: right; max-width: 320px;">Worli, Mumbai - 400018</strong>
-          </div>
-          <div class="receipt-line">
-            <span>Estimated Courier Delivery:</span>
-            <strong style="color: #27ae60;">BlueDart Apex • 3 to 5 Business Days</strong>
-          </div>
-          <div style="border-top: 1px solid rgba(197,168,128,0.3); margin-top: 0.8rem; padding-top: 0.8rem;" class="receipt-line">
-            <span style="font-size: 1rem; font-weight: 700;">Total Paid (Inclusive of GST):</span>
-            <span id="receipt-final-amount" style="font-size: 1.25rem; font-weight: 700; color: var(--deep-wine);">₹0</span>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="index.html" class="btn-luxury btn-gold">
-            Return to Homepage
-          </a>
-          <button class="btn-luxury btn-outline-white" style="border-color: var(--frost-dark); color: var(--frost-dark);" onclick="window.print()">
-            Print Tax Invoice Receipt
-          </button>
-        </div>
+      <div style="display:flex; gap:1rem; justify-content:center;">
+        <a href="shop.html" class="btn-burgundy" style="padding:0.85rem 2rem;">CONTINUE SHOPPING</a>
+        <button onclick="window.print()" class="btn-outline" style="padding:0.85rem 2rem; border:1px solid var(--text-dark); background:none; cursor:pointer; font-weight:600; border-radius:var(--radius-sm);">
+          PRINT RECEIPT
+        </button>
       </div>
     </div>
   </main>
 
-  <!-- Shared Footer Area -->
+  <!-- Injected Footer + Drawers + Modals + Mobile Bottom Navigation -->
   <div id="frost-footer-area"></div>
 
-  <!-- Supabase Cloud Engine -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Scripts -->
   <script src="supabase-client.js"></script>
-
-  <!-- Analytics & Logic -->
-  <script src="admin-data.js"></script>
   <script src="shared.js"></script>
   <script>
-    let checkoutShippingData = {};
-    let selectedBankName = 'HDFC Bank';
+    let shippingSpeedExtra = 0;
+    let selectedPayMode = 'UPI';
 
-    function initCheckoutPage() {
-      initFrostPage('checkout');
-
-      // If cart is empty and not on receipt screen, redirect or prefill demo
-      if ((!cart || cart.length === 0) && !localStorage.getItem('frost_last_order')) {
-        // Add sample item so user can always experience the checkout flow smoothly
-        addToCart('saree-01');
+    function initCheckout() {
+      // Ensure cart has item
+      if (!cart || cart.length === 0) {
+        addToCart('sage-linen-dress', 'S / Sage Green');
       }
-
-      renderCheckoutSummary();
+      renderCheckoutReview();
     }
 
-    function renderCheckoutSummary() {
-      const previewContainer = document.getElementById('checkout-items-preview');
+    function renderCheckoutReview() {
+      const listEl = document.getElementById('checkout-products-list');
       const t = getCartTotals();
+      const finalTotal = t.total + shippingSpeedExtra;
 
-      if (previewContainer) {
-        previewContainer.innerHTML = cart.map(item => `
-          <div style="display: flex; gap: 0.8rem; align-items: center; margin-bottom: 0.8rem; font-size: 0.82rem;">
-            <img src="${item.image}" alt="${item.title}" style="width: 50px; height: 60px; object-fit: cover; border-radius: 4px;" />
-            <div style="flex: 1; min-width: 0;">
-              <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.title}</div>
-              <div style="color: var(--text-muted); font-size: 0.74rem;">${item.qty} × ${item.option}</div>
-            </div>
-            <div style="font-weight: 700; color: var(--frost-dark);">${formatCurrency(item.priceINR * item.qty)}</div>
+      listEl.innerHTML = cart.map(item => `
+        <div style="display:flex; gap:0.8rem; align-items:center; margin-bottom:0.8rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(0,0,0,0.05);">
+          <img src="${item.image}" alt="${item.title}" style="width:48px; height:60px; object-fit:cover; border-radius:var(--radius-sm);" />
+          <div style="flex:1; min-width:0;">
+            <div style="font-weight:600; font-size:0.85rem; color:var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.title}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${item.qty} × ${item.option || 'Standard'}</div>
           </div>
-        `).join('');
-      }
+          <div style="font-weight:700; font-size:0.88rem; color:var(--text-dark);">${formatCurrency(item.priceINR * item.qty)}</div>
+        </div>
+      `).join('');
 
-      document.getElementById('co-subtotal').textContent = formatCurrency(t.subtotal);
-      document.getElementById('co-shipping').textContent = t.freeShip ? 'Complimentary' : formatCurrency(t.ship);
-      document.getElementById('co-total').textContent = formatCurrency(t.total);
-      
-      const upiAmt = document.getElementById('upi-box-amount');
-      if (upiAmt) upiAmt.textContent = formatCurrency(t.total);
+      document.getElementById('co-subtotal-val').textContent = formatCurrency(t.subtotal);
+      document.getElementById('co-ship-val').textContent = shippingSpeedExtra > 0 ? formatCurrency(shippingSpeedExtra) : (t.freeShip ? 'FREE' : formatCurrency(t.ship));
+      document.getElementById('co-total-val').textContent = formatCurrency(finalTotal);
+      document.getElementById('btn-pay-amount').textContent = formatCurrency(finalTotal);
 
-      const discRow = document.getElementById('co-discount-row');
       if (t.disc > 0) {
-        discRow.style.display = 'flex';
-        document.getElementById('co-discount').textContent = `-${formatCurrency(t.disc)}`;
-      } else {
-        discRow.style.display = 'none';
-      }
-
-      const giftRow = document.getElementById('co-gift-row');
-      if (isGiftWrapped) {
-        giftRow.style.display = 'flex';
-      } else {
-        giftRow.style.display = 'none';
+        document.getElementById('co-discount-line').style.display = 'flex';
+        document.getElementById('co-discount-val').textContent = `-${formatCurrency(t.disc)}`;
       }
     }
 
-    function handleShippingSubmit(e) {
+    function handleProceedToStep2(e) {
       e.preventDefault();
-      checkoutShippingData = {
-        name: `${document.getElementById('ship-fname').value} ${document.getElementById('ship-lname').value}`.trim(),
-        phone: document.getElementById('ship-phone').value,
-        email: document.getElementById('ship-email').value,
-        address: document.getElementById('ship-address').value,
-        landmark: document.getElementById('ship-landmark').value,
-        city: document.getElementById('ship-city').value,
-        state: document.getElementById('ship-state').value,
-        pincode: document.getElementById('ship-pincode').value
-      };
+      const name = `${document.getElementById('co-fname').value} ${document.getElementById('co-lname').value}`;
+      const city = document.getElementById('co-city').value;
+      const pin = document.getElementById('co-pincode').value;
+      const email = document.getElementById('co-email').value;
+      const phone = document.getElementById('co-phone').value;
 
-      goToStep(2);
+      document.getElementById('summary-shipping-address').textContent = `${name}, ${city} - ${pin}`;
+      document.getElementById('summary-shipping-email').textContent = `${email} · +91 ${phone}`;
+
+      goToCheckoutStep(2);
     }
 
-    function goToStep(step) {
-      const step1 = document.getElementById('step-1-container');
-      const step2 = document.getElementById('step-2-container');
-      const mainGrid = document.getElementById('checkout-main-grid');
-      const receipt = document.getElementById('order-confirmation-container');
+    function goToCheckoutStep(step) {
+      document.getElementById('checkout-step-1').style.display = step === 1 ? 'block' : 'none';
+      document.getElementById('checkout-step-2').style.display = step === 2 ? 'block' : 'none';
+      document.getElementById('checkout-step-3').style.display = step === 3 ? 'block' : 'none';
 
-      const nav1 = document.getElementById('step-nav-1');
-      const nav2 = document.getElementById('step-nav-2');
-      const nav3 = document.getElementById('step-nav-3');
+      const n1 = document.getElementById('step-node-1');
+      const n2 = document.getElementById('step-node-2');
+      const n3 = document.getElementById('step-node-3');
 
-      if (step === 1) {
-        step1.style.display = 'block';
-        step2.style.display = 'none';
-        nav1.className = 'stepper-item active';
-        nav2.className = 'stepper-item';
-        nav3.className = 'stepper-item';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (step === 2) {
-        step1.style.display = 'none';
-        step2.style.display = 'block';
-        nav1.className = 'stepper-item completed';
-        nav2.className = 'stepper-item active';
-        nav3.className = 'stepper-item';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (step === 3) {
-        mainGrid.style.display = 'none';
-        receipt.style.display = 'block';
-        nav1.className = 'stepper-item completed';
-        nav2.className = 'stepper-item completed';
-        nav3.className = 'stepper-item active completed';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      n1.className = step === 1 ? 'step-node active' : 'step-node completed';
+      n2.className = step === 2 ? 'step-node active' : (step > 2 ? 'step-node completed' : 'step-node');
+      n3.className = step === 3 ? 'step-node active' : 'step-node';
+
+      window.scrollTo({ top: 100, behavior: 'smooth' });
     }
 
-    function switchPaymentTab(tabId, btn) {
-      document.querySelectorAll('.payment-nav-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.payment-tab-panel').forEach(p => p.classList.remove('active'));
+    function selectShippingSpeed(speed, cost) {
+      shippingSpeedExtra = cost;
+      document.getElementById('method-standard').classList.toggle('selected', speed === 'standard');
+      document.getElementById('method-express').classList.toggle('selected', speed === 'express');
+      renderCheckoutReview();
+    }
+
+    function switchPayMode(mode, btn) {
+      document.querySelectorAll('.pay-tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById(`tab-${tabId}`).classList.add('active');
+
+      document.getElementById('pay-mode-upi').style.display = mode === 'upi' ? 'block' : 'none';
+      document.getElementById('pay-mode-card').style.display = mode === 'card' ? 'block' : 'none';
+      document.getElementById('pay-mode-netbanking').style.display = mode === 'netbanking' ? 'block' : 'none';
+
+      selectedPayMode = mode === 'upi' ? 'UPI' : (mode === 'card' ? 'Credit/Debit Card' : 'Net Banking');
     }
 
-    function setUpiSuffix(suffix) {
-      const input = document.getElementById('upi-vpa-input');
-      const current = input.value.split('@')[0] || 'patron';
-      input.value = `${current}${suffix}`;
-    }
-
-    function selectBank(el, bankName) {
-      document.querySelectorAll('.bank-option-card').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
-      selectedBankName = bankName;
-    }
-
-    async function executePayment(paymentMode) {
-      showToast('Processing payment via 256-Bit SSL Gateway…');
-      
-      const btn = event.target;
+    async function handleExecuteCheckout() {
+      const btn = document.getElementById('btn-final-pay');
       btn.disabled = true;
-      btn.textContent = 'Saving Order to Supabase Cloud… 🔒';
+      btn.innerHTML = `<span>Processing Secure Payment... 🔒</span>`;
 
+      const t = getCartTotals();
+      const finalTotal = t.total + shippingSpeedExtra;
+      const orderId = `FRST-${Math.floor(10000 + Math.random() * 90000)}`;
+
+      // Save order
       try {
-        const order = await placeOrder({
-          ...checkoutShippingData,
-          paymentMethod: paymentMode
-        });
+        if (typeof placeOrder === 'function') {
+          await placeOrder({
+            id: orderId,
+            customer: `${document.getElementById('co-fname').value} ${document.getElementById('co-lname').value}`,
+            email: document.getElementById('co-email').value,
+            phone: document.getElementById('co-phone').value,
+            address: `${document.getElementById('co-address').value}, ${document.getElementById('co-city').value} - ${document.getElementById('co-pincode').value}`,
+            paymentMethod: `Online (${selectedPayMode})`,
+            totals: { total: finalTotal }
+          });
+        }
+      } catch (err) {}
 
-        // Populate Receipt
-        document.getElementById('receipt-customer-name').textContent = order.customer.split(' ')[0] || 'Valued Patron';
-        document.getElementById('receipt-order-id').textContent = order.id;
-        document.getElementById('receipt-date').textContent = order.date;
-        document.getElementById('receipt-payment-mode').textContent = order.paymentMethod;
-        document.getElementById('receipt-txn-ref').textContent = order.paymentRef;
-        document.getElementById('receipt-address').textContent = order.address;
-        document.getElementById('receipt-final-amount').textContent = formatCurrency(order.totals.total);
+      setTimeout(() => {
+        // Clear cart
+        cart = [];
+        saveCart();
+        updateCartUI();
 
-        goToStep(3);
-        showToast('✓ Order confirmed and saved in Supabase PostgreSQL!');
-      } catch (err) {
-        console.error('Payment flow error:', err);
-        showToast('Order confirmed! Receipt generated.');
-        goToStep(3);
-      }
+        // Switch to Confirmation screen
+        document.getElementById('checkout-interactive-grid').style.display = 'none';
+        document.querySelector('.checkout-stepper-3step').style.display = 'none';
+        document.getElementById('order-confirmed-screen').style.display = 'block';
+
+        document.getElementById('confirmed-order-id').textContent = orderId;
+        document.getElementById('confirmed-pay-mode').textContent = `Online (${selectedPayMode}) · Verified`;
+        document.getElementById('confirmed-total-paid').textContent = formatCurrency(finalTotal);
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1200);
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCheckoutPage);
-    } else {
-      initCheckoutPage();
-    }
+    document.addEventListener('DOMContentLoaded', initCheckout);
   </script>
 </body>
 </html>

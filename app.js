@@ -568,8 +568,8 @@ function updateCartUI() {
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
         <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--frost-dark); margin-bottom: 0.4rem;">Your shopping bag is empty</h4>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">Explore our couture sarees and artisanal home living collections.</p>
-        <button class="btn-luxury btn-gold" onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})" style="font-size: 0.72rem; padding: 0.8rem 1.6rem;">Explore Collections</button>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">Explore our clothing and artisanal home living products.</p>
+        <button class="btn-luxury btn-gold" onclick="closeCart(); window.location.href='shop.html'" style="font-size: 0.72rem; padding: 0.8rem 1.6rem;">Start Shopping</button>
       </div>
     `;
 

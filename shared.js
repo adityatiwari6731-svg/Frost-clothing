@@ -8,52 +8,394 @@
 // 1. PRODUCT CATALOG DATA
 // ==========================================
 const FROST_PRODUCTS = [
-  {id:'saree-01',title:'The Empress Banarasi Katan Silk Saree',category:'sarees',categoryName:'Couture Saree',priceINR:48500,originalPriceINR:58000,rating:4.9,reviewsCount:38,badge:'Heritage Heirloom',badgeType:'gold',image:'images/saree_banarasi.jpg',fabric:'Pure Katan Silk',zari:'Antique Silver & Champagne Gold Zari',craft:'Handloom Kadwa Weave — 45 Days',origin:'Varanasi Atelier',description:'A regal masterpiece handwoven over 45 days in our Varanasi ateliers. Deep wine plum body intricately showered with antique silver and champagne gold kadwa jaal motifs, crowned by an opulent heirloom pallu.',optionsLabel:'Bespoke Tailoring',options:['Unstitched Blouse Piece Included','Custom Blouse Tailored (+₹2,490)','Fall & Pico Finished (Complimentary)']},
-  {id:'saree-02',title:'Frost Celestial Moonlit Tissue Saree',category:'sarees',categoryName:'Couture Saree',priceINR:36000,originalPriceINR:42000,rating:4.8,reviewsCount:29,badge:'Limited Edition',badgeType:'dark',image:'images/hero_saree.jpg',fabric:'Icy-Platinum Tissue Silk',zari:'Pure Silver Thread Embroidery',craft:'Zardozi & Cutdana Hand-Craft',origin:'Kashmir & Varanasi Guild',description:'Draped in ethereal icy-platinum luster, this tissue silk saree glimmers like morning frost. Embellished with micro-cutdana and hand-embroidered silver zardozi borders for haute couture occasions.',optionsLabel:'Bespoke Tailoring',options:['Unstitched Blouse Piece Included','Custom Blouse Tailored (+₹2,490)','Fall & Pico Finished (Complimentary)']},
-  {id:'saree-03',title:'Whispering Willow Organza Silk Saree',category:'sarees',categoryName:'Couture Saree',priceINR:28500,originalPriceINR:34000,rating:4.9,reviewsCount:42,badge:'Pure Silk Mark',badgeType:'gold',image:'images/saree_organza.jpg',fabric:'Translucent Tissue Organza',zari:'Gota Patti & Crystal Filigree',craft:'Artisanal Hand-Applique',origin:'Chanderi Atelier',description:'Gossamer-light organza silk in misty sage and pearl frost tones. Finished with exquisite hand-cut gota patti and crystal sequins along an undulating scalloped hem.',optionsLabel:'Bespoke Tailoring',options:['Unstitched Blouse Piece Included','Custom Blouse Tailored (+₹2,490)','Fall & Pico Finished (Complimentary)']},
-  {id:'saree-04',title:'Royal Kanjivaram Temple Border Silk Saree',category:'sarees',categoryName:'Couture Saree',priceINR:52000,originalPriceINR:65000,rating:5.0,reviewsCount:56,badge:'Royal Bridal',badgeType:'gold',image:'images/saree_banarasi.jpg',fabric:'Pure Mulberry Silk',zari:'Heavy 24k Gold Pure Zari',craft:'Temple Korvai Weave',origin:'Kanchipuram Silk Atelier',description:'The quintessential Kanjivaram wedding drape. Woven on temple korvai technique with contrasting borders and a majestic peacock pallu motif in heavy 24k gold pure zari.',optionsLabel:'Bespoke Tailoring',options:['Unstitched Blouse Piece Included','Custom Blouse Tailored (+₹2,490)','Fall & Pico Finished (Complimentary)']},
-  {id:'kurta-01',title:'Noor Chanderi Zari Hand-Embroidered Silk Kurta Set',category:'sarees',categoryName:'Ethnic Couture',priceINR:18500,originalPriceINR:22000,rating:4.9,reviewsCount:31,badge:'Festive Edition',badgeType:'gold',image:'images/hero_saree.jpg',fabric:'Chanderi Silk & Mulmul Lining',zari:'Real Gota Patti & Zardozi Yoke',craft:'Artisanal Hand-Embroidery',origin:'Chanderi & Lucknow Atelier',description:'An elegant 3-piece handcrafted ensemble featuring a gold zari hand-embroidered Chanderi silk kurta, paired with tapered brocade silk trousers and an ethereal sheer dupatta with scalloped borders.',optionsLabel:'Select Size',options:['XS (Bust 34")','S (Bust 36")','M (Bust 38")','L (Bust 40")','XL (Bust 42")']},
-  {id:'kurta-02',title:'Handcrafted Ajrakh Block Print Pure Tussar Kurta',category:'sarees',categoryName:'Ethnic Couture',priceINR:12800,originalPriceINR:15500,rating:4.8,reviewsCount:24,badge:'Hand Block Print',badgeType:'dark',image:'images/saree_organza.jpg',fabric:'100% Wild Tussar Silk',zari:'Natural Indigo & Madder Dyes',craft:'16-Stage Ajrakh Hand-Block Print',origin:'Kutch Artisan Collective',description:'Hand-block printed using ancestral resist-dye techniques with natural indigo, madder, and iron mordants on organic wild tussar silk. Features mother-of-pearl buttons and fine kantha accents.',optionsLabel:'Select Size',options:['S (38)','M (40)','L (42)','XL (44)']},
-  {id:'home-01',title:'Imperial 800TC Egyptian Cotton Bedsheet Set',category:'bedsheets',categoryName:'Luxury Bedsheet',priceINR:14500,originalPriceINR:18000,rating:5.0,reviewsCount:64,badge:'Best Seller',badgeType:'gold',image:'images/home_sanctuary.jpg',fabric:'800-Thread Count Egyptian Cotton Sateen',zari:'Double Silver Satin Stitch Border',craft:'Single-Ply Sateen Weave',origin:'Frost Sanctuary Living',description:'Indulge in five-star sanctuary comfort. Spun from authentic long-staple Egyptian cotton with a luminous sateen finish and double-needle silver satin stitching. Includes 1 flat sheet and 2 oxford pillowcases.',optionsLabel:'Select Bed Size',options:['Super King (108" x 108")','King (100" x 108")','Queen (90" x 100")']},
-  {id:'home-02',title:'Botanical Mirage Velvet Cushion Covers (Set of 3)',category:'cushions',categoryName:'Artisan Cushion Covers',priceINR:8900,originalPriceINR:11500,rating:4.9,reviewsCount:47,badge:'Artisanal Handcraft',badgeType:'dark',image:'images/cushions_luxury.jpg',fabric:'Micro-Plush Velvet & Raw Tussar Silk',zari:'Metallic Botanical Zardozi & Beadwork',craft:'Hand-Embroidered Ari Work',origin:'Lucknow & Delhi Atelier',description:'A curated triptych of jewel-toned cushions: Deep Emerald Velvet, Slate Frost Silk, and Champagne Raw Silk — each hand-embroidered with shimmering metallic fern and floral motifs.',optionsLabel:'Select Dimension',options:['18" x 18" (Standard Luxury)','16" x 16" (Accent)','20" x 20" (Grand Floor Cushion)']},
-  {id:'home-03',title:'Grand Versailles Banquet Jacquard Tablecloth',category:'tablecloths',categoryName:'Banquet Table Linen',priceINR:12500,originalPriceINR:15500,rating:4.8,reviewsCount:19,badge:'Grand Soirée',badgeType:'dark',image:'images/tablecloth_luxury.jpg',fabric:'Linen-Silk Damask Jacquard',zari:'Woven Silver Meander Border',craft:'Master Loom Jacquard Weave',origin:'Coimbatore Heritage Loom',description:'Transform your dining table into a palace banquet. Luxurious linen-silk blend woven with understated champagne damask geometry framed with a double hemstitch border. Includes 6 matching dinner napkins.',optionsLabel:'Select Dining Size',options:['8-Seater (70" x 108")','6-Seater (60" x 90")','10-Seater Banquet (72" x 126")']},
-  {id:'home-04',title:'Mulberry Silk Oxford Pillow Covers (Pair)',category:'pillows',categoryName:'Pillow Ensembles',priceINR:7500,originalPriceINR:9200,rating:4.9,reviewsCount:52,badge:'Pure 22-Momme Silk',badgeType:'gold',image:'images/home_sanctuary.jpg',fabric:'100% Pure 22-Momme Grade 6A Mulberry Silk',zari:'Hidden Envelope Closure & Flanged Border',craft:'Anti-Friction Hair & Skin Finish',origin:'Bangalore Silk District',description:'The definitive sleep beauty treatment. Woven from Grade 6A pure mulberry silk that naturally preserves skin hydration, reduces morning creases, and eliminates sleep friction on hair.',optionsLabel:'Select Pillow Size',options:['King Size Pair (20" x 36")','Standard / Queen Pair (20" x 30")']},
-  {id:'home-05',title:'Celestial Frost Velvet Bed Runner & Cushion Duo',category:'cushions',categoryName:'Artisan Cushion Covers',priceINR:11200,originalPriceINR:14000,rating:4.9,reviewsCount:28,badge:'Sanctuary Suite',badgeType:'gold',image:'images/cushions_luxury.jpg',fabric:'Quilted Frost Slate Velvet',zari:'Silver Lurex Hand-Quilted Kantha',craft:'Artisanal Hand-Padded Quilt',origin:'Jaipur Master Guild',description:'Complete the layered bed aesthetic with our signature slate frost velvet bed runner and two matching bolsters. Features hand-stitched kantha quilting with micro silver lurex threads.',optionsLabel:'Select Option',options:['Full Bed Runner + 2 Cushions','Runner Only','Duo Cushions Only']},
+  {
+    id: 'sage-linen-dress',
+    title: 'Textured Linen Midi Dress',
+    category: 'women',
+    subCategory: 'dresses',
+    categoryName: 'Dresses',
+    priceINR: 1899,
+    originalPriceINR: 2499,
+    rating: 4.8,
+    reviewsCount: 126,
+    badge: 'Bestseller',
+    badgeType: 'green',
+    image: 'images/sage_linen_dress.jpg',
+    gallery: [
+      'images/sage_linen_dress.jpg',
+      'images/sage_fabric.jpg',
+      'images/women_banner.jpg',
+      'images/hero_editorial.jpg'
+    ],
+    color: 'Sage Green',
+    colors: [
+      { name: 'Sage Green', hex: '#889F8D' },
+      { name: 'Ivory Cream', hex: '#ECE6DA' },
+      { name: 'Bordeaux', hex: '#6C151E' }
+    ],
+    fabric: '100% Textured Organic Linen',
+    zari: 'Natural Shell Buttons',
+    craft: 'Tailored Minimalist Silhouette',
+    origin: 'Frost Contemporary Atelier',
+    description: 'The breathable Indian linen and relaxed fit soothe with naturally airy texture. Mindfully evocative and minimalist, cut with an effortless silhouette. For the modern woman who values understated luxury and enduring style.',
+    optionsLabel: 'Select Size',
+    options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+  },
+  {
+    id: 'bordeaux-coord',
+    title: 'Bordeaux Silk Blend Co-ord Set',
+    category: 'women',
+    subCategory: 'coords',
+    categoryName: 'Co-ord Sets',
+    priceINR: 2499,
+    originalPriceINR: 3200,
+    rating: 4.9,
+    reviewsCount: 84,
+    badge: 'Trending',
+    badgeType: 'burgundy',
+    image: 'images/bordeaux_coord.jpg',
+    gallery: [
+      'images/bordeaux_coord.jpg',
+      'images/hero_editorial.jpg'
+    ],
+    color: 'Bordeaux',
+    colors: [
+      { name: 'Bordeaux', hex: '#6C151E' },
+      { name: 'Forest Green', hex: '#0F382C' },
+      { name: 'Warm Sand', hex: '#F5DABF' }
+    ],
+    fabric: 'Silk-Linen Blend',
+    zari: 'Subtle Sheen Finish',
+    craft: 'Relaxed Tunic & Trouser Set',
+    origin: 'Frost Contemporary Atelier',
+    description: 'A modern two-piece ensemble combining fluid drape and crisp tailoring. Deep wine plum body with a breathable soft touch, styled effortlessly from desk to evening soirees.',
+    optionsLabel: 'Select Size',
+    options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+  },
+  {
+    id: 'rose-kurti',
+    title: 'Rose Handloom Cotton Kurti',
+    category: 'women',
+    subCategory: 'kurtis',
+    categoryName: 'Kurtis',
+    priceINR: 1299,
+    originalPriceINR: 1800,
+    rating: 4.9,
+    reviewsCount: 92,
+    badge: 'Artisanal',
+    badgeType: 'burgundy',
+    image: 'images/rose_kurti.jpg',
+    gallery: [
+      'images/rose_kurti.jpg'
+    ],
+    color: 'Dusty Rose',
+    colors: [
+      { name: 'Dusty Rose', hex: '#B5767A' },
+      { name: 'Ivory', hex: '#FAF8F5' }
+    ],
+    fabric: '100% Handspun Slub Cotton',
+    zari: 'Delicate Needlework Yoke',
+    craft: 'Handloom Weave & Thread Accents',
+    origin: 'Frost Heritage Guild',
+    description: 'Crafted from handloom cotton dyed in muted antique rose. Features delicate thread embroidery at the split neckline and sleeves, paired with side slits for easy movement.',
+    optionsLabel: 'Select Size',
+    options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+  },
+  {
+    id: 'blockprint-bedsheet',
+    title: 'Ivory Block Print Bedsheet Set',
+    category: 'home',
+    subCategory: 'bedsheets',
+    categoryName: 'Bedding',
+    priceINR: 1499,
+    originalPriceINR: 2100,
+    rating: 4.9,
+    reviewsCount: 110,
+    badge: 'Home Sanctuary',
+    badgeType: 'green',
+    image: 'images/blockprint_bedsheet.jpg',
+    gallery: [
+      'images/blockprint_bedsheet.jpg',
+      'images/home_banner.jpg'
+    ],
+    color: 'Ivory Sage',
+    colors: [
+      { name: 'Ivory Sage', hex: '#DCE4DD' },
+      { name: 'Warm Sand', hex: '#EBE3D7' }
+    ],
+    fabric: '300TC Organic Cotton Percale',
+    zari: 'Double Hemstitch Edges',
+    craft: 'Authentic Wooden Block Print',
+    origin: 'Jaipur Master Collective',
+    description: 'Transform your bedroom into a calm retreat. Hand-printed botanical flora in earthy sage on natural unbleached cotton percale. Includes 1 flat bedsheet and 2 oxford pillowcases.',
+    optionsLabel: 'Select Bed Size',
+    options: ['King (108" x 108")', 'Queen (90" x 100")', 'Single (60" x 90")']
+  },
+  {
+    id: 'curtains-green',
+    title: 'Deep Green Bagh Print Curtains',
+    category: 'home',
+    subCategory: 'curtains',
+    categoryName: 'Curtains',
+    priceINR: 1899,
+    originalPriceINR: 2600,
+    rating: 4.9,
+    reviewsCount: 68,
+    badge: 'Craft Edit',
+    badgeType: 'green',
+    image: 'images/curtains_green.jpg',
+    gallery: [
+      'images/curtains_green.jpg'
+    ],
+    color: 'Forest Green',
+    colors: [
+      { name: 'Forest Green', hex: '#0F382C' },
+      { name: 'Ivory Sand', hex: '#E8DEC8' }
+    ],
+    fabric: 'Linen-Cotton Light-Filtering Blend',
+    zari: 'Hand-Carved Bagh Motifs',
+    craft: 'Traditional Bagh Resist Print',
+    origin: 'Madhya Pradesh Guild',
+    description: 'Rich deep forest green panels with heritage Bagh print patterns that softly filter daylight, bringing calm earthy poise to living rooms and verandas.',
+    optionsLabel: 'Select Length',
+    options: ['7 Feet Window (48" x 84")', '9 Feet Door (48" x 108")']
+  },
+  {
+    id: 'table-runner',
+    title: 'Textured Linen Table Runner',
+    category: 'home',
+    subCategory: 'tableware',
+    categoryName: 'Table Linens',
+    priceINR: 699,
+    originalPriceINR: 999,
+    rating: 4.8,
+    reviewsCount: 45,
+    badge: 'Dining Edit',
+    badgeType: 'green',
+    image: 'images/table_runner.jpg',
+    gallery: [
+      'images/table_runner.jpg'
+    ],
+    color: 'Natural Taupe',
+    colors: [
+      { name: 'Natural Taupe', hex: '#B7A89A' },
+      { name: 'Forest Green', hex: '#0F382C' }
+    ],
+    fabric: 'Pure French Slub Linen',
+    zari: 'Subtle Frayed Edge Detail',
+    craft: 'Artisanal Loom Weave',
+    origin: 'Frost Living Sanctuary',
+    description: 'Pure washed linen table runner with natural slub texture and relaxed fringe edges. Elevates dinner tables with timeless tactile warmth.',
+    optionsLabel: 'Select Size',
+    options: ['Standard (14" x 72")', 'Banquet (14" x 96")']
+  },
+  {
+    id: 'cushion-cream',
+    title: 'Cream Embroidered Cushion Covers (Pair)',
+    category: 'home',
+    subCategory: 'cushions',
+    categoryName: 'Cushions',
+    priceINR: 499,
+    originalPriceINR: 799,
+    rating: 4.8,
+    reviewsCount: 77,
+    badge: 'Bestseller',
+    badgeType: 'burgundy',
+    image: 'images/cushion_cream.jpg',
+    gallery: [
+      'images/cushion_cream.jpg'
+    ],
+    color: 'Cream Linen',
+    colors: [
+      { name: 'Cream Linen', hex: '#EDE7DE' },
+      { name: 'Sage Green', hex: '#99A89A' }
+    ],
+    fabric: 'Washed Pure Linen',
+    zari: 'Floral Stem Thread Embroidery',
+    craft: 'Botanical Needlework',
+    origin: 'Frost Living Sanctuary',
+    description: 'Set of two soft cream linen cushion covers accented with graceful botanical stem embroidery and tactile raw fringe trims. Concealed zipper closure.',
+    optionsLabel: 'Select Size',
+    options: ['16" x 16"', '18" x 18"', '20" x 20"']
+  },
+  {
+    id: 'charcoal-bottoms',
+    title: 'Charcoal Linen Wide-Leg Bottoms',
+    category: 'women',
+    subCategory: 'bottoms',
+    categoryName: 'Bottoms',
+    priceINR: 1599,
+    originalPriceINR: 2200,
+    rating: 4.7,
+    reviewsCount: 53,
+    badge: 'Wardrobe Staple',
+    badgeType: 'green',
+    image: 'images/charcoal_bottoms.jpg',
+    gallery: [
+      'images/charcoal_bottoms.jpg'
+    ],
+    color: 'Charcoal',
+    colors: [
+      { name: 'Charcoal', hex: '#3A3A3C' },
+      { name: 'Ivory', hex: '#FAF8F5' }
+    ],
+    fabric: '100% Breathable Midweight Linen',
+    zari: 'Tailored Horn Buttons',
+    craft: 'Relaxed Tailored Cut',
+    origin: 'Frost Contemporary Atelier',
+    description: 'Flattering high-waisted wide-leg trousers cut in breathable charcoal linen. Features side pockets, subtle front pleats, and comfortable elastic back waist.',
+    optionsLabel: 'Select Size',
+    options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+  },
+  {
+    id: 'saree-01',
+    title: 'The Empress Banarasi Katan Silk Saree',
+    category: 'sarees',
+    subCategory: 'sarees',
+    categoryName: 'Couture Saree',
+    priceINR: 48500,
+    originalPriceINR: 58000,
+    rating: 4.9,
+    reviewsCount: 38,
+    badge: 'Heritage Heirloom',
+    badgeType: 'gold',
+    image: 'images/saree_banarasi.jpg',
+    fabric: 'Pure Katan Silk',
+    zari: 'Antique Silver & Champagne Gold Zari',
+    craft: 'Handloom Kadwa Weave — 45 Days',
+    origin: 'Varanasi Atelier',
+    description: 'A regal masterpiece handwoven over 45 days in our Varanasi ateliers. Deep wine plum body intricately showered with antique silver and champagne gold kadwa jaal motifs, crowned by an opulent heirloom pallu.',
+    optionsLabel: 'Bespoke Tailoring',
+    options: ['Unstitched Blouse Piece Included', 'Custom Blouse Tailored (+₹2,490)', 'Fall & Pico Finished (Complimentary)']
+  },
+  {
+    id: 'home-01',
+    title: 'Imperial 800TC Egyptian Cotton Bedsheet Set',
+    category: 'home',
+    subCategory: 'bedsheets',
+    categoryName: 'Luxury Bedsheet',
+    priceINR: 14500,
+    originalPriceINR: 18000,
+    rating: 5.0,
+    reviewsCount: 64,
+    badge: 'Best Seller',
+    badgeType: 'gold',
+    image: 'images/home_sanctuary.jpg',
+    fabric: '800-Thread Count Egyptian Cotton Sateen',
+    zari: 'Double Silver Satin Stitch Border',
+    craft: 'Single-Ply Sateen Weave',
+    origin: 'Frost Sanctuary Living',
+    description: 'Indulge in five-star sanctuary comfort. Spun from authentic long-staple Egyptian cotton with a luminous sateen finish and double-needle silver satin stitching. Includes 1 flat sheet and 2 oxford pillowcases.',
+    optionsLabel: 'Select Bed Size',
+    options: ['Super King (108" x 108")', 'King (100" x 108")', 'Queen (90" x 100")']
+  }
 ];
 
-// Merge any custom products added or updated via Admin Panel (including uploaded images)
-(function mergeAdminProducts() {
+window.FROST_PRODUCTS = FROST_PRODUCTS;
+
+// Global Configuration
+window.FROST_CONFIG = {
+  freeShipThreshold: 1499,
+  currency: 'INR'
+};
+
+function filterOutDeletedProducts() {
   try {
+    const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
+    if (Array.isArray(deletedIds) && deletedIds.length > 0) {
+      for (let i = FROST_PRODUCTS.length - 1; i >= 0; i--) {
+        if (deletedIds.includes(FROST_PRODUCTS[i].id)) {
+          FROST_PRODUCTS.splice(i, 1);
+        }
+      }
+      // Also purge deleted product DOM elements across all pages
+      deletedIds.forEach(id => {
+        document.querySelectorAll(`[data-id="${id}"], [data-product-id="${id}"]`).forEach(el => el.remove());
+      });
+    }
+  } catch(e) {}
+}
+
+// 5. STORAGE & ADMIN PRODUCT SYNC
+// ==========================================
+function refreshProductsFromStorage() {
+  try {
+    const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
     const adminProds = JSON.parse(localStorage.getItem('frost_admin_products') || '[]');
-    adminProds.forEach(ap => {
-      const idx = FROST_PRODUCTS.findIndex(p => p.id === ap.id);
-      if (idx > -1) {
-        FROST_PRODUCTS[idx] = { ...FROST_PRODUCTS[idx], ...ap };
-      } else if (ap.active !== false) {
-        FROST_PRODUCTS.push({
+
+    // 1. Purge deleted products
+    if (Array.isArray(deletedIds) && deletedIds.length > 0) {
+      for (let i = FROST_PRODUCTS.length - 1; i >= 0; i--) {
+        if (deletedIds.includes(FROST_PRODUCTS[i].id)) {
+          FROST_PRODUCTS.splice(i, 1);
+        }
+      }
+    }
+
+    // 2. Merge/insert admin-added products
+    if (Array.isArray(adminProds)) {
+      adminProds.forEach(ap => {
+        if (deletedIds.includes(ap.id)) return;
+        if (ap.active === false) {
+          const idx = FROST_PRODUCTS.findIndex(p => p.id === ap.id);
+          if (idx > -1) FROST_PRODUCTS.splice(idx, 1);
+          return;
+        }
+
+        const isWomen = (ap.category === 'women' || ap.category === 'sarees' || ap.category === 'dresses');
+        const normalizedCat = isWomen ? 'women' : 'home';
+        const catName = ap.categoryName || (isWomen ? "Women's Collection" : "Home & Living");
+
+        const formattedProd = {
           id: ap.id,
           title: ap.title,
-          category: ap.category || 'sarees',
-          categoryName: ap.category === 'sarees' ? 'Couture Saree' : 'Artisanal Home',
-          priceINR: ap.priceINR,
-          originalPriceINR: ap.originalPriceINR,
-          rating: 4.9,
-          reviewsCount: 12,
+          category: normalizedCat,
+          categoryName: catName,
+          priceINR: Number(ap.priceINR || ap.price_inr || 1499),
+          originalPriceINR: Number(ap.originalPriceINR || ap.original_price_inr || 0),
+          rating: Number(ap.rating || 4.9),
+          reviewsCount: Number(ap.reviewsCount || 12),
           badge: ap.badge || 'New Creation',
-          badgeType: 'gold',
-          image: ap.image || 'images/hero_saree.jpg',
-          fabric: ap.fabric || 'Pure Artisan Handloom',
-          zari: 'Antique Threadwork',
-          craft: 'Traditional Master Weave',
-          origin: 'Frost Heritage Atelier',
+          badgeType: isWomen ? 'burgundy' : 'green',
+          image: ap.image || ap.image_url || 'images/hero_editorial.jpg',
+          gallery: [ap.image || ap.image_url || 'images/hero_editorial.jpg'],
+          fabric: ap.fabric || (isWomen ? '100% Breathable Midweight Linen' : 'Pure French Slub Linen'),
+          zari: ap.zari || 'Fine Hand Finish',
+          craft: ap.craft || 'Artisanal Craft',
+          origin: ap.origin || 'Frost Atelier',
           description: ap.description || ap.title,
-          optionsLabel: 'Select Option',
-          options: ['Standard Luxury Edition', 'Complimentary Gift Finish']
-        });
-      }
-    });
-  } catch(e) {}
-})();
+          optionsLabel: ap.optionsLabel || (isWomen ? 'Select Size' : 'Select Dimensions'),
+          options: Array.isArray(ap.options) ? ap.options : (isWomen ? ['XS', 'S', 'M', 'L', 'XL'] : ['Standard Edition', 'Luxury Set'])
+        };
+
+        const idx = FROST_PRODUCTS.findIndex(p => p.id === ap.id);
+        if (idx > -1) {
+          FROST_PRODUCTS[idx] = { ...FROST_PRODUCTS[idx], ...formattedProd };
+        } else {
+          FROST_PRODUCTS.unshift(formattedProd);
+        }
+      });
+    }
+
+    filterOutDeletedProducts();
+  } catch(e) {
+    console.warn('refreshProductsFromStorage notice:', e);
+  }
+}
+
+// Run immediately
+refreshProductsFromStorage();
+
+// Listen for updates from other tabs or admin panel
+window.addEventListener('storage', (e) => {
+  if (e.key && (e.key.startsWith('frost_admin_products') || e.key.startsWith('frost_deleted') || e.key.startsWith('frost_last_product_update'))) {
+    refreshProductsFromStorage();
+    window.dispatchEvent(new CustomEvent('frost:products-updated'));
+  }
+});
+window.addEventListener('frost:products-updated', () => {
+  refreshProductsFromStorage();
+});
 
 // Asynchronously sync catalog from Supabase PostgreSQL
 async function syncSupabaseProducts() {
@@ -61,7 +403,9 @@ async function syncSupabaseProducts() {
     try {
       const dbProds = await apiGetProducts();
       if (dbProds && dbProds.length > 0) {
+        const deletedIds = JSON.parse(localStorage.getItem('frost_deleted_products') || '[]');
         dbProds.forEach(dp => {
+          if (deletedIds.includes(dp.id)) return;
           const idx = FROST_PRODUCTS.findIndex(p => p.id === dp.id);
           if (idx > -1) {
             FROST_PRODUCTS[idx] = { ...FROST_PRODUCTS[idx], ...dp };
@@ -69,9 +413,11 @@ async function syncSupabaseProducts() {
             FROST_PRODUCTS.unshift(dp);
           }
         });
+        filterOutDeletedProducts();
         window.dispatchEvent(new CustomEvent('frost:products-updated'));
         if (typeof renderCurrentPageCatalog === 'function') renderCurrentPageCatalog();
         if (typeof renderCuratedProducts === 'function') renderCuratedProducts();
+        if (typeof renderShopCatalog === 'function') renderShopCatalog();
       }
     } catch(e) {
       console.warn('Supabase catalog sync warning:', e.message);
@@ -99,6 +445,12 @@ let cart = JSON.parse(localStorage.getItem('frost_cart') || '[]');
 let wishlist = JSON.parse(localStorage.getItem('frost_wishlist') || '[]');
 let isGiftWrapped = false;
 let appliedDiscount = 0;
+try {
+  const savedPromo = JSON.parse(localStorage.getItem('frost_promo') || 'null');
+  if (savedPromo && savedPromo.discount) {
+    appliedDiscount = Number(savedPromo.discount);
+  }
+} catch(e) {}
 let activeQuickViewProduct = null;
 let selectedModalOption = null;
 let checkoutStep = 1;
@@ -172,15 +524,18 @@ function getCartTotals() {
   const subtotal = cart.reduce((s, i) => s + i.priceINR * i.qty, 0);
   const gift = isGiftWrapped ? 450 : 0;
   const disc = subtotal * (appliedDiscount / 100);
-  const freeShip = subtotal >= 20000;
-  const ship = freeShip ? 0 : 950;
+  const freeShip = subtotal >= 1499;
+  const ship = (subtotal === 0 || freeShip) ? 0 : 99;
   const total = Math.max(0, subtotal - disc + gift + ship);
   return {subtotal, gift, disc, ship, total, freeShip};
 }
 
 function updateCartUI() {
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
   const badge = document.getElementById('cart-badge');
-  if (badge) badge.textContent = cart.reduce((s, i) => s + i.qty, 0);
+  if (badge) badge.textContent = totalQty;
+  const mobileBadge = document.getElementById('mobile-bottom-badge');
+  if (mobileBadge) mobileBadge.textContent = totalQty;
 
   const container = document.getElementById('cart-items-container');
   if (!container) return;
@@ -191,7 +546,7 @@ function updateCartUI() {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <h4 style="font-family:var(--font-serif);font-size:1.3rem;color:var(--frost-dark);margin-bottom:.4rem;">Your bag is empty</h4>
         <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1.4rem;">Explore our couture sarees and artisanal home living.</p>
-        <a href="sarees.html" onclick="closeCart()" class="btn-luxury btn-gold" style="font-size:.72rem;padding:.8rem 1.6rem;">Explore Collections</a>
+        <a href="shop.html" onclick="closeCart()" class="btn-luxury btn-gold" style="font-size:.72rem;padding:.8rem 1.6rem;">Explore Shop</a>
       </div>`;
     const t = getCartTotals();
     _updateTotalsUI(t);
@@ -225,14 +580,14 @@ function updateCartUI() {
 function _updateTotalsUI({subtotal, ship, total, freeShip}) {
   const el = id => document.getElementById(id);
   if (el('cart-subtotal')) el('cart-subtotal').textContent = formatCurrency(subtotal);
-  if (el('cart-shipping')) el('cart-shipping').textContent = freeShip ? 'Complimentary' : formatCurrency(ship);
+  if (el('cart-shipping')) el('cart-shipping').textContent = freeShip ? 'FREE' : formatCurrency(ship);
   if (el('cart-total')) el('cart-total').textContent = formatCurrency(total);
-  const pct = Math.min(100, Math.round((subtotal / 20000) * 100));
+  const pct = Math.min(100, Math.round((subtotal / 1499) * 100));
   if (el('shipping-bar-fill')) el('shipping-bar-fill').style.width = `${pct}%`;
   if (el('shipping-text')) {
     el('shipping-text').innerHTML = freeShip
-      ? '<strong>✨ Complimentary Pan-India White-Glove Shipping unlocked!</strong>'
-      : `Add <strong>${formatCurrency(20000 - subtotal)}</strong> more for Complimentary Delivery Across India`;
+      ? '<strong>✨ Complimentary Delivery Unlocked!</strong>'
+      : `Add <strong>${formatCurrency(1499 - subtotal)}</strong> more for FREE SHIPPING`;
   }
 }
 
@@ -291,8 +646,19 @@ function openCart()    { document.getElementById('cart-drawer')?.classList.add('
 function closeCart()   { document.getElementById('cart-drawer')?.classList.remove('active'); document.getElementById('cart-backdrop')?.classList.remove('active'); document.body.style.overflow=''; }
 function openWishlist(){ document.getElementById('wishlist-drawer')?.classList.add('active'); document.getElementById('cart-backdrop')?.classList.add('active'); document.body.style.overflow='hidden'; }
 function closeWishlist(){ document.getElementById('wishlist-drawer')?.classList.remove('active'); document.getElementById('cart-backdrop')?.classList.remove('active'); document.body.style.overflow=''; }
-function openSearch()  { document.getElementById('search-modal')?.classList.add('active'); setTimeout(()=>document.getElementById('search-input')?.focus(), 50); }
-function closeSearch() { document.getElementById('search-modal')?.classList.remove('active'); const si=document.getElementById('search-input'); if(si) si.value=''; }
+function openSearch()  { 
+  document.getElementById('search-modal')?.classList.add('active'); 
+  document.getElementById('search-backdrop')?.classList.add('active'); 
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('search-input')?.focus(), 80); 
+}
+function closeSearch() { 
+  document.getElementById('search-modal')?.classList.remove('active'); 
+  document.getElementById('search-backdrop')?.classList.remove('active'); 
+  document.body.style.overflow = '';
+  const si = document.getElementById('search-input'); 
+  if (si) si.value = ''; 
+}
 function closeQuickView(){ document.getElementById('quickview-modal')?.classList.remove('active'); document.getElementById('quickview-backdrop')?.classList.remove('active'); document.body.style.overflow=''; activeQuickViewProduct=null; }
 function closeCheckout(){ document.getElementById('checkout-modal')?.classList.remove('active'); document.getElementById('checkout-backdrop')?.classList.remove('active'); document.body.style.overflow=''; }
 
@@ -479,22 +845,33 @@ function handleApplyPromo() {
 }
 
 async function placeOrder(orderData) {
-  const orderId = 'FAB-' + Math.floor(100000 + Math.random() * 900000);
-  const today = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  const orderId = orderData.id || ('FRST-' + Math.floor(100000 + Math.random() * 900000));
+  const todayIso = new Date().toISOString().split('T')[0];
   const t = getCartTotals();
+  const orderTotal = (orderData.totals && orderData.totals.total !== undefined) ? orderData.totals.total : t.total;
+  const orderSubtotal = (orderData.totals && orderData.totals.subtotal !== undefined) ? orderData.totals.subtotal : t.subtotal;
+  const custName = orderData.customer || orderData.name || 'Valued Guest';
   const order = {
     id: orderId,
-    date: today,
-    customer: orderData.name,
-    email: orderData.email,
-    phone: orderData.phone,
-    address: `${orderData.address}, ${orderData.landmark ? orderData.landmark + ', ' : ''}${orderData.city}, ${orderData.state} - ${orderData.pincode}`,
-    items: [...cart],
+    date: todayIso,
+    customer: custName,
+    email: orderData.email || 'patron@frosthaute.com',
+    phone: orderData.phone || '',
+    address: orderData.address || `${orderData.city || 'Mumbai'}, India`,
+    city: orderData.city || 'Mumbai',
+    state: orderData.state || 'Maharashtra',
+    country: 'India',
+    items: cart.length > 0 ? [...cart] : (orderData.items || []),
+    subtotal: Number(orderSubtotal),
+    discount: Number(t.disc || 0),
+    shipping: Number(t.ship || 0),
+    total: Number(orderTotal),
     totals: t,
-    paymentMethod: orderData.paymentMethod || 'UPI (Google Pay / PhonePe)',
+    paymentMethod: orderData.paymentMethod || 'Online (UPI)',
     paymentRef: orderData.paymentRef || ('UPI' + Math.floor(1000000000 + Math.random() * 9000000000)),
     estimatedDelivery: '3 to 5 business days',
-    status: 'Confirmed & Packing'
+    status: 'Confirmed & Packing',
+    giftWrapped: isGiftWrapped
   };
   
   // Save to orders history
@@ -508,6 +885,7 @@ async function placeOrder(orderData) {
     try {
       await apiCreateOrder({
         ...order,
+        customer_name: custName,
         city: orderData.city || 'Mumbai',
         state: orderData.state || 'Maharashtra',
         pincode: orderData.pincode || '400001'
@@ -613,114 +991,322 @@ function initHeroSlider() {
 // ==========================================
 // 13. HTML COMPONENT BUILDERS
 // ==========================================
+// 13. HTML COMPONENT BUILDERS (REDESIGN UI)
+// ==========================================
 function buildTopBar() {
-  return `<div class="container">
-    <div class="top-bar-ticker"><span class="badge-pulse"></span><span>Complimentary Pan-India White-Glove Shipping On Orders Above ₹20,000</span></div>
-    <div class="top-bar-actions">
-      <a href="heritage.html" class="top-bar-link">Our Atelier Story</a>
-      <a href="contact.html" class="top-bar-link">Private Concierge</a>
-      <div class="currency-selector" style="color:var(--gold-light);font-size:0.75rem;font-weight:600;letter-spacing:0.04em;">
-        <span>🇮🇳 India · INR (₹)</span>
-      </div>
+  return `<div class="top-announcement-bar">
+    <div class="bar-inner">
+      <span>100% SECURE ONLINE PAYMENT</span>
     </div>
   </div>`;
 }
 
 function buildHeader(active) {
-  const a=(p)=>active===p?' active':'';
-  return `<div class="container"><div class="nav-wrapper">
-    <a href="index.html" class="brand-logo" aria-label="FROST"><span class="logo-monogram">FROST</span><span class="logo-tagline">Couture &amp; Living</span></a>
-    <nav aria-label="Primary">
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="sarees.html" class="nav-link${a('sarees')}">Couture Sarees</a>
-          <ul class="nav-dropdown">
-            <li><a href="sarees.html" class="dropdown-link">Banarasi Brocades</a></li>
-            <li><a href="sarees.html" class="dropdown-link">Kanjivaram Heirlooms</a></li>
-            <li><a href="sarees.html" class="dropdown-link">Tissue Organza</a></li>
-            <li><a href="sarees.html" class="dropdown-link">Bridal Trousseau</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a href="home-living.html" class="nav-link${a('home')}">Home Sanctuary</a>
-          <ul class="nav-dropdown">
-            <li><a href="home-living.html" class="dropdown-link">Egyptian Cotton Bedsheets</a></li>
-            <li><a href="home-living.html" class="dropdown-link">Velvet Cushion Covers</a></li>
-            <li><a href="home-living.html" class="dropdown-link">Mulberry Silk Pillows</a></li>
-            <li><a href="home-living.html" class="dropdown-link">Banquet Table Linens</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a href="lookbook.html" class="nav-link${a('lookbook')}">Lookbook</a></li>
-        <li class="nav-item"><a href="heritage.html" class="nav-link${a('heritage')}">Heritage</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link${a('contact')}">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="nav-actions">
-      <button class="icon-btn" id="search-trigger" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-      <button class="icon-btn" id="wishlist-trigger" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="badge-count" id="wishlist-badge">0</span></button>
-      <button class="icon-btn" id="cart-trigger" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="badge-count" id="cart-badge">0</span></button>
-      <button class="icon-btn mobile-toggle" id="mobile-menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  const a = (p) => active === p ? ' active' : '';
+  return `
+  <header class="frost-site-header">
+    <div class="frost-header-container">
+      <a href="index.html" class="brand-logo-frost" aria-label="FROST Homepage">
+        <span class="logo-text">FROST</span>
+        <span class="logo-sub">Finest Clothing &amp; Living</span>
+      </a>
+
+      <nav class="frost-desktop-nav" aria-label="Main Navigation">
+        <ul class="frost-nav-links">
+          <li><a href="shop.html" class="${a('shop')}">Shop</a></li>
+          <li><a href="shop.html?cat=women" class="${a('women')}">Women</a></li>
+          <li><a href="shop.html?cat=home" class="${a('home')}">Home &amp; Living</a></li>
+          <li><a href="lookbook.html" class="${a('journal')}">Journal</a></li>
+        </ul>
+      </nav>
+
+      <div class="frost-header-actions">
+        <button class="header-action-icon" id="search-trigger" aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="header-action-icon" id="wishlist-trigger" aria-label="Wishlist" title="Saved Items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="header-badge-count" id="wishlist-badge">0</span>
+        </a>
+        <a href="cart.html" class="header-action-icon" id="cart-trigger" aria-label="Bag" title="Shopping Bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="header-badge-count" id="cart-badge">0</span>
+        </a>
+        <button class="header-action-icon mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Menu" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
     </div>
-  </div></div>`;
+  </header>`;
 }
 
 function buildFooterArea() {
   return `
     <div class="overlay-backdrop" id="cart-backdrop"></div>
     <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping Bag">
-      <div class="drawer-header"><h3>Your Shopping Bag</h3><button class="close-btn" id="cart-close-btn">✕</button></div>
-      <div class="shipping-progress-box"><div id="shipping-text">Add ₹20,000 more for Complimentary Pan-India Delivery</div><div class="shipping-bar-track"><div class="shipping-bar-fill" id="shipping-bar-fill" style="width:0%"></div></div></div>
+      <div class="drawer-header">
+        <h3 style="font-family:var(--font-serif);font-size:1.5rem;letter-spacing:0.04em;">YOUR BAG</h3>
+        <button class="close-btn" id="cart-close-btn">✕</button>
+      </div>
+      <div class="free-shipping-progress-banner" style="margin: 0.8rem 1.2rem;">
+        <div class="free-shipping-label" id="shipping-text">Add ₹1,499 more for FREE SHIPPING</div>
+        <div class="free-shipping-bar-track">
+          <div class="free-shipping-bar-fill" id="shipping-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
       <div class="drawer-body" id="cart-items-container"></div>
       <div class="drawer-footer">
-        <label class="gift-wrap-toggle"><input type="checkbox" id="gift-wrap-toggle"/><span>Bespoke Gold-Foil Gift Box &amp; Card (+₹450)</span></label>
-        <div class="promo-input-group"><input type="text" id="promo-code-input" placeholder="Privilege Code (e.g. FROST15)"/><button type="button" id="btn-apply-promo">Apply</button></div>
+        <div class="promo-input-group">
+          <input type="text" id="promo-code-input" placeholder="Coupon Code (e.g. FROST10)"/>
+          <button type="button" id="btn-apply-promo">Apply</button>
+        </div>
         <div class="cart-summary-row"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
-        <div class="cart-summary-row"><span>Pan-India Delivery</span><span id="cart-shipping">₹0</span></div>
-        <div class="cart-summary-row cart-summary-total"><span>Estimated Total</span><span id="cart-total">₹0</span></div>
-        <a href="checkout.html" class="btn-checkout" id="btn-checkout" style="display:block; text-align:center; text-decoration:none;">Proceed to Checkout</a>
-        <a href="cart.html" style="display:block; text-align:center; font-size:0.75rem; color:var(--text-muted); text-decoration:underline; margin-top:0.6rem;">View Detailed Shopping Bag</a>
+        <div class="cart-summary-row"><span>Shipping</span><span id="cart-shipping">FREE</span></div>
+        <div class="cart-summary-row cart-summary-total"><span>Total</span><span id="cart-total">₹0</span></div>
+        <div style="display:flex;gap:0.6rem;margin-top:0.8rem;">
+          <a href="cart.html" class="btn-outline" style="flex:1;text-align:center;padding:0.8rem;border:1px solid var(--frost-border);font-size:0.8rem;text-decoration:none;font-weight:700;color:var(--text-dark);border-radius:var(--radius-sm);background:#FAF7F2;">VIEW BAG</a>
+          <a href="checkout.html" class="btn-checkout-bordeaux" id="btn-checkout" style="flex:1.6;margin-top:0;padding:0.8rem;text-align:center;">CHECKOUT &rarr;</a>
+        </div>
+        <div class="bag-guest-subtext">Guest checkout only. Online payment.</div>
       </div>
     </aside>
+
     <aside class="wishlist-drawer" id="wishlist-drawer" aria-label="Wishlist">
-      <div class="drawer-header"><h3>Saved Heirlooms</h3><button class="close-btn" id="wishlist-close-btn">✕</button></div>
+      <div class="drawer-header">
+        <h3 style="font-family:var(--font-serif);font-size:1.4rem;">SAVED PIECES</h3>
+        <button class="close-btn" id="wishlist-close-btn">✕</button>
+      </div>
       <div class="drawer-body" id="wishlist-items-container"></div>
+      <div class="drawer-footer" style="padding:1.2rem;border-top:1px solid var(--frost-border);background:#ffffff;">
+        <a href="wishlist.html" class="btn-burgundy" style="display:block;text-align:center;text-decoration:none;padding:0.85rem;font-size:0.82rem;letter-spacing:0.08em;">VIEW FULL WISHLIST PAGE &rarr;</a>
+      </div>
     </aside>
+
     <div class="overlay-backdrop" id="quickview-backdrop"></div>
     <div class="quickview-modal" id="quickview-modal" role="dialog" aria-modal="true"><div id="quickview-modal-body"></div></div>
+    
     <div class="overlay-backdrop" id="checkout-backdrop"></div>
     <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true">
       <button class="close-btn" id="checkout-close-btn" style="position:absolute;top:1.2rem;right:1.5rem;">✕</button>
       <div id="checkout-modal-body"></div>
     </div>
+
+    <!-- Interactive Size Guide Modal -->
+    <div class="overlay-backdrop" id="sizeguide-backdrop" onclick="closeSizeGuide()"></div>
+    <div class="size-guide-modal" id="sizeguide-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:92%;max-width:680px;background:#ffffff;border-radius:var(--radius-sm);box-shadow:var(--shadow-dark);z-index:250;padding:2.2rem;max-height:90vh;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+        <h3 style="font-family:var(--font-serif);font-size:1.8rem;letter-spacing:0.06em;text-transform:uppercase;">SIZE GUIDE</h3>
+        <button onclick="closeSizeGuide()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;">✕</button>
+      </div>
+      <div style="display:flex;gap:1rem;border-bottom:1px solid var(--frost-border);margin-bottom:1.5rem;">
+        <button class="shop-tab-btn active" id="sg-tab-women" onclick="switchSizeGuideTab('women')">WOMEN</button>
+        <button class="shop-tab-btn" id="sg-tab-home" onclick="switchSizeGuideTab('home')">HOME LIVING</button>
+      </div>
+      <div id="sg-content-women">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86rem;margin-bottom:1.8rem;text-align:center;">
+          <thead>
+            <tr style="background:#FAF7F2;border-bottom:2px solid var(--frost-border);">
+              <th style="padding:10px;">Size</th>
+              <th style="padding:10px;">Bust (in)</th>
+              <th style="padding:10px;">Waist (in)</th>
+              <th style="padding:10px;">Hip (in)</th>
+              <th style="padding:10px;">Length (in)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">XS</td><td>34</td><td>26</td><td>36</td><td>46</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">S</td><td>36</td><td>28</td><td>38</td><td>47</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">M</td><td>38</td><td>30</td><td>40</td><td>48</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">L</td><td>40</td><td>32</td><td>42</td><td>48.5</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">XL</td><td>42</td><td>34</td><td>44</td><td>49</td></tr>
+            <tr><td style="padding:9px;font-weight:600;">XXL</td><td>44</td><td>36</td><td>46</td><td>49.5</td></tr>
+          </tbody>
+        </table>
+        <div style="background:#FAF7F2;padding:1.2rem;border-radius:var(--radius-sm);font-size:0.84rem;line-height:1.6;color:#4B5563;">
+          <strong style="color:var(--text-dark);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:4px;">HOW TO MEASURE</strong>
+          <strong>Bust:</strong> Measure under arms around the fullest part of bust.<br/>
+          <strong>Waist:</strong> Measure around your natural waistline keeping tape comfortably loose.<br/>
+          <strong>Hips:</strong> Measure around the fullest part of your body at the top of the legs.
+        </div>
+      </div>
+      <div id="sg-content-home" style="display:none;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.86rem;margin-bottom:1.8rem;text-align:center;">
+          <thead>
+            <tr style="background:#FAF7F2;border-bottom:2px solid var(--frost-border);">
+              <th style="padding:10px;">Item</th>
+              <th style="padding:10px;">Dimensions</th>
+              <th style="padding:10px;">Includes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">King Bedsheet</td><td>108" x 108"</td><td>1 Flat Sheet + 2 Pillow Covers (20" x 30")</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">Queen Bedsheet</td><td>90" x 100"</td><td>1 Flat Sheet + 2 Pillow Covers (20" x 30")</td></tr>
+            <tr style="border-bottom:1px solid var(--frost-border);"><td style="padding:9px;font-weight:600;">Cushion Covers</td><td>16" x 16" / 18" x 18"</td><td>Set of 2 Covers</td></tr>
+            <tr><td style="padding:9px;font-weight:600;">Table Runner</td><td>14" x 72" / 14" x 96"</td><td>1 Pure Linen Runner</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Search Backdrop Overlay & Modal -->
+    <div class="overlay-backdrop" id="search-backdrop" onclick="closeSearch()"></div>
     <div class="search-modal" id="search-modal">
-      <div class="container">
-        <div class="search-bar-inner"><input type="text" id="search-input" class="search-input" placeholder="Search sarees, bedsheets, cushions, linens…" autocomplete="off"/><button class="close-btn" id="search-close-btn">✕</button></div>
-        <div style="display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap;align-items:center;">
-          <span style="font-size:.74rem;text-transform:uppercase;color:var(--gold-dark);font-weight:600;">Trending:</span>
-          <a href="sarees.html" class="option-pill">Banarasi</a>
-          <a href="sarees.html" class="option-pill">Organza Saree</a>
-          <a href="home-living.html" class="option-pill">Egyptian Cotton</a>
-          <a href="home-living.html" class="option-pill">Velvet Cushion</a>
-          <a href="home-living.html" class="option-pill">Tablecloth</a>
+      <div class="container" style="max-width:800px;margin:3rem auto;padding:0 1.5rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
+          <span style="font-family:var(--font-serif);font-size:1.6rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dark);">WHAT ARE YOU LOOKING FOR?</span>
+          <button class="close-btn" id="search-close-btn" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-dark);">✕</button>
+        </div>
+        <form id="global-search-form" onsubmit="event.preventDefault(); executeSearch();" style="display:flex;gap:0.6rem;align-items:center;">
+          <div class="search-bar-inner" style="flex:1;display:flex;align-items:center;background:#ffffff;border:1.5px solid var(--frost-border);border-radius:var(--radius-sm);padding:0.4rem 1rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);margin-right:0.6rem;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-input" class="search-input" placeholder="Search dresses, kurtis, bedsheets, cushions..." autocomplete="off" style="width:100%;border:none;font-size:1.05rem;outline:none;background:transparent;font-family:var(--font-sans);"/>
+          </div>
+          <button type="submit" id="search-submit-btn" class="btn-burgundy" style="padding:0.85rem 1.6rem;white-space:nowrap;font-size:0.85rem;cursor:pointer;letter-spacing:0.08em;">SEARCH</button>
+        </form>
+        <div style="display:flex;gap:.8rem;margin-top:1.2rem;flex-wrap:wrap;align-items:center;">
+          <span style="font-size:.76rem;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Popular Searches:</span>
+          <a href="shop.html?search=dress" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Dresses</a>
+          <a href="shop.html?search=coord" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Co-ords</a>
+          <a href="shop.html?search=kurti" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Kurtis</a>
+          <a href="shop.html?search=bedsheet" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Bedsheets</a>
+          <a href="shop.html?search=cushion" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Cushions</a>
+          <a href="shop.html?search=linen" class="option-pill" style="padding:5px 14px;background:#FAF7F2;border:1px solid var(--frost-border);border-radius:20px;font-size:0.78rem;color:var(--text-dark);text-decoration:none;">Linen</a>
         </div>
       </div>
     </div>
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-col footer-brand">
-            <div class="brand-logo" style="align-items:flex-start;margin-bottom:1.2rem;"><span class="logo-monogram" style="color:var(--frost-white);">FROST</span><span class="logo-tagline">Couture &amp; Living</span></div>
-            <p class="footer-desc">An artisanal Indian atelier celebrating the zenith of handloom weaving and sanctuary home decor.</p>
-            <form class="newsletter-form" id="newsletter-form"><input type="email" class="newsletter-input" id="newsletter-email" placeholder="Your email address" required/><button type="submit" class="newsletter-btn">Subscribe</button></form>
-            <span style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.5rem;display:block;">15% off your first order upon subscribing.</span>
+
+    <!-- Dark Luxury Footer -->
+    <footer class="frost-dark-footer">
+      <div class="frost-footer-container">
+        <div class="footer-cols-grid">
+          <div class="footer-brand-col">
+            <h3 class="footer-brand-title">FROST</h3>
+            <p class="footer-brand-sub">Crafted for the way you live. Contemporary silhouettes and refined home textiles made for everyday living.</p>
           </div>
-          <div class="footer-col"><h5>Couture Sarees</h5><ul class="footer-links"><li><a href="sarees.html">Banarasi Brocades</a></li><li><a href="sarees.html">Kanjivaram Heirlooms</a></li><li><a href="sarees.html">Tissue Organza</a></li><li><a href="sarees.html">Bridal Trousseau</a></li></ul></div>
-          <div class="footer-col"><h5>Sanctuary Living</h5><ul class="footer-links"><li><a href="home-living.html">Egyptian Cotton Bedsheets</a></li><li><a href="home-living.html">Velvet Cushion Covers</a></li><li><a href="home-living.html">Mulberry Silk Pillows</a></li><li><a href="home-living.html">Banquet Table Linens</a></li></ul></div>
-          <div class="footer-col"><h5>The Maison</h5><ul class="footer-links"><li><a href="lookbook.html">The Lookbook</a></li><li><a href="heritage.html">Heritage &amp; Craft</a></li><li><a href="contact.html">Contact &amp; Concierge</a></li><li><span style="color:var(--gold-light);">Mumbai:</span> The Taj Mahal Palace</li><li><span style="color:var(--gold-light);">New Delhi:</span> The Chanakya</li><li><span style="color:var(--gold-light);">Bengaluru:</span> The Leela Palace</li></ul></div>
+          <div>
+            <h5 class="footer-col-heading">Shop</h5>
+            <ul class="footer-links-list">
+              <li><a href="shop.html">All Products</a></li>
+              <li><a href="shop.html?cat=women">Women</a></li>
+              <li><a href="shop.html?cat=home">Home &amp; Living</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="footer-col-heading">Customer Care</h5>
+            <ul class="footer-links-list">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="contact.html">Shipping &amp; Delivery</a></li>
+              <li><a href="contact.html">Returns &amp; Exchanges</a></li>
+              <li><a href="checkout.html">Track Order</a></li>
+              <li><a href="javascript:void(0)" onclick="openSizeGuide()">Size Guide</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="footer-col-heading">About</h5>
+            <ul class="footer-links-list">
+              <li><a href="heritage.html">Our Story</a></li>
+              <li><a href="heritage.html">Our Textiles</a></li>
+              <li><a href="lookbook.html">Journal</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="footer-col-heading">Legal</h5>
+            <ul class="footer-links-list">
+              <li><a href="heritage.html">Privacy Policy</a></li>
+              <li><a href="heritage.html">Terms of Service</a></li>
+              <li><a href="heritage.html">Refund Policy</a></li>
+              <li><a href="heritage.html">Shipping Policy</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="footer-bottom"><div>© 2026 FROST ATELIER &amp; LIVING LTD. ALL RIGHTS RESERVED.</div><div>CERTIFIED HANDLOOM &amp; PURE SILK MARK OF INDIA</div></div>
+
+        <div class="footer-bottom-bar">
+          <div class="footer-social-icons">
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12c0 2 1.5 3 2.5 3s1-1 1-2c0-2.5-1.5-4-3.5-4S4 10.5 4 13c0 2 1 3.5 2.5 4"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+          </div>
+
+          <div style="font-size:0.78rem;color:#9CA3AF;">
+            © 2026 FROST CLOTHING. All rights reserved.
+          </div>
+
+          <div class="footer-payment-badges">
+            <span class="payment-badge-pill">UPI</span>
+            <span class="payment-badge-pill">VISA</span>
+            <span class="payment-badge-pill">Mastercard</span>
+            <span class="payment-badge-pill">RuPay</span>
+          </div>
+        </div>
       </div>
     </footer>
-    <style>.admin-access-link{position:fixed;bottom:.6rem;left:1rem;font-size:.6rem;color:rgba(255,255,255,.15);letter-spacing:.1em;text-transform:uppercase;z-index:50;transition:color .2s}.admin-access-link:hover{color:var(--gold-dark)}</style>
+
+    <!-- Global Sticky Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-bottom-item ${active==='index'?'active':''}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </a>
+      <a href="shop.html" class="mobile-bottom-item ${active==='shop'?'active':''}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Shop</span>
+      </a>
+      <a href="shop.html?cat=women" class="mobile-bottom-item ${active==='women'?'active':''}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+        <span>Women</span>
+      </a>
+      <a href="shop.html?cat=home" class="mobile-bottom-item ${active==='home'?'active':''}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Living</span>
+      </a>
+      <a href="cart.html" class="mobile-bottom-item ${active==='cart'?'active':''}" id="mobile-cart-bottom-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="mobile-bottom-badge" id="mobile-bottom-badge">0</span>
+        <span>Cart</span>
+      </a>
+    </nav>
+    <style>.admin-access-link{position:fixed;bottom:70px;left:1rem;font-size:.65rem;color:rgba(0,0,0,.2);letter-spacing:.1em;text-transform:uppercase;z-index:50;text-decoration:none;transition:color .2s}.admin-access-link:hover{color:var(--frost-burgundy)}</style>
     <a href="admin.html" class="admin-access-link">◆ Admin</a>`;
+}
+
+function openSizeGuide() {
+  const modal = document.getElementById('sizeguide-modal');
+  const backdrop = document.getElementById('sizeguide-backdrop');
+  if (modal && backdrop) {
+    modal.style.display = 'block';
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeSizeGuide() {
+  const modal = document.getElementById('sizeguide-modal');
+  const backdrop = document.getElementById('sizeguide-backdrop');
+  if (modal && backdrop) {
+    modal.style.display = 'none';
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function switchSizeGuideTab(tab) {
+  const womenBtn = document.getElementById('sg-tab-women');
+  const homeBtn = document.getElementById('sg-tab-home');
+  const womenContent = document.getElementById('sg-content-women');
+  const homeContent = document.getElementById('sg-content-home');
+  if (tab === 'women') {
+    womenBtn.classList.add('active');
+    homeBtn.classList.remove('active');
+    womenContent.style.display = 'block';
+    homeContent.style.display = 'none';
+  } else {
+    homeBtn.classList.add('active');
+    womenBtn.classList.remove('active');
+    homeContent.style.display = 'block';
+    womenContent.style.display = 'none';
+  }
 }
 
 // ==========================================
@@ -735,70 +1321,109 @@ function setupEvents() {
 
 
 
-  // Cart
-  document.getElementById('cart-trigger')?.addEventListener('click',openCart);
-  document.getElementById('cart-close-btn')?.addEventListener('click',closeCart);
-  document.getElementById('cart-backdrop')?.addEventListener('click',()=>{closeCart();closeWishlist();});
-
-  // Wishlist
-  document.getElementById('wishlist-trigger')?.addEventListener('click',openWishlist);
-  document.getElementById('wishlist-close-btn')?.addEventListener('click',closeWishlist);
+  // Drawers & Modals Backdrop Click
+  document.getElementById('cart-close-btn')?.addEventListener('click', closeCart);
+  document.getElementById('cart-backdrop')?.addEventListener('click', () => { closeCart(); closeWishlist(); });
+  document.getElementById('wishlist-close-btn')?.addEventListener('click', closeWishlist);
+  document.getElementById('search-backdrop')?.addEventListener('click', closeSearch);
 
   // Search
-  document.getElementById('search-trigger')?.addEventListener('click',openSearch);
-  document.getElementById('search-close-btn')?.addEventListener('click',closeSearch);
-  document.getElementById('search-input')?.addEventListener('input', e=>{
-    const q = e.target.value.trim();
-    if(document.getElementById('products-grid')){
-      renderCatalog({ searchQuery: q });
-    }
+  document.getElementById('search-trigger')?.addEventListener('click', openSearch);
+  document.getElementById('search-close-btn')?.addEventListener('click', closeSearch);
+  document.getElementById('search-submit-btn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    executeSearch();
   });
-  document.getElementById('search-input')?.addEventListener('keydown', e=>{
-    if(e.key === 'Enter'){
-      const q = e.target.value.trim().toLowerCase();
-      if(!q) return;
-      if(q.includes('saree') || q.includes('banarasi') || q.includes('kanjivaram') || q.includes('organza')){
-        window.location.href = 'sarees.html';
-      } else if(q.includes('bed') || q.includes('cushion') || q.includes('pillow') || q.includes('table') || q.includes('sheet') || q.includes('linen') || q.includes('home')){
-        window.location.href = 'home-living.html';
-      }
+  document.getElementById('global-search-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    executeSearch();
+  });
+  document.getElementById('search-input')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      executeSearch();
     }
   });
 
   // Quick view backdrop
-  document.getElementById('quickview-backdrop')?.addEventListener('click',closeQuickView);
+  document.getElementById('quickview-backdrop')?.addEventListener('click', closeQuickView);
 
   // Checkout
-  document.getElementById('btn-checkout')?.addEventListener('click',openCheckout);
-  document.getElementById('checkout-close-btn')?.addEventListener('click',closeCheckout);
-  document.getElementById('checkout-backdrop')?.addEventListener('click',closeCheckout);
+  document.getElementById('btn-checkout')?.addEventListener('click', openCheckout);
+  document.getElementById('checkout-close-btn')?.addEventListener('click', closeCheckout);
+  document.getElementById('checkout-backdrop')?.addEventListener('click', closeCheckout);
 
   // Gift wrap & promo
-  document.getElementById('gift-wrap-toggle')?.addEventListener('change',e=>{isGiftWrapped=e.target.checked;updateCartUI();});
-  document.getElementById('btn-apply-promo')?.addEventListener('click',handleApplyPromo);
+  document.getElementById('gift-wrap-toggle')?.addEventListener('change', e => { isGiftWrapped = e.target.checked; updateCartUI(); });
+  document.getElementById('btn-apply-promo')?.addEventListener('click', handleApplyPromo);
 
   // Newsletter
-  document.getElementById('newsletter-form')?.addEventListener('submit',e=>{
+  document.getElementById('newsletter-form')?.addEventListener('submit', e => {
     e.preventDefault();
-    const email=document.getElementById('newsletter-email')?.value;
-    if(email){showToast('Welcome! Use code FROST15 for 15% off your first order.');e.target.reset();}
+    const email = document.getElementById('newsletter-email')?.value;
+    if (email) { showToast('Welcome! Use code FROST15 for 15% off your first order.'); e.target.reset(); }
   });
 
   // Mobile menu
-  document.getElementById('mobile-menu-toggle')?.addEventListener('click',()=>{
-    const menu=document.querySelector('.nav-menu');
-    if(!menu) return;
-    if(menu.style.display==='flex'){
+  document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+    const menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    if (menu.style.display === 'flex') {
       menu.removeAttribute('style');
     } else {
-      Object.assign(menu.style,{display:'flex',flexDirection:'column',position:'absolute',top:'100%',left:'0',width:'100%',background:'white',padding:'1.5rem',boxShadow:'0 10px 30px rgba(0,0,0,.1)',zIndex:'200'});
+      Object.assign(menu.style, { display: 'flex', flexDirection: 'column', position: 'absolute', top: '100%', left: '0', width: '100%', background: 'white', padding: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,.1)', zIndex: '200' });
     }
   });
 
   // Escape key
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){closeCart();closeWishlist();closeQuickView();closeCheckout();closeSearch();}
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeCart(); closeWishlist(); closeQuickView(); closeCheckout(); closeSearch(); }
   });
+}
+
+// Global Search Execution Function
+function executeSearch() {
+  const input = document.getElementById('search-input');
+  const q = input ? input.value.trim() : '';
+  if (!q) return;
+  closeSearch();
+  const isShop = window.location.pathname.toLowerCase().includes('shop');
+  if (isShop && typeof filterCatalogBySearch === 'function') {
+    filterCatalogBySearch(q);
+  } else {
+    window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
+  }
+}
+
+// Real Visitor Tracking Function
+function trackVisit() {
+  try {
+    const visits = JSON.parse(localStorage.getItem('frost_visits') || '[]');
+    const today = new Date().toISOString().split('T')[0];
+    const hour = new Date().getHours();
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    
+    visits.push({
+      date: today,
+      hour: hour,
+      page: page,
+      userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop',
+      referrer: document.referrer ? (new URL(document.referrer, window.location.origin).hostname || 'Direct') : 'Direct',
+      timestamp: new Date().toISOString()
+    });
+
+    if (visits.length > 5000) visits.splice(0, visits.length - 5000);
+    localStorage.setItem('frost_visits', JSON.stringify(visits));
+
+    // Also sync to Supabase visitor_logs table if REST client is available
+    if (typeof supabaseRest === 'function') {
+      supabaseRest('visitor_logs', 'POST', {
+        page_path: page,
+        referrer: document.referrer || 'Direct',
+        user_device: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+      }).catch(() => {});
+    }
+  } catch(e) {}
 }
 
 // ==========================================
@@ -819,15 +1444,17 @@ function initFrostPage(activePage) {
 
   // Active link highlighting
   if (activePage) {
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.nav-link, .frost-nav-links a').forEach(link => {
       const href = link.getAttribute('href') || '';
       if (
         (activePage === 'index' && (href === 'index.html' || href === '#')) ||
-        (activePage === 'sarees' && href.includes('sarees')) ||
-        (activePage === 'home' && href.includes('home-living')) ||
+        (activePage === 'shop' && href === 'shop.html') ||
+        (activePage === 'women' && (href.includes('cat=women') || href.includes('sarees'))) ||
+        (activePage === 'home' && (href.includes('cat=home') || href.includes('home-living'))) ||
         (activePage === 'lookbook' && href.includes('lookbook')) ||
         (activePage === 'heritage' && href.includes('heritage')) ||
-        (activePage === 'contact' && href.includes('contact'))
+        (activePage === 'contact' && href.includes('contact')) ||
+        (activePage === 'wishlist' && href.includes('wishlist'))
       ) {
         link.classList.add('active');
       }
@@ -839,19 +1466,38 @@ function initFrostPage(activePage) {
   updateCartUI();
   updateWishlistUI();
 
-  // Visitor tracking
-  try { trackVisit(); } catch(e) {}
+  // Real visitor tracking
+  trackVisit();
 }
 
 // Auto-run when script loads or DOM is ready
 function autoInitFrost() {
   const path = window.location.pathname.toLowerCase();
+  const search = window.location.search.toLowerCase();
   let page = 'index';
-  if (path.includes('sarees')) page = 'sarees';
-  else if (path.includes('home-living')) page = 'home';
-  else if (path.includes('lookbook')) page = 'lookbook';
-  else if (path.includes('heritage')) page = 'heritage';
-  else if (path.includes('contact')) page = 'contact';
+  if (path.includes('shop')) {
+    if (search.includes('cat=women')) page = 'women';
+    else if (search.includes('cat=home')) page = 'home';
+    else page = 'shop';
+  } else if (path.includes('sarees')) {
+    page = 'women';
+  } else if (path.includes('home-living')) {
+    page = 'home';
+  } else if (path.includes('product')) {
+    page = 'product';
+  } else if (path.includes('cart')) {
+    page = 'cart';
+  } else if (path.includes('wishlist')) {
+    page = 'wishlist';
+  } else if (path.includes('checkout')) {
+    page = 'checkout';
+  } else if (path.includes('lookbook')) {
+    page = 'lookbook';
+  } else if (path.includes('heritage')) {
+    page = 'heritage';
+  } else if (path.includes('contact')) {
+    page = 'contact';
+  }
 
   initFrostPage(page);
 }
@@ -861,3 +1507,4 @@ if (document.readyState === 'loading') {
 } else {
   autoInitFrost();
 }
+

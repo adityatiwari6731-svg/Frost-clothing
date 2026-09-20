@@ -304,13 +304,17 @@ async function apiCreateOrder(orderData, items) {
   return Array.isArray(insertedOrder) ? insertedOrder[0] : orderRow;
 }
 
-/**
- * Fetch All Orders for Admin Dashboard
- */
 async function apiGetAdminOrders() {
   try {
     const data = await supabaseRest('orders?select=*,order_items(*)&order=created_at.desc');
-    return Array.isArray(data) ? data : [];
+    if (!Array.isArray(data)) return [];
+    // Strictly filter out test/fake orders so admin shows only genuine live orders
+    return data.filter(o => 
+      o.id !== 'FAB-TEST-9010' && 
+      o.customer_name !== 'Simulated Patron' && 
+      !String(o.id || '').startsWith('FR-10020') &&
+      !String(o.customer_name || '').toLowerCase().includes('simulated')
+    );
   } catch (err) {
     console.warn('apiGetAdminOrders fallback error:', err.message);
     return [];
