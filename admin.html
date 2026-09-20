@@ -967,6 +967,95 @@
       transform: scale(1.1);
     }
 
+    /* Multi-Image Gallery Styles */
+    .image-preview-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .gallery-preview-item {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 2px solid var(--border-mid);
+      background: #111;
+      transition: all 0.2s ease;
+    }
+    .gallery-preview-item.is-cover {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 10px rgba(197, 168, 128, 0.45);
+    }
+    .gallery-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-cover-badge {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      background: var(--gold-primary);
+      color: #0b1118;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 2;
+    }
+    .gallery-item-actions {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 17, 24, 0.85);
+      display: flex;
+      justify-content: center;
+      padding: 3px 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .gallery-preview-item:hover .gallery-item-actions {
+      opacity: 1;
+    }
+    .gallery-action-btn {
+      background: none;
+      border: none;
+      color: var(--gold-primary);
+      font-size: 0.64rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .gallery-remove-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(235, 77, 75, 0.9);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      z-index: 3;
+      transition: transform 0.15s ease;
+    }
+    .gallery-remove-btn:hover {
+      transform: scale(1.15);
+      background: #ff1f35;
+    }
+
     .modal-footer {
       display: flex;
       justify-content: flex-end;
@@ -1446,7 +1535,7 @@
               <div style="display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap;">
                 <input type="text" class="table-search" id="product-search" placeholder="Search products..." onkeyup="renderProductsGrid()" />
                 <button class="btn-secondary" onclick="renderProductsGrid()" title="Reload from Supabase Cloud">🔄 Refresh Cloud</button>
-                <button class="btn-secondary" onclick="syncDefaultCatalogToSupabase()" title="Upload all 11 default products to Supabase">☁️ Sync All Catalog to Supabase</button>
+                <button class="btn-secondary" onclick="syncDefaultCatalogToSupabase()" title="Upload genuine catalog to Supabase">☁️ Sync Catalog to Supabase</button>
                 <button class="btn-primary" onclick="openAddProductModal()">+ Add New Product</button>
               </div>
             </div>
@@ -1485,7 +1574,7 @@
                 </div>
               </div>
               <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
-                <button class="btn-secondary" onclick="syncDefaultCatalogToSupabase()">Seed Complete 11-Item Luxury Catalog to Supabase</button>
+                <button class="btn-secondary" onclick="syncDefaultCatalogToSupabase()">Seed Frost Catalog to Supabase Cloud</button>
                 <button class="btn-secondary" onclick="syncAdminOrdersFromSupabase(); renderOrdersTable();">Force Pull Orders from Supabase</button>
               </div>
             </div>
@@ -1619,28 +1708,38 @@
         </div>
         <div>
           <label class="modal-label">Badge Label</label>
-          <input type="text" class="modal-input" id="prod-badge" placeholder="New Arrival" />
+          <input type="text" class="modal-input" id="prod-badge" placeholder="Bestseller" />
         </div>
         <div>
           <label class="modal-label">Fabric Composition</label>
-          <input type="text" class="modal-input" id="prod-fabric" placeholder="Pure Katan Silk" />
+          <input type="text" class="modal-input" id="prod-fabric" placeholder="100% Breathable Linen" />
         </div>
         <div class="modal-form-full">
-          <label class="modal-label">Product Image (Upload File Directly or Drag &amp; Drop) *</label>
+          <label class="modal-label">Product Images &amp; Gallery <span style="font-weight:normal; color:var(--text-muted); font-size:0.75rem;">(Optional — upload 1 or more photos, or paste URLs)</span></label>
+          
           <div class="image-upload-zone" id="image-drop-zone" onclick="document.getElementById('prod-image-file').click()">
-            <input type="file" id="prod-image-file" accept="image/*" style="display:none;" onchange="handleImageFileSelect(event)" />
+            <input type="file" id="prod-image-file" accept="image/*" multiple style="display:none;" onchange="handleMultiImageSelect(event)" />
             <div class="image-upload-icon">📸</div>
-            <div class="image-upload-text">Click to choose image or drag &amp; drop file here</div>
-            <div class="image-upload-subtext">JPG, PNG, WebP supported • Automatically compressed and stored for instant loading</div>
-            
-            <div id="image-preview-wrapper" style="display:none;" onclick="event.stopPropagation();">
-              <div class="image-preview-container">
-                <img id="image-preview-img" src="" alt="Preview" class="image-preview-thumb" />
-                <button type="button" class="image-remove-btn" onclick="removeUploadedImage()" title="Remove uploaded image">✕</button>
-              </div>
-              <div id="image-filename-label" style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; font-family:monospace;"></div>
-            </div>
+            <div class="image-upload-text">Click to choose photos or drag &amp; drop multiple files here</div>
+            <div class="image-upload-subtext">Add multiple photos for gallery • JPG, PNG, WebP supported • Optional to upload</div>
           </div>
+
+          <!-- Direct Image URL Input Row -->
+          <div style="display:flex; gap:0.6rem; margin-top:0.8rem; align-items:center;" onclick="event.stopPropagation();">
+            <input type="url" id="prod-image-url-input" class="modal-input" placeholder="Or enter image URL (e.g. https://example.com/photo.jpg)" style="flex:1;" onkeydown="if(event.key==='Enter'){event.preventDefault(); addImageUrlFromInput();}" />
+            <button type="button" class="btn-secondary" onclick="addImageUrlFromInput()" style="padding:0.6rem 1.1rem; font-size:0.75rem; white-space:nowrap; border-color:var(--gold-primary); color:var(--gold-primary);">+ Add Image URL</button>
+          </div>
+
+          <!-- Multi-Image Gallery Preview -->
+          <div id="image-preview-wrapper" style="display:none; margin-top:0.9rem;" onclick="event.stopPropagation();">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span id="gallery-count-label" style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Photos (0) — First photo is Primary Cover</span>
+              <button type="button" onclick="clearAllGalleryImages()" style="background:none; border:none; color:var(--accent-red); font-size:0.72rem; cursor:pointer; text-decoration:underline;">Remove All</button>
+            </div>
+            <div class="image-preview-gallery" id="product-gallery-preview-grid"></div>
+            <div id="image-filename-label" style="font-size:0.72rem; color:var(--text-dim); margin-top:0.4rem;"></div>
+          </div>
+
           <input type="hidden" id="prod-image" value="" />
         </div>
         <div class="modal-form-full">
@@ -2307,87 +2406,135 @@
       await renderProductsGrid();
     }
 
-    let uploadedImageData = '';
+    let productGallery = [];
 
-    function handleImageFileSelect(event) {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      processAndPreviewImage(file);
-    }
+    function renderGalleryPreview() {
+      const wrapper = document.getElementById('image-preview-wrapper');
+      const grid = document.getElementById('product-gallery-preview-grid');
+      const countLabel = document.getElementById('gallery-count-label');
+      const hiddenInput = document.getElementById('prod-image');
 
-    async function processAndPreviewImage(file) {
-      if (!file.type.startsWith('image/')) {
-        alert('Please select a valid image file (JPG, PNG, or WebP).');
+      if (!wrapper || !grid) return;
+
+      if (productGallery.length === 0) {
+        wrapper.style.display = 'none';
+        grid.innerHTML = '';
+        if (hiddenInput) hiddenInput.value = '';
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = async function() {
-          // 1. Create client-side preview immediately
-          const maxDim = 1000;
-          let w = img.width;
-          let h = img.height;
-          if (w > maxDim || h > maxDim) {
-            if (w > h) {
-              h = Math.round((h * maxDim) / w);
-              w = maxDim;
-            } else {
-              w = Math.round((w * maxDim) / h);
-              h = maxDim;
-            }
-          }
-          const canvas = document.createElement('canvas');
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+      wrapper.style.display = 'block';
+      if (countLabel) countLabel.textContent = `Photos (${productGallery.length}) — First photo is Primary Cover`;
+      if (hiddenInput) hiddenInput.value = productGallery[0] || '';
 
-          uploadedImageData = dataUrl;
-          document.getElementById('prod-image').value = dataUrl;
-
-          const previewImg = document.getElementById('image-preview-img');
-          const previewWrapper = document.getElementById('image-preview-wrapper');
-          const fnLabel = document.getElementById('image-filename-label');
-
-          previewImg.src = dataUrl;
-          previewWrapper.style.display = 'block';
-          if (fnLabel) fnLabel.textContent = `Uploading ${file.name} (${Math.round(file.size / 1024)} KB) to Supabase Storage... ⏳`;
-
-          // 2. Direct Supabase Storage Cloud Upload
-          if (typeof apiUploadProductImage === 'function') {
-            try {
-              const cloudUrl = await apiUploadProductImage(file);
-              if (cloudUrl) {
-                uploadedImageData = cloudUrl;
-                document.getElementById('prod-image').value = cloudUrl;
-                if (fnLabel) fnLabel.innerHTML = `✓ <span style="color:var(--accent-green);">Uploaded to Supabase Cloud CDN:</span> ${file.name}`;
-              }
-            } catch (storageErr) {
-              console.warn('Supabase storage upload fallback to local canvas:', storageErr.message);
-              if (fnLabel) fnLabel.textContent = `Local Storage Ready: ${file.name} (${Math.round(file.size / 1024)} KB)`;
-            }
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+      grid.innerHTML = productGallery.map((url, i) => `
+        <div class="gallery-preview-item ${i === 0 ? 'is-cover' : ''}">
+          <img src="${url}" alt="Photo ${i+1}" />
+          ${i === 0 ? '<span class="gallery-cover-badge">Cover</span>' : ''}
+          <button type="button" class="gallery-remove-btn" onclick="removeGalleryImage(${i})" title="Remove photo">✕</button>
+          ${i !== 0 ? `<div class="gallery-item-actions"><button type="button" class="gallery-action-btn" onclick="setAsCoverImage(${i})">Make Cover</button></div>` : ''}
+        </div>
+      `).join('');
     }
 
-    function removeUploadedImage() {
-      uploadedImageData = '';
-      const input = document.getElementById('prod-image');
-      if (input) input.value = '';
-      const fileInput = document.getElementById('prod-image-file');
-      if (fileInput) fileInput.value = '';
-      const wrapper = document.getElementById('image-preview-wrapper');
-      if (wrapper) wrapper.style.display = 'none';
-      const previewImg = document.getElementById('image-preview-img');
-      if (previewImg) previewImg.src = '';
+    function addImageToGallery(url) {
+      if (!url || typeof url !== 'string') return;
+      url = url.trim();
+      if (!url) return;
+      if (!productGallery.includes(url)) {
+        productGallery.push(url);
+        renderGalleryPreview();
+      }
+    }
+
+    function removeGalleryImage(index) {
+      if (index >= 0 && index < productGallery.length) {
+        productGallery.splice(index, 1);
+        renderGalleryPreview();
+      }
+    }
+
+    function setAsCoverImage(index) {
+      if (index > 0 && index < productGallery.length) {
+        const item = productGallery.splice(index, 1)[0];
+        productGallery.unshift(item);
+        renderGalleryPreview();
+      }
+    }
+
+    function clearAllGalleryImages() {
+      productGallery = [];
+      renderGalleryPreview();
+    }
+
+    function addImageUrlFromInput() {
+      const input = document.getElementById('prod-image-url-input');
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) {
+        alert('Please enter a valid image URL (e.g. https://domain.com/photo.jpg)');
+        return;
+      }
+      addImageToGallery(val);
+      input.value = '';
       const fnLabel = document.getElementById('image-filename-label');
-      if (fnLabel) fnLabel.textContent = '';
+      if (fnLabel) fnLabel.textContent = '✓ Image URL added to gallery.';
+    }
+
+    async function handleMultiImageSelect(event) {
+      const files = Array.from(event.target.files || []);
+      if (!files.length) return;
+      const fnLabel = document.getElementById('image-filename-label');
+      if (fnLabel) fnLabel.textContent = `Processing ${files.length} photo(s)... ⏳`;
+
+      for (const file of files) {
+        await processAndAddImageFile(file);
+      }
+      event.target.value = '';
+      if (fnLabel) fnLabel.textContent = `✓ ${files.length} photo(s) added to gallery.`;
+    }
+
+    function processAndAddImageFile(file) {
+      return new Promise((resolve) => {
+        if (!file.type || !file.type.startsWith('image/')) {
+          resolve();
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = async function() {
+            const maxDim = 1000;
+            let w = img.width, h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+              else { w = Math.round((w * maxDim) / h); h = maxDim; }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+
+            let finalUrl = dataUrl;
+            if (typeof apiUploadProductImage === 'function') {
+              try {
+                const cloudUrl = await apiUploadProductImage(file);
+                if (cloudUrl) finalUrl = cloudUrl;
+              } catch(err) {
+                console.warn('Supabase storage upload notice:', err.message);
+              }
+            }
+            addImageToGallery(finalUrl);
+            resolve();
+          };
+          img.onerror = () => resolve();
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve();
+        reader.readAsDataURL(file);
+      });
     }
 
     function setupDragAndDrop() {
@@ -2410,11 +2557,16 @@
         }, false);
       });
 
-      zone.addEventListener('drop', (e) => {
+      zone.addEventListener('drop', async (e) => {
         const dt = e.dataTransfer;
-        const files = dt.files;
+        const files = Array.from(dt.files || []);
         if (files && files.length > 0) {
-          processAndPreviewImage(files[0]);
+          const fnLabel = document.getElementById('image-filename-label');
+          if (fnLabel) fnLabel.textContent = `Processing ${files.length} dropped photo(s)... ⏳`;
+          for (const file of files) {
+            await processAndAddImageFile(file);
+          }
+          if (fnLabel) fnLabel.textContent = `✓ ${files.length} photo(s) added to gallery.`;
         }
       }, false);
     }
@@ -2422,11 +2574,12 @@
     function openAddProductModal() {
       editingProductId = null;
       document.getElementById('product-modal-title').textContent = 'Add New Product';
-      ['prod-title', 'prod-price', 'prod-original-price', 'prod-stock', 'prod-badge', 'prod-fabric', 'prod-image', 'prod-desc'].forEach(id => {
+      ['prod-title', 'prod-price', 'prod-original-price', 'prod-stock', 'prod-badge', 'prod-fabric', 'prod-image', 'prod-desc', 'prod-image-url-input'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
       });
-      removeUploadedImage();
+      productGallery = [];
+      renderGalleryPreview();
       document.getElementById('prod-active').value = 'true';
       openProductModal();
     }
@@ -2447,18 +2600,13 @@
       document.getElementById('prod-desc').value = p.description;
       document.getElementById('prod-active').value = p.active ? 'true' : 'false';
 
-      if (p.image) {
-        uploadedImageData = p.image;
-        document.getElementById('prod-image').value = p.image;
-        const previewImg = document.getElementById('image-preview-img');
-        if (previewImg) previewImg.src = p.image;
-        const wrapper = document.getElementById('image-preview-wrapper');
-        if (wrapper) wrapper.style.display = 'block';
-        const fnLabel = document.getElementById('image-filename-label');
-        if (fnLabel) fnLabel.textContent = p.image.includes('supabase.co') ? '✓ Live Supabase Storage Image' : (p.image.startsWith('data:') ? 'Custom Uploaded Image' : p.image);
-      } else {
-        removeUploadedImage();
+      productGallery = [];
+      if (Array.isArray(p.gallery) && p.gallery.length > 0) {
+        productGallery = [...p.gallery];
+      } else if (p.image) {
+        productGallery = [p.image];
       }
+      renderGalleryPreview();
 
       openProductModal();
     }
@@ -2466,12 +2614,14 @@
     async function saveProduct() {
       const title = document.getElementById('prod-title').value.trim();
       const price = parseInt(document.getElementById('prod-price').value);
-      if (!title || !price) {
+      if (!title || isNaN(price)) {
         alert('Title and Price are required fields.');
         return;
       }
 
-      const imgVal = document.getElementById('prod-image').value || 'images/hero_saree.jpg';
+      // Photos are optional: default to gallery or fallback image
+      const primaryImg = productGallery.length > 0 ? productGallery[0] : (document.getElementById('prod-image').value || 'images/hero_editorial.jpg');
+      const galleryImgs = productGallery.length > 0 ? [...productGallery] : [primaryImg];
 
       const rawCat = document.getElementById('prod-category').value;
       const isWomen = (rawCat === 'women' || rawCat === 'sarees' || rawCat === 'dresses');
@@ -2487,10 +2637,11 @@
         priceINR: price,
         originalPriceINR: parseInt(document.getElementById('prod-original-price').value) || Math.round(price * 1.3),
         stock: parseInt(document.getElementById('prod-stock').value) || 10,
-        badge: document.getElementById('prod-badge').value || 'New Creation',
+        badge: document.getElementById('prod-badge').value || 'Handcrafted',
         badgeType: isWomen ? 'burgundy' : 'green',
         fabric: document.getElementById('prod-fabric').value || (isWomen ? '100% Breathable Midweight Linen' : 'Pure French Slub Linen'),
-        image: imgVal,
+        image: primaryImg,
+        gallery: galleryImgs,
         description: document.getElementById('prod-desc').value || title,
         optionsLabel: isWomen ? 'Select Size' : 'Select Dimensions',
         options: isWomen ? ['XS', 'S', 'M', 'L', 'XL'] : ['Standard Edition', 'Luxury Set'],

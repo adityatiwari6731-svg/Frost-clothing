@@ -457,7 +457,7 @@
 
         <!-- Main Viewport -->
         <div class="pdp-main-viewport">
-          <span class="pdp-badge-floating" id="pdp-hero-badge">NEW ARRIVAL</span>
+          <span class="pdp-badge-floating" id="pdp-hero-badge" style="display:none;"></span>
           <img src="images/sage_linen_dress.jpg" alt="Textured Linen Midi Dress" id="pdp-main-display-img" />
         </div>
       </div>
@@ -675,30 +675,42 @@
         document.getElementById('pdp-save-tag').style.display = 'none';
       }
 
-      if (p.badge) {
-        document.getElementById('pdp-hero-badge').textContent = p.badge;
+      const badgeEl = document.getElementById('pdp-hero-badge');
+      if (badgeEl) {
+        if (p.badge && !p.badge.toLowerCase().includes('new arrival')) {
+          badgeEl.textContent = p.badge;
+          badgeEl.style.display = 'inline-block';
+        } else {
+          badgeEl.style.display = 'none';
+        }
       }
 
       // Main image & gallery
       const mainImg = document.getElementById('pdp-main-display-img');
-      mainImg.src = p.image;
+      mainImg.src = p.image || 'images/hero_editorial.jpg';
       mainImg.alt = p.title;
 
-      // Build 5-image gallery using related assets
-      const galleryList = [
-        p.image,
-        'images/sage_fabric.jpg',
-        'images/women_banner.jpg',
-        'images/hero_editorial.jpg',
-        'images/bordeaux_coord.jpg'
-      ];
+      // Build gallery: prioritize product's own gallery images
+      let galleryList = [];
+      if (Array.isArray(p.gallery) && p.gallery.length > 0) {
+        galleryList = p.gallery.filter(Boolean);
+      } else if (p.image) {
+        galleryList = [p.image];
+      } else {
+        galleryList = ['images/hero_editorial.jpg'];
+      }
 
       const thumbsCol = document.getElementById('pdp-gallery-thumbs');
-      thumbsCol.innerHTML = galleryList.map((src, i) => `
-        <div class="pdp-thumb-slot ${i === 0 ? 'active' : ''}" onclick="switchPdpThumb('${src}', this)">
-          <img src="${src}" alt="${p.title} view ${i+1}" loading="lazy" />
-        </div>
-      `).join('');
+      if (galleryList.length <= 1) {
+        thumbsCol.style.display = 'none';
+      } else {
+        thumbsCol.style.display = '';
+        thumbsCol.innerHTML = galleryList.map((src, i) => `
+          <div class="pdp-thumb-slot ${i === 0 ? 'active' : ''}" onclick="switchPdpThumb('${src}', this)">
+            <img src="${src}" alt="${p.title} view ${i+1}" loading="lazy" />
+          </div>
+        `).join('');
+      }
 
       // Description & fabric details
       document.getElementById('pdp-desc-content').textContent = p.description;

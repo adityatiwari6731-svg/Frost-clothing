@@ -273,32 +273,6 @@ const DEFAULT_PRODUCTS = [
     description: 'Flattering high-waisted wide-leg trousers cut in breathable charcoal linen with front pleats.',
     stock: 20,
     active: true
-  },
-  {
-    id: 'saree-01',
-    title: 'The Empress Banarasi Katan Silk Saree',
-    category: 'sarees',
-    priceINR: 48500,
-    originalPriceINR: 58000,
-    badge: 'Heritage Heirloom',
-    image: 'images/saree_banarasi.jpg',
-    fabric: 'Pure Katan Silk',
-    description: 'A regal masterpiece handwoven over 45 days in Varanasi with antique gold kadwa jaal.',
-    stock: 5,
-    active: true
-  },
-  {
-    id: 'home-01',
-    title: 'Imperial 800TC Egyptian Cotton Bedsheet Set',
-    category: 'home',
-    priceINR: 14500,
-    originalPriceINR: 18000,
-    badge: 'Best Seller',
-    image: 'images/home_sanctuary.jpg',
-    fabric: '800-Thread Count Egyptian Cotton',
-    description: 'Five-star sanctuary comfort with luminous sateen finish and silver satin stitching.',
-    stock: 12,
-    active: true
   }
 ];
 

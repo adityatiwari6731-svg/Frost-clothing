@@ -246,48 +246,6 @@ const FROST_PRODUCTS = [
     description: 'Flattering high-waisted wide-leg trousers cut in breathable charcoal linen. Features side pockets, subtle front pleats, and comfortable elastic back waist.',
     optionsLabel: 'Select Size',
     options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-  },
-  {
-    id: 'saree-01',
-    title: 'The Empress Banarasi Katan Silk Saree',
-    category: 'sarees',
-    subCategory: 'sarees',
-    categoryName: 'Couture Saree',
-    priceINR: 48500,
-    originalPriceINR: 58000,
-    rating: 4.9,
-    reviewsCount: 38,
-    badge: 'Heritage Heirloom',
-    badgeType: 'gold',
-    image: 'images/saree_banarasi.jpg',
-    fabric: 'Pure Katan Silk',
-    zari: 'Antique Silver & Champagne Gold Zari',
-    craft: 'Handloom Kadwa Weave — 45 Days',
-    origin: 'Varanasi Atelier',
-    description: 'A regal masterpiece handwoven over 45 days in our Varanasi ateliers. Deep wine plum body intricately showered with antique silver and champagne gold kadwa jaal motifs, crowned by an opulent heirloom pallu.',
-    optionsLabel: 'Bespoke Tailoring',
-    options: ['Unstitched Blouse Piece Included', 'Custom Blouse Tailored (+₹2,490)', 'Fall & Pico Finished (Complimentary)']
-  },
-  {
-    id: 'home-01',
-    title: 'Imperial 800TC Egyptian Cotton Bedsheet Set',
-    category: 'home',
-    subCategory: 'bedsheets',
-    categoryName: 'Luxury Bedsheet',
-    priceINR: 14500,
-    originalPriceINR: 18000,
-    rating: 5.0,
-    reviewsCount: 64,
-    badge: 'Best Seller',
-    badgeType: 'gold',
-    image: 'images/home_sanctuary.jpg',
-    fabric: '800-Thread Count Egyptian Cotton Sateen',
-    zari: 'Double Silver Satin Stitch Border',
-    craft: 'Single-Ply Sateen Weave',
-    origin: 'Frost Sanctuary Living',
-    description: 'Indulge in five-star sanctuary comfort. Spun from authentic long-staple Egyptian cotton with a luminous sateen finish and double-needle silver satin stitching. Includes 1 flat sheet and 2 oxford pillowcases.',
-    optionsLabel: 'Select Bed Size',
-    options: ['Super King (108" x 108")', 'King (100" x 108")', 'Queen (90" x 100")']
   }
 ];
 
